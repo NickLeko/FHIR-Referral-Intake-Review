@@ -1,0 +1,236 @@
+{
+  "bundle_id": "bundle-003-human-confirmation",
+  "extracted_review_packet": {
+    "intake_id": "bundle-003-human-confirmation",
+    "bundle_id": "bundle-003-human-confirmation",
+    "requested_service": "Specialty consult",
+    "referral_reason": "Shortness of breath vs deconditioning",
+    "ordering_provider": "Alex Morgan, MD",
+    "patient_age_group": "Adult",
+    "encounter_context": "Ambulatory | Specialty intake visit | 2026-03-10",
+    "supporting_diagnosis": [
+      "R06.02 - Shortness of breath",
+      "R53.83 - Fatigue / deconditioning concern"
+    ],
+    "key_observations": [
+      "Six-minute walk note: Reduced exercise tolerance reported"
+    ],
+    "referenced_documents": [
+      "PCP referral note with unclear specialty destination"
+    ],
+    "priority": "urgent",
+    "missing_elements": [],
+    "ambiguous_elements": [
+      "requested_service",
+      "referral_reason",
+      "ordering_provider"
+    ],
+    "fields_requiring_human_confirmation": [
+      "requested_service",
+      "referral_reason",
+      "ordering_provider"
+    ],
+    "unsupported_elements": [],
+    "source_trace": {
+      "requested_service": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-003",
+          "field_path": "code.text"
+        }
+      ],
+      "referral_reason": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-003",
+          "field_path": "reasonCode[0].text"
+        }
+      ],
+      "ordering_provider": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-003",
+          "field_path": "requester.display"
+        }
+      ],
+      "patient_age_group": [
+        {
+          "resource_type": "Patient",
+          "resource_id": "pat-003",
+          "field_path": "birthDate"
+        }
+      ],
+      "encounter_context": [
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-003",
+          "field_path": "class"
+        },
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-003",
+          "field_path": "type[0]"
+        },
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-003",
+          "field_path": "period.start"
+        }
+      ],
+      "supporting_diagnosis": [
+        {
+          "resource_type": "Condition",
+          "resource_id": "cond-003a",
+          "field_path": "code"
+        },
+        {
+          "resource_type": "Condition",
+          "resource_id": "cond-003a",
+          "field_path": "clinicalStatus"
+        },
+        {
+          "resource_type": "Condition",
+          "resource_id": "cond-003b",
+          "field_path": "code"
+        }
+      ],
+      "key_observations": [
+        {
+          "resource_type": "Observation",
+          "resource_id": "obs-003",
+          "field_path": "code"
+        },
+        {
+          "resource_type": "Observation",
+          "resource_id": "obs-003",
+          "field_path": "valueString"
+        }
+      ],
+      "referenced_documents": [
+        {
+          "resource_type": "DocumentReference",
+          "resource_id": "doc-003",
+          "field_path": "description"
+        }
+      ],
+      "priority": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-003",
+          "field_path": "priority"
+        }
+      ]
+    },
+    "recommended_next_admin_action": "Route for manual clarification before downstream scheduling or authorization tasks.",
+    "status": "HUMAN_CONFIRMATION_REQUIRED"
+  },
+  "status_before_review": "HUMAN_CONFIRMATION_REQUIRED",
+  "missing_elements": [],
+  "ambiguous_elements": [
+    "requested_service",
+    "referral_reason",
+    "ordering_provider"
+  ],
+  "fields_requiring_human_confirmation": [
+    "requested_service",
+    "referral_reason",
+    "ordering_provider"
+  ],
+  "source_trace_map": {
+    "requested_service": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-003",
+        "field_path": "code.text"
+      }
+    ],
+    "referral_reason": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-003",
+        "field_path": "reasonCode[0].text"
+      }
+    ],
+    "ordering_provider": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-003",
+        "field_path": "requester.display"
+      }
+    ],
+    "patient_age_group": [
+      {
+        "resource_type": "Patient",
+        "resource_id": "pat-003",
+        "field_path": "birthDate"
+      }
+    ],
+    "encounter_context": [
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-003",
+        "field_path": "class"
+      },
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-003",
+        "field_path": "type[0]"
+      },
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-003",
+        "field_path": "period.start"
+      }
+    ],
+    "supporting_diagnosis": [
+      {
+        "resource_type": "Condition",
+        "resource_id": "cond-003a",
+        "field_path": "code"
+      },
+      {
+        "resource_type": "Condition",
+        "resource_id": "cond-003a",
+        "field_path": "clinicalStatus"
+      },
+      {
+        "resource_type": "Condition",
+        "resource_id": "cond-003b",
+        "field_path": "code"
+      }
+    ],
+    "key_observations": [
+      {
+        "resource_type": "Observation",
+        "resource_id": "obs-003",
+        "field_path": "code"
+      },
+      {
+        "resource_type": "Observation",
+        "resource_id": "obs-003",
+        "field_path": "valueString"
+      }
+    ],
+    "referenced_documents": [
+      {
+        "resource_type": "DocumentReference",
+        "resource_id": "doc-003",
+        "field_path": "description"
+      }
+    ],
+    "priority": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-003",
+        "field_path": "priority"
+      }
+    ]
+  },
+  "human_review_decision": "ESCALATE_HUMAN_CONFIRMATION",
+  "reviewer_name": "Administrative Reviewer",
+  "reviewer_note": "Requested specialty and ordering provider identity need clarification before routing.",
+  "reviewed_at": "2026-03-31T21:44:16+00:00",
+  "final_status": "HUMAN_CONFIRMATION_REQUIRED",
+  "final_reviewed_handoff_summary": "Referral intake bundle-003-human-confirmation was reviewed as HUMAN_CONFIRMATION_REQUIRED. Requested service: Specialty consult. Ordering provider: Alex Morgan, MD. Missing elements: none. Ambiguous elements: requested_service, referral_reason, ordering_provider. Reviewer note: Requested specialty and ordering provider identity need clarification before routing.. Next admin step: Route for manual clarification before downstream scheduling or authorization tasks.",
+  "recommended_next_admin_step": "Route for manual clarification before downstream scheduling or authorization tasks."
+}

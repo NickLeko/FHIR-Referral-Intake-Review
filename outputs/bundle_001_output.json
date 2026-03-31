@@ -1,0 +1,229 @@
+{
+  "bundle_id": "bundle-001-review-ready",
+  "extracted_review_packet": {
+    "intake_id": "bundle-001-review-ready",
+    "bundle_id": "bundle-001-review-ready",
+    "requested_service": "Cardiology consultation",
+    "referral_reason": "Exertional dyspnea evaluation",
+    "ordering_provider": "Riley Chen, MD",
+    "patient_age_group": "Adult",
+    "encounter_context": "Ambulatory | Cardiology clinic intake | 2026-02-28",
+    "supporting_diagnosis": [
+      "R06.09 - Exertional dyspnea"
+    ],
+    "key_observations": [
+      "Resting oxygen saturation: 94 %"
+    ],
+    "referenced_documents": [
+      "Outside stress test summary"
+    ],
+    "priority": "routine",
+    "missing_elements": [],
+    "ambiguous_elements": [],
+    "fields_requiring_human_confirmation": [],
+    "unsupported_elements": [],
+    "source_trace": {
+      "requested_service": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-001",
+          "field_path": "code.text"
+        },
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-001",
+          "field_path": "code.coding[0].display"
+        }
+      ],
+      "referral_reason": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-001",
+          "field_path": "reasonCode[0].text"
+        }
+      ],
+      "ordering_provider": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-001",
+          "field_path": "requester.reference"
+        },
+        {
+          "resource_type": "Practitioner",
+          "resource_id": "prac-001",
+          "field_path": "name[0]"
+        }
+      ],
+      "patient_age_group": [
+        {
+          "resource_type": "Patient",
+          "resource_id": "pat-001",
+          "field_path": "birthDate"
+        }
+      ],
+      "encounter_context": [
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-001",
+          "field_path": "class"
+        },
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-001",
+          "field_path": "type[0]"
+        },
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-001",
+          "field_path": "period.start"
+        }
+      ],
+      "supporting_diagnosis": [
+        {
+          "resource_type": "Condition",
+          "resource_id": "cond-001",
+          "field_path": "code"
+        },
+        {
+          "resource_type": "Condition",
+          "resource_id": "cond-001",
+          "field_path": "clinicalStatus"
+        }
+      ],
+      "key_observations": [
+        {
+          "resource_type": "Observation",
+          "resource_id": "obs-001",
+          "field_path": "code"
+        },
+        {
+          "resource_type": "Observation",
+          "resource_id": "obs-001",
+          "field_path": "valueQuantity"
+        }
+      ],
+      "referenced_documents": [
+        {
+          "resource_type": "DocumentReference",
+          "resource_id": "doc-001",
+          "field_path": "description"
+        }
+      ],
+      "priority": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-001",
+          "field_path": "priority"
+        }
+      ]
+    },
+    "recommended_next_admin_action": "Proceed to downstream administrative handling after reviewer confirmation.",
+    "status": "REVIEW_READY"
+  },
+  "status_before_review": "REVIEW_READY",
+  "missing_elements": [],
+  "ambiguous_elements": [],
+  "fields_requiring_human_confirmation": [],
+  "source_trace_map": {
+    "requested_service": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-001",
+        "field_path": "code.text"
+      },
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-001",
+        "field_path": "code.coding[0].display"
+      }
+    ],
+    "referral_reason": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-001",
+        "field_path": "reasonCode[0].text"
+      }
+    ],
+    "ordering_provider": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-001",
+        "field_path": "requester.reference"
+      },
+      {
+        "resource_type": "Practitioner",
+        "resource_id": "prac-001",
+        "field_path": "name[0]"
+      }
+    ],
+    "patient_age_group": [
+      {
+        "resource_type": "Patient",
+        "resource_id": "pat-001",
+        "field_path": "birthDate"
+      }
+    ],
+    "encounter_context": [
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-001",
+        "field_path": "class"
+      },
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-001",
+        "field_path": "type[0]"
+      },
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-001",
+        "field_path": "period.start"
+      }
+    ],
+    "supporting_diagnosis": [
+      {
+        "resource_type": "Condition",
+        "resource_id": "cond-001",
+        "field_path": "code"
+      },
+      {
+        "resource_type": "Condition",
+        "resource_id": "cond-001",
+        "field_path": "clinicalStatus"
+      }
+    ],
+    "key_observations": [
+      {
+        "resource_type": "Observation",
+        "resource_id": "obs-001",
+        "field_path": "code"
+      },
+      {
+        "resource_type": "Observation",
+        "resource_id": "obs-001",
+        "field_path": "valueQuantity"
+      }
+    ],
+    "referenced_documents": [
+      {
+        "resource_type": "DocumentReference",
+        "resource_id": "doc-001",
+        "field_path": "description"
+      }
+    ],
+    "priority": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-001",
+        "field_path": "priority"
+      }
+    ]
+  },
+  "human_review_decision": "CONFIRM_READY",
+  "reviewer_name": "Administrative Reviewer",
+  "reviewer_note": "Packet is sufficiently complete for downstream administrative handling.",
+  "reviewed_at": "2026-03-31T21:44:16+00:00",
+  "final_status": "REVIEW_READY",
+  "final_reviewed_handoff_summary": "Referral intake bundle-001-review-ready was reviewed as REVIEW_READY. Requested service: Cardiology consultation. Ordering provider: Riley Chen, MD. Missing elements: none. Ambiguous elements: none. Reviewer note: Packet is sufficiently complete for downstream administrative handling.. Next admin step: Proceed to downstream administrative handling after reviewer confirmation.",
+  "recommended_next_admin_step": "Proceed to downstream administrative handling after reviewer confirmation."
+}

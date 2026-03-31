@@ -1,0 +1,158 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-003-human-confirmation",
+  "type": "collection",
+  "timestamp": "2026-03-10T14:30:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-003",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-003",
+        "name": [
+          {
+            "text": "Morgan Hale"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1992-11-03"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:encounter-003",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "enc-003",
+        "status": "in-progress",
+        "class": {
+          "code": "AMB",
+          "display": "Ambulatory"
+        },
+        "type": [
+          {
+            "text": "Specialty intake visit"
+          }
+        ],
+        "period": {
+          "start": "2026-03-10"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-003a",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-003a",
+        "clinicalStatus": "active",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+              "code": "R06.02",
+              "display": "Shortness of breath"
+            }
+          ],
+          "text": "Shortness of breath"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-003b",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-003b",
+        "clinicalStatus": "active",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+              "code": "R53.83",
+              "display": "Other fatigue"
+            }
+          ],
+          "text": "Fatigue / deconditioning concern"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-003",
+        "status": "final",
+        "code": {
+          "text": "Six-minute walk note"
+        },
+        "valueString": "Reduced exercise tolerance reported"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:document-003",
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "doc-003",
+        "status": "current",
+        "type": {
+          "text": "Outside PCP note"
+        },
+        "description": "PCP referral note with unclear specialty destination",
+        "content": [
+          {
+            "attachment": {
+              "title": "PCP note PDF"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-003",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "sr-003",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "Patient/pat-003"
+        },
+        "category": [
+          {
+            "text": "Referral"
+          }
+        ],
+        "code": {
+          "text": "Specialty consult"
+        },
+        "authoredOn": "2026-03-10",
+        "requester": {
+          "display": "Alex Morgan, MD"
+        },
+        "encounter": {
+          "reference": "Encounter/enc-003"
+        },
+        "reasonCode": [
+          {
+            "text": "Shortness of breath vs deconditioning"
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/cond-003a"
+          },
+          {
+            "reference": "Condition/cond-003b"
+          }
+        ],
+        "supportingInfo": [
+          {
+            "reference": "Observation/obs-003"
+          },
+          {
+            "reference": "DocumentReference/doc-003"
+          }
+        ],
+        "priority": "urgent"
+      }
+    }
+  ]
+}

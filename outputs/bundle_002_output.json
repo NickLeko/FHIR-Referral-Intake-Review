@@ -1,0 +1,117 @@
+{
+  "bundle_id": "bundle-002-incomplete",
+  "extracted_review_packet": {
+    "intake_id": "bundle-002-incomplete",
+    "bundle_id": "bundle-002-incomplete",
+    "requested_service": "Lumbar spine MRI review",
+    "referral_reason": "Persistent low back pain",
+    "ordering_provider": null,
+    "patient_age_group": "Adult",
+    "encounter_context": null,
+    "supporting_diagnosis": [],
+    "key_observations": [],
+    "referenced_documents": [
+      "Referral cover sheet without signed order details"
+    ],
+    "priority": "routine",
+    "missing_elements": [
+      "ordering_provider",
+      "encounter_context",
+      "supporting_diagnosis"
+    ],
+    "ambiguous_elements": [],
+    "fields_requiring_human_confirmation": [],
+    "unsupported_elements": [],
+    "source_trace": {
+      "requested_service": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-002",
+          "field_path": "code.text"
+        }
+      ],
+      "referral_reason": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-002",
+          "field_path": "reasonCode[0].text"
+        }
+      ],
+      "patient_age_group": [
+        {
+          "resource_type": "Patient",
+          "resource_id": "pat-002",
+          "field_path": "birthDate"
+        }
+      ],
+      "referenced_documents": [
+        {
+          "resource_type": "DocumentReference",
+          "resource_id": "doc-002",
+          "field_path": "description"
+        }
+      ],
+      "priority": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-002",
+          "field_path": "priority"
+        }
+      ]
+    },
+    "recommended_next_admin_action": "Request the missing intake elements before downstream administrative work.",
+    "status": "INCOMPLETE"
+  },
+  "status_before_review": "INCOMPLETE",
+  "missing_elements": [
+    "ordering_provider",
+    "encounter_context",
+    "supporting_diagnosis"
+  ],
+  "ambiguous_elements": [],
+  "fields_requiring_human_confirmation": [],
+  "source_trace_map": {
+    "requested_service": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-002",
+        "field_path": "code.text"
+      }
+    ],
+    "referral_reason": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-002",
+        "field_path": "reasonCode[0].text"
+      }
+    ],
+    "patient_age_group": [
+      {
+        "resource_type": "Patient",
+        "resource_id": "pat-002",
+        "field_path": "birthDate"
+      }
+    ],
+    "referenced_documents": [
+      {
+        "resource_type": "DocumentReference",
+        "resource_id": "doc-002",
+        "field_path": "description"
+      }
+    ],
+    "priority": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-002",
+        "field_path": "priority"
+      }
+    ]
+  },
+  "human_review_decision": "CONFIRM_INCOMPLETE",
+  "reviewer_name": "Administrative Reviewer",
+  "reviewer_note": "Ordering provider, encounter context, and diagnosis support are still missing.",
+  "reviewed_at": "2026-03-31T21:44:16+00:00",
+  "final_status": "INCOMPLETE",
+  "final_reviewed_handoff_summary": "Referral intake bundle-002-incomplete was reviewed as INCOMPLETE. Requested service: Lumbar spine MRI review. Ordering provider: Unavailable. Missing elements: ordering_provider, encounter_context, supporting_diagnosis. Ambiguous elements: none. Reviewer note: Ordering provider, encounter context, and diagnosis support are still missing.. Next admin step: Request the missing intake elements before downstream administrative work.",
+  "recommended_next_admin_step": "Request the missing intake elements before downstream administrative work."
+}

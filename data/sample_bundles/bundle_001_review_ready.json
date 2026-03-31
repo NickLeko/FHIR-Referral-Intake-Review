@@ -1,0 +1,160 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-001-review-ready",
+  "type": "collection",
+  "timestamp": "2026-03-01T10:15:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-001",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-001",
+        "name": [
+          {
+            "text": "Jordan Avery"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1987-08-14"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:practitioner-001",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "prac-001",
+        "name": [
+          {
+            "text": "Riley Chen, MD"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:encounter-001",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "enc-001",
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "display": "Ambulatory"
+        },
+        "type": [
+          {
+            "text": "Cardiology clinic intake"
+          }
+        ],
+        "period": {
+          "start": "2026-02-28"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-001",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-001",
+        "clinicalStatus": "active",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+              "code": "R06.09",
+              "display": "Other forms of dyspnea"
+            }
+          ],
+          "text": "Exertional dyspnea"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-001",
+        "status": "final",
+        "code": {
+          "text": "Resting oxygen saturation"
+        },
+        "valueQuantity": {
+          "value": 94,
+          "unit": "%"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:document-001",
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "doc-001",
+        "status": "current",
+        "type": {
+          "text": "Outside test result"
+        },
+        "description": "Outside stress test summary",
+        "content": [
+          {
+            "attachment": {
+              "title": "Stress test PDF"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-001",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "sr-001",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "Patient/pat-001"
+        },
+        "category": [
+          {
+            "text": "Referral"
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.ama-assn.org/go/cpt",
+              "code": "99243",
+              "display": "Office consultation"
+            }
+          ],
+          "text": "Cardiology consultation"
+        },
+        "authoredOn": "2026-03-01",
+        "requester": {
+          "reference": "Practitioner/prac-001",
+          "display": "Riley Chen, MD"
+        },
+        "encounter": {
+          "reference": "Encounter/enc-001"
+        },
+        "reasonCode": [
+          {
+            "text": "Exertional dyspnea evaluation"
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/cond-001"
+          }
+        ],
+        "supportingInfo": [
+          {
+            "reference": "Observation/obs-001"
+          },
+          {
+            "reference": "DocumentReference/doc-001"
+          }
+        ],
+        "priority": "routine"
+      }
+    }
+  ]
+}

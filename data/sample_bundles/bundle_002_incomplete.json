@@ -1,0 +1,73 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-002-incomplete",
+  "type": "collection",
+  "timestamp": "2026-03-08T09:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-002",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-002",
+        "name": [
+          {
+            "text": "Taylor Brooks"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1976-04-21"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:document-002",
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "doc-002",
+        "status": "current",
+        "type": {
+          "text": "Referral cover sheet"
+        },
+        "description": "Referral cover sheet without signed order details",
+        "content": [
+          {
+            "attachment": {
+              "title": "Cover sheet PDF"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-002",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "sr-002",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "Patient/pat-002"
+        },
+        "category": [
+          {
+            "text": "Referral"
+          }
+        ],
+        "code": {
+          "text": "Lumbar spine MRI review"
+        },
+        "authoredOn": "2026-03-08",
+        "reasonCode": [
+          {
+            "text": "Persistent low back pain"
+          }
+        ],
+        "supportingInfo": [
+          {
+            "reference": "DocumentReference/doc-002"
+          }
+        ],
+        "priority": "routine"
+      }
+    }
+  ]
+}

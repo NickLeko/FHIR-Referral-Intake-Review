@@ -40,12 +40,23 @@ def decision_to_status(decision: HumanReviewDecision) -> PacketStatus:
     return PacketStatus.HUMAN_CONFIRMATION_REQUIRED
 
 
+def decision_overrides_status(
+    current_status: PacketStatus,
+    decision: HumanReviewDecision,
+) -> bool:
+    return decision_to_status(decision) != current_status
+
+
 def build_reviewed_output(
     packet: ReviewPacket,
     decision: HumanReviewDecision,
     reviewer_note: str = "",
     reviewer_name: str = "Administrative Reviewer",
 ) -> ReviewedOutput:
+    reviewer_note = reviewer_note.strip()
+    if decision_overrides_status(packet.status, decision) and not reviewer_note:
+        raise ValueError("Reviewer note is required when overriding the initial status.")
+
     final_status = decision_to_status(decision)
     next_step = recommended_next_admin_action_for_status(final_status)
     summary = (

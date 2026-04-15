@@ -31,6 +31,24 @@ class TraceEntry:
         }
 
 
+@dataclass(frozen=True)
+class IssueRationale:
+    field: str
+    issue_type: str
+    rationale: str
+    source: str = ""
+    evidence: str = ""
+
+    def to_dict(self) -> dict[str, str]:
+        return {
+            "field": self.field,
+            "issue_type": self.issue_type,
+            "rationale": self.rationale,
+            "source": self.source,
+            "evidence": self.evidence,
+        }
+
+
 @dataclass
 class ParsedBundle:
     bundle_id: str
@@ -57,6 +75,7 @@ class ReviewPacket:
     ambiguous_elements: list[str] = field(default_factory=list)
     fields_requiring_human_confirmation: list[str] = field(default_factory=list)
     unsupported_elements: list[str] = field(default_factory=list)
+    issue_rationales: list[IssueRationale] = field(default_factory=list)
     source_trace: dict[str, list[TraceEntry]] = field(default_factory=dict)
     recommended_next_admin_action: str = ""
     status: PacketStatus = PacketStatus.INCOMPLETE
@@ -78,6 +97,7 @@ class ReviewPacket:
             "ambiguous_elements": self.ambiguous_elements,
             "fields_requiring_human_confirmation": self.fields_requiring_human_confirmation,
             "unsupported_elements": self.unsupported_elements,
+            "issue_rationales": [issue.to_dict() for issue in self.issue_rationales],
             "source_trace": {
                 field_name: [entry.to_dict() for entry in entries]
                 for field_name, entries in self.source_trace.items()
@@ -111,6 +131,7 @@ class ReviewedOutput:
             "fields_requiring_human_confirmation": packet_dict[
                 "fields_requiring_human_confirmation"
             ],
+            "issue_rationales": packet_dict["issue_rationales"],
             "source_trace_map": packet_dict["source_trace"],
             "human_review_decision": self.human_review_decision.value,
             "reviewer_name": self.reviewer_name,

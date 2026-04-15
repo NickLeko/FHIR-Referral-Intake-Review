@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from src.models import ParsedBundle, ReviewPacket
+from src.models import IssueRationale, ParsedBundle, ReviewPacket
 from src.parser import get_first_resource, get_resources, resolve_reference
 from src.review import classify_status, recommended_next_admin_action_for_status
 from src.tracing import add_trace, make_trace
@@ -24,13 +24,53 @@ GENERIC_SERVICE_TERMS = {
     "service request",
 }
 AMBIGUOUS_REASON_MARKERS = (" vs ", "possible", "unclear", "rule out", "/")
+MISSING_FIELD_RATIONALES = {
+    "requested_service": (
+        "ServiceRequest did not include a usable service description for routing.",
+        "ServiceRequest.code",
+    ),
+    "referral_reason": (
+        "No usable referral reason or referenced diagnosis was available for intake review.",
+        "ServiceRequest.reasonCode / ServiceRequest.reasonReference",
+    ),
+    "ordering_provider": (
+        "No requester reference or display value was available to identify the ordering provider.",
+        "ServiceRequest.requester",
+    ),
+    "patient_age_group": (
+        "Patient birth date was missing or unusable, so age group could not be derived.",
+        "Patient.birthDate",
+    ),
+    "encounter_context": (
+        "No encounter context could be resolved for scheduling or authorization handoff.",
+        "ServiceRequest.encounter / Encounter",
+    ),
+    "supporting_diagnosis": (
+        "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
+        "Condition.code",
+    ),
+}
+AMBIGUOUS_FIELD_RATIONALES = {
+    "requested_service": (
+        "Requested service is too generic to choose a reliable specialty route.",
+        "ServiceRequest.code",
+    ),
+    "referral_reason": (
+        "Referral reason contains ambiguity markers that require human clarification.",
+        "ServiceRequest.reasonCode",
+    ),
+    "ordering_provider": (
+        "Requester display was present without a resolvable Practitioner reference.",
+        "ServiceRequest.requester",
+    ),
+}
 
 
 def build_review_packet(parsed_bundle: ParsedBundle) -> ReviewPacket:
     trace_map: dict[str, list] = {}
 
-    patient = get_first_resource(parsed_bundle, "Patient")
     service_request = get_first_resource(parsed_bundle, "ServiceRequest")
+    patient = _resolve_patient(parsed_bundle, service_request)
     encounter = _resolve_encounter(parsed_bundle, service_request)
 
     requested_service = _extract_requested_service(service_request, trace_map)
@@ -71,6 +111,7 @@ def build_review_packet(parsed_bundle: ParsedBundle) -> ReviewPacket:
         f"{item['resource_type']}/{item['resource_id']}"
         for item in parsed_bundle.unsupported_resources
     ]
+    packet.issue_rationales = _build_issue_rationales(packet, parsed_bundle)
     packet.status = classify_status(
         packet.missing_elements,
         packet.fields_requiring_human_confirmation,
@@ -80,6 +121,23 @@ def build_review_packet(parsed_bundle: ParsedBundle) -> ReviewPacket:
         packet.status
     )
     return packet
+
+
+def _resolve_patient(
+    parsed_bundle: ParsedBundle,
+    service_request: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    if service_request is None:
+        return None
+
+    subject_ref = service_request.get("subject")
+    if not isinstance(subject_ref, dict):
+        return None
+
+    resolved = resolve_reference(parsed_bundle, clean_text(subject_ref.get("reference")))
+    if resolved and resolved.get("resourceType") == "Patient":
+        return resolved
+    return None
 
 
 def _resolve_encounter(
@@ -424,6 +482,77 @@ def _detect_missing_elements(packet: ReviewPacket) -> list[str]:
         elif isinstance(value, list) and not value:
             missing.append(field_name)
     return missing
+
+
+def _build_issue_rationales(
+    packet: ReviewPacket,
+    parsed_bundle: ParsedBundle,
+) -> list[IssueRationale]:
+    issue_rationales: list[IssueRationale] = []
+
+    for field_name in packet.missing_elements:
+        rationale, source = MISSING_FIELD_RATIONALES.get(
+            field_name,
+            ("Required intake field was not available.", ""),
+        )
+        issue_rationales.append(
+            IssueRationale(
+                field=field_name,
+                issue_type="missing",
+                rationale=rationale,
+                source=_source_for_field(packet, field_name) or source,
+                evidence=_evidence_for_field(packet, field_name),
+            )
+        )
+
+    for field_name in packet.ambiguous_elements:
+        rationale, source = AMBIGUOUS_FIELD_RATIONALES.get(
+            field_name,
+            ("Extracted value requires human confirmation before routing.", ""),
+        )
+        issue_rationales.append(
+            IssueRationale(
+                field=field_name,
+                issue_type="ambiguous",
+                rationale=rationale,
+                source=_source_for_field(packet, field_name) or source,
+                evidence=_evidence_for_field(packet, field_name),
+            )
+        )
+
+    for item in parsed_bundle.unsupported_resources:
+        resource_label = f"{item['resource_type']}/{item['resource_id']}"
+        issue_rationales.append(
+            IssueRationale(
+                field=resource_label,
+                issue_type="unsupported",
+                rationale=(
+                    "Bundle contains a resource outside the supported parser subset; "
+                    "reviewer should inspect it before treating the handoff as complete."
+                ),
+                source=resource_label,
+                evidence="Unsupported resource was present in the submitted bundle.",
+            )
+        )
+
+    return issue_rationales
+
+
+def _source_for_field(packet: ReviewPacket, field_name: str) -> str:
+    trace_entries = packet.source_trace.get(field_name, [])
+    return "; ".join(
+        f"{entry.resource_type}/{entry.resource_id}.{entry.field_path}"
+        for entry in trace_entries
+    )
+
+
+def _evidence_for_field(packet: ReviewPacket, field_name: str) -> str:
+    value = getattr(packet, field_name, None)
+    if isinstance(value, list):
+        return "; ".join(value) if value else "No value extracted."
+    if value is None:
+        return "No value extracted."
+    return str(value)
 
 
 def _detect_ambiguous_elements(

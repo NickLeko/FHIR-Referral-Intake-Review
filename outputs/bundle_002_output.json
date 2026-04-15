@@ -22,6 +22,29 @@
     "ambiguous_elements": [],
     "fields_requiring_human_confirmation": [],
     "unsupported_elements": [],
+    "issue_rationales": [
+      {
+        "field": "ordering_provider",
+        "issue_type": "missing",
+        "rationale": "No requester reference or display value was available to identify the ordering provider.",
+        "source": "ServiceRequest.requester",
+        "evidence": "No value extracted."
+      },
+      {
+        "field": "encounter_context",
+        "issue_type": "missing",
+        "rationale": "No encounter context could be resolved for scheduling or authorization handoff.",
+        "source": "ServiceRequest.encounter / Encounter",
+        "evidence": "No value extracted."
+      },
+      {
+        "field": "supporting_diagnosis",
+        "issue_type": "missing",
+        "rationale": "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
+        "source": "Condition.code",
+        "evidence": "No value extracted."
+      }
+    ],
     "source_trace": {
       "requested_service": [
         {
@@ -70,6 +93,29 @@
   ],
   "ambiguous_elements": [],
   "fields_requiring_human_confirmation": [],
+  "issue_rationales": [
+    {
+      "field": "ordering_provider",
+      "issue_type": "missing",
+      "rationale": "No requester reference or display value was available to identify the ordering provider.",
+      "source": "ServiceRequest.requester",
+      "evidence": "No value extracted."
+    },
+    {
+      "field": "encounter_context",
+      "issue_type": "missing",
+      "rationale": "No encounter context could be resolved for scheduling or authorization handoff.",
+      "source": "ServiceRequest.encounter / Encounter",
+      "evidence": "No value extracted."
+    },
+    {
+      "field": "supporting_diagnosis",
+      "issue_type": "missing",
+      "rationale": "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
+      "source": "Condition.code",
+      "evidence": "No value extracted."
+    }
+  ],
   "source_trace_map": {
     "requested_service": [
       {
@@ -110,7 +156,7 @@
   "human_review_decision": "CONFIRM_INCOMPLETE",
   "reviewer_name": "Administrative Reviewer",
   "reviewer_note": "Ordering provider, encounter context, and diagnosis support are still missing.",
-  "reviewed_at": "2026-03-31T21:44:16+00:00",
+  "reviewed_at": "2026-04-15T05:41:56+00:00",
   "final_status": "INCOMPLETE",
   "final_reviewed_handoff_summary": "Referral intake bundle-002-incomplete was reviewed as INCOMPLETE. Requested service: Lumbar spine MRI review. Ordering provider: Unavailable. Missing elements: ordering_provider, encounter_context, supporting_diagnosis. Ambiguous elements: none. Reviewer note: Ordering provider, encounter context, and diagnosis support are still missing.. Next admin step: Request the missing intake elements before downstream administrative work.",
   "recommended_next_admin_step": "Request the missing intake elements before downstream administrative work."

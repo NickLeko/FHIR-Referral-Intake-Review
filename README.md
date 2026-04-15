@@ -1,10 +1,10 @@
 # FHIR Referral Intake Review
 
-A simulated healthcare interoperability workflow prototype that ingests mock FHIR bundles, extracts referral intake details into an operational review packet, flags gaps or ambiguity, and routes the result into an explicit human-review step.
+A referral intake coordinator often has to turn structured data, cover sheets, notes, and partial order details into a practical handoff for scheduling, authorization, or specialty routing. This prototype simulates that administrative review step using mock FHIR bundles: it extracts the referral facts that matter, explains missing or ambiguous intake issues, preserves source traceability, and requires a human reviewer before the handoff is finalized.
 
 ## Why this matters
 
-FHIR-shaped data is often discussed as an interoperability standard, but operational teams still need the data transformed into something inspectable and actionable. This project demonstrates a narrow but realistic bridge from structured referral data to a human-reviewable administrative handoff.
+FHIR can move referral data between systems, but it does not automatically tell an operations team whether the packet is ready for downstream work. A scheduler may need a clear specialty, an authorization team may need a supporting diagnosis, and a referral coordinator may need to confirm the ordering provider before routing the case. This project demonstrates a narrow, inspectable workflow for turning structured referral data into a human-reviewable administrative packet instead of treating interoperability as the finish line.
 
 ## What this project demonstrates
 
@@ -80,9 +80,11 @@ This keeps the workflow inspectable and auditable without over-engineering a ful
 
 ## Sample bundles
 
-- `bundle_001_review_ready.json`: mostly complete and review-ready
-- `bundle_002_incomplete.json`: missing clear operational intake elements
-- `bundle_003_human_confirmation.json`: present but ambiguous enough to require manual confirmation
+| Bundle | Scenario | Expected status | Why flagged | Reviewer action |
+| --- | --- | --- | --- | --- |
+| `bundle_001_review_ready.json` | Cardiology referral with requester, encounter context, diagnosis, observation, and supporting document | `REVIEW_READY` | No required intake gaps or material ambiguity detected | Confirm ready before downstream administrative handling |
+| `bundle_002_incomplete.json` | MRI-related referral cover sheet with limited order context | `INCOMPLETE` | Ordering provider, encounter context, and supporting diagnosis are missing | Confirm incomplete and request missing intake elements |
+| `bundle_003_human_confirmation.json` | Urgent specialty consult with generic destination, ambiguous reason, and display-only requester | `HUMAN_CONFIRMATION_REQUIRED` | Specialty route, reason, and provider identity require clarification | Escalate for human confirmation before scheduling or authorization work |
 
 ## Running locally
 
@@ -107,11 +109,13 @@ pytest -q
 - Use the human review form to confirm or override the recommendation
 - Review the saved JSON artifacts in `outputs/`
 
-See [docs/demo_walkthrough.md](/Users/nicholasleko/projects/FHIR-Referral-Intake-Review/docs/demo_walkthrough.md) for a guided demo flow.
+See [docs/demo_walkthrough.md](docs/demo_walkthrough.md) for a guided demo flow.
 
 ## Screenshots
 
 Captured locally:
+
+![FHIR Referral Intake Review app overview](screenshots/app_overview.png)
 
 - `screenshots/app_overview.png`
 - `screenshots/app_full_page.png`

@@ -10,6 +10,7 @@ from src.review import (
     HumanReviewDecision,
     build_reviewed_output,
     default_decision_for_status,
+    decision_overrides_status,
 )
 from src.utils import (
     list_sample_bundle_paths,
@@ -60,6 +61,19 @@ def trace_rows(source_trace: dict[str, list[dict[str, str]]]) -> list[dict[str, 
     return rows
 
 
+def issue_table_rows(issue_rationales: list[dict[str, str]]) -> list[dict[str, str]]:
+    return [
+        {
+            "Field": issue["field"],
+            "Issue Type": issue["issue_type"],
+            "Rationale": issue["rationale"],
+            "Source": issue["source"] or "Not available",
+            "Evidence": issue["evidence"] or "Not available",
+        }
+        for issue in issue_rationales
+    ]
+
+
 st.set_page_config(page_title="FHIR Referral Intake Review", layout="wide")
 
 st.title("FHIR Referral Intake Review")
@@ -97,14 +111,11 @@ with left:
 
 with right:
     st.subheader("Issues Requiring Attention")
-    st.markdown("**Missing elements**")
-    st.write(packet_dict["missing_elements"] or ["None"])
-    st.markdown("**Ambiguous elements**")
-    st.write(packet_dict["ambiguous_elements"] or ["None"])
-    st.markdown("**Human confirmation required for**")
-    st.write(packet_dict["fields_requiring_human_confirmation"] or ["None"])
-    st.markdown("**Unsupported elements**")
-    st.write(packet_dict["unsupported_elements"] or ["None"])
+    issue_rows = issue_table_rows(packet_dict["issue_rationales"])
+    if issue_rows:
+        st.dataframe(issue_rows, width="stretch", hide_index=True)
+    else:
+        st.success("No missing, ambiguous, or unsupported issues detected.")
 
 st.subheader("Source Traceability")
 st.dataframe(trace_rows(packet_dict["source_trace"]), width="stretch", hide_index=True)
@@ -119,25 +130,35 @@ with st.form("human_review_form"):
         index=decision_options.index(default_decision),
         format_func=lambda decision: decision.value,
     )
+    override_requires_note = decision_overrides_status(packet.status, selected_decision)
     reviewer_name = st.text_input("Reviewer name", value="Administrative Reviewer")
     reviewer_note = st.text_area(
-        "Reviewer note",
-        placeholder="Optional note describing the administrative decision.",
+        "Reviewer note" + (" (required for override)" if override_requires_note else ""),
+        placeholder=(
+            "Required when changing the initial status."
+            if override_requires_note
+            else "Optional note describing the administrative decision."
+        ),
     )
+    if override_requires_note:
+        st.caption("A note is required because this decision changes the initial status.")
     submitted = st.form_submit_button("Generate reviewed handoff summary")
 
 if submitted:
-    reviewed_output = build_reviewed_output(
-        packet=packet,
-        decision=selected_decision,
-        reviewer_note=reviewer_note,
-        reviewer_name=reviewer_name or "Administrative Reviewer",
-    )
-    output_path = sample_output_path(selected_bundle_path)
-    save_json_file(output_path, reviewed_output.to_dict())
+    if decision_overrides_status(packet.status, selected_decision) and not reviewer_note.strip():
+        st.error("Reviewer note is required when overriding the initial status.")
+    else:
+        reviewed_output = build_reviewed_output(
+            packet=packet,
+            decision=selected_decision,
+            reviewer_note=reviewer_note,
+            reviewer_name=reviewer_name or "Administrative Reviewer",
+        )
+        output_path = sample_output_path(selected_bundle_path)
+        save_json_file(output_path, reviewed_output.to_dict())
 
-    st.success(f"Reviewed artifact saved to {output_path}")
-    st.subheader("Final Reviewed Handoff Summary")
-    st.write(reviewed_output.final_reviewed_handoff_summary)
-    st.subheader("Saved Reviewed Output")
-    st.json(reviewed_output.to_dict())
+        st.success(f"Reviewed artifact saved to {output_path}")
+        st.subheader("Final Reviewed Handoff Summary")
+        st.write(reviewed_output.final_reviewed_handoff_summary)
+        st.subheader("Saved Reviewed Output")
+        st.json(reviewed_output.to_dict())

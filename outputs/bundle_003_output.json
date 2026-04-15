@@ -31,6 +31,29 @@
       "ordering_provider"
     ],
     "unsupported_elements": [],
+    "issue_rationales": [
+      {
+        "field": "requested_service",
+        "issue_type": "ambiguous",
+        "rationale": "Requested service is too generic to choose a reliable specialty route.",
+        "source": "ServiceRequest/sr-003.code.text",
+        "evidence": "Specialty consult"
+      },
+      {
+        "field": "referral_reason",
+        "issue_type": "ambiguous",
+        "rationale": "Referral reason contains ambiguity markers that require human clarification.",
+        "source": "ServiceRequest/sr-003.reasonCode[0].text",
+        "evidence": "Shortness of breath vs deconditioning"
+      },
+      {
+        "field": "ordering_provider",
+        "issue_type": "ambiguous",
+        "rationale": "Requester display was present without a resolvable Practitioner reference.",
+        "source": "ServiceRequest/sr-003.requester.display",
+        "evidence": "Alex Morgan, MD"
+      }
+    ],
     "source_trace": {
       "requested_service": [
         {
@@ -136,6 +159,29 @@
     "referral_reason",
     "ordering_provider"
   ],
+  "issue_rationales": [
+    {
+      "field": "requested_service",
+      "issue_type": "ambiguous",
+      "rationale": "Requested service is too generic to choose a reliable specialty route.",
+      "source": "ServiceRequest/sr-003.code.text",
+      "evidence": "Specialty consult"
+    },
+    {
+      "field": "referral_reason",
+      "issue_type": "ambiguous",
+      "rationale": "Referral reason contains ambiguity markers that require human clarification.",
+      "source": "ServiceRequest/sr-003.reasonCode[0].text",
+      "evidence": "Shortness of breath vs deconditioning"
+    },
+    {
+      "field": "ordering_provider",
+      "issue_type": "ambiguous",
+      "rationale": "Requester display was present without a resolvable Practitioner reference.",
+      "source": "ServiceRequest/sr-003.requester.display",
+      "evidence": "Alex Morgan, MD"
+    }
+  ],
   "source_trace_map": {
     "requested_service": [
       {
@@ -229,7 +275,7 @@
   "human_review_decision": "ESCALATE_HUMAN_CONFIRMATION",
   "reviewer_name": "Administrative Reviewer",
   "reviewer_note": "Requested specialty and ordering provider identity need clarification before routing.",
-  "reviewed_at": "2026-03-31T21:44:16+00:00",
+  "reviewed_at": "2026-04-15T05:41:56+00:00",
   "final_status": "HUMAN_CONFIRMATION_REQUIRED",
   "final_reviewed_handoff_summary": "Referral intake bundle-003-human-confirmation was reviewed as HUMAN_CONFIRMATION_REQUIRED. Requested service: Specialty consult. Ordering provider: Alex Morgan, MD. Missing elements: none. Ambiguous elements: requested_service, referral_reason, ordering_provider. Reviewer note: Requested specialty and ordering provider identity need clarification before routing.. Next admin step: Route for manual clarification before downstream scheduling or authorization tasks.",
   "recommended_next_admin_step": "Route for manual clarification before downstream scheduling or authorization tasks."

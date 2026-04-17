@@ -1,0 +1,195 @@
+{
+  "bundle_id": "bundle-007-incomplete-patient-demographics",
+  "extracted_review_packet": {
+    "intake_id": "bundle-007-incomplete-patient-demographics",
+    "bundle_id": "bundle-007-incomplete-patient-demographics",
+    "requested_service": "Dermatology consultation",
+    "referral_reason": "New changing skin lesion",
+    "ordering_provider": "Samira Patel, PA-C",
+    "patient_age_group": null,
+    "encounter_context": "Ambulatory | Dermatology referral intake | 2026-03-18",
+    "supporting_diagnosis": [
+      "D48.5 - Changing skin lesion"
+    ],
+    "key_observations": [],
+    "referenced_documents": [],
+    "priority": "routine",
+    "missing_elements": [
+      "patient_age_group"
+    ],
+    "ambiguous_elements": [],
+    "fields_requiring_human_confirmation": [],
+    "unsupported_elements": [],
+    "issue_rationales": [
+      {
+        "field": "patient_age_group",
+        "issue_type": "missing",
+        "rationale": "Patient birth date was missing or unusable, so age group could not be derived.",
+        "source": "Patient.birthDate",
+        "evidence": "No value extracted."
+      }
+    ],
+    "source_trace": {
+      "requested_service": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-007",
+          "field_path": "code.text"
+        }
+      ],
+      "referral_reason": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-007",
+          "field_path": "reasonCode[0].text"
+        }
+      ],
+      "ordering_provider": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-007",
+          "field_path": "requester.reference"
+        },
+        {
+          "resource_type": "Practitioner",
+          "resource_id": "prac-007",
+          "field_path": "name[0]"
+        }
+      ],
+      "encounter_context": [
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-007",
+          "field_path": "class"
+        },
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-007",
+          "field_path": "type[0]"
+        },
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-007",
+          "field_path": "period.start"
+        }
+      ],
+      "supporting_diagnosis": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-007",
+          "field_path": "reasonReference[0].reference"
+        },
+        {
+          "resource_type": "Condition",
+          "resource_id": "cond-007",
+          "field_path": "code"
+        },
+        {
+          "resource_type": "Condition",
+          "resource_id": "cond-007",
+          "field_path": "clinicalStatus"
+        }
+      ],
+      "priority": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-007",
+          "field_path": "priority"
+        }
+      ]
+    },
+    "recommended_next_admin_action": "Request the missing intake elements before downstream administrative work.",
+    "status": "INCOMPLETE"
+  },
+  "status_before_review": "INCOMPLETE",
+  "missing_elements": [
+    "patient_age_group"
+  ],
+  "ambiguous_elements": [],
+  "fields_requiring_human_confirmation": [],
+  "issue_rationales": [
+    {
+      "field": "patient_age_group",
+      "issue_type": "missing",
+      "rationale": "Patient birth date was missing or unusable, so age group could not be derived.",
+      "source": "Patient.birthDate",
+      "evidence": "No value extracted."
+    }
+  ],
+  "source_trace_map": {
+    "requested_service": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-007",
+        "field_path": "code.text"
+      }
+    ],
+    "referral_reason": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-007",
+        "field_path": "reasonCode[0].text"
+      }
+    ],
+    "ordering_provider": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-007",
+        "field_path": "requester.reference"
+      },
+      {
+        "resource_type": "Practitioner",
+        "resource_id": "prac-007",
+        "field_path": "name[0]"
+      }
+    ],
+    "encounter_context": [
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-007",
+        "field_path": "class"
+      },
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-007",
+        "field_path": "type[0]"
+      },
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-007",
+        "field_path": "period.start"
+      }
+    ],
+    "supporting_diagnosis": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-007",
+        "field_path": "reasonReference[0].reference"
+      },
+      {
+        "resource_type": "Condition",
+        "resource_id": "cond-007",
+        "field_path": "code"
+      },
+      {
+        "resource_type": "Condition",
+        "resource_id": "cond-007",
+        "field_path": "clinicalStatus"
+      }
+    ],
+    "priority": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-007",
+        "field_path": "priority"
+      }
+    ]
+  },
+  "human_review_decision": "CONFIRM_INCOMPLETE",
+  "reviewer_name": "Administrative Reviewer",
+  "reviewer_note": "Patient age group cannot be derived because birth date is missing.",
+  "reviewed_at": "2026-04-15T05:41:56+00:00",
+  "final_status": "INCOMPLETE",
+  "final_reviewed_handoff_summary": "Referral intake bundle-007-incomplete-patient-demographics was reviewed as INCOMPLETE. Requested service: Dermatology consultation. Ordering provider: Samira Patel, PA-C. Missing elements: patient_age_group. Ambiguous elements: none. Reviewer note: Patient age group cannot be derived because birth date is missing.. Next admin step: Request the missing intake elements before downstream administrative work.",
+  "recommended_next_admin_step": "Request the missing intake elements before downstream administrative work."
+}

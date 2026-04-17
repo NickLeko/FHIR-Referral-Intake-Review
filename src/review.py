@@ -52,6 +52,7 @@ def build_reviewed_output(
     decision: HumanReviewDecision,
     reviewer_note: str = "",
     reviewer_name: str = "Administrative Reviewer",
+    reviewed_at: str | None = None,
 ) -> ReviewedOutput:
     reviewer_note = reviewer_note.strip()
     if decision_overrides_status(packet.status, decision) and not reviewer_note:
@@ -75,7 +76,7 @@ def build_reviewed_output(
         human_review_decision=decision,
         reviewer_name=reviewer_name,
         reviewer_note=reviewer_note,
-        reviewed_at=now_iso(),
+        reviewed_at=reviewed_at or now_iso(),
         final_status=final_status,
         final_reviewed_handoff_summary=summary,
         recommended_next_admin_step=next_step,

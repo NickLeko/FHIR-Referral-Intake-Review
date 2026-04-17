@@ -81,6 +81,11 @@
       ],
       "supporting_diagnosis": [
         {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-001",
+          "field_path": "reasonReference[0].reference"
+        },
+        {
           "resource_type": "Condition",
           "resource_id": "cond-001",
           "field_path": "code"
@@ -183,6 +188,11 @@
       }
     ],
     "supporting_diagnosis": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-001",
+        "field_path": "reasonReference[0].reference"
+      },
       {
         "resource_type": "Condition",
         "resource_id": "cond-001",

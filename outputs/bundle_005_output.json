@@ -1,0 +1,173 @@
+{
+  "bundle_id": "bundle-005-unresolved-diagnosis-reference",
+  "extracted_review_packet": {
+    "intake_id": "bundle-005-unresolved-diagnosis-reference",
+    "bundle_id": "bundle-005-unresolved-diagnosis-reference",
+    "requested_service": "Neurology consultation",
+    "referral_reason": "Right hand numbness evaluation",
+    "ordering_provider": "Priya Shah, DO",
+    "patient_age_group": "Adult",
+    "encounter_context": "Ambulatory | Primary care referral visit | 2026-03-14",
+    "supporting_diagnosis": [],
+    "key_observations": [],
+    "referenced_documents": [],
+    "priority": "routine",
+    "missing_elements": [
+      "supporting_diagnosis"
+    ],
+    "ambiguous_elements": [],
+    "fields_requiring_human_confirmation": [],
+    "unsupported_elements": [],
+    "issue_rationales": [
+      {
+        "field": "supporting_diagnosis",
+        "issue_type": "missing",
+        "rationale": "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
+        "source": "ServiceRequest.reasonReference",
+        "evidence": "Unresolved references: Condition/cond-005-missing"
+      }
+    ],
+    "source_trace": {
+      "requested_service": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-005",
+          "field_path": "code.text"
+        }
+      ],
+      "referral_reason": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-005",
+          "field_path": "reasonCode[0].text"
+        }
+      ],
+      "ordering_provider": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-005",
+          "field_path": "requester.reference"
+        },
+        {
+          "resource_type": "Practitioner",
+          "resource_id": "prac-005",
+          "field_path": "name[0]"
+        }
+      ],
+      "patient_age_group": [
+        {
+          "resource_type": "Patient",
+          "resource_id": "pat-005",
+          "field_path": "birthDate"
+        }
+      ],
+      "encounter_context": [
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-005",
+          "field_path": "class"
+        },
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-005",
+          "field_path": "type[0]"
+        },
+        {
+          "resource_type": "Encounter",
+          "resource_id": "enc-005",
+          "field_path": "period.start"
+        }
+      ],
+      "priority": [
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-005",
+          "field_path": "priority"
+        }
+      ]
+    },
+    "recommended_next_admin_action": "Request the missing intake elements before downstream administrative work.",
+    "status": "INCOMPLETE"
+  },
+  "status_before_review": "INCOMPLETE",
+  "missing_elements": [
+    "supporting_diagnosis"
+  ],
+  "ambiguous_elements": [],
+  "fields_requiring_human_confirmation": [],
+  "issue_rationales": [
+    {
+      "field": "supporting_diagnosis",
+      "issue_type": "missing",
+      "rationale": "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
+      "source": "ServiceRequest.reasonReference",
+      "evidence": "Unresolved references: Condition/cond-005-missing"
+    }
+  ],
+  "source_trace_map": {
+    "requested_service": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-005",
+        "field_path": "code.text"
+      }
+    ],
+    "referral_reason": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-005",
+        "field_path": "reasonCode[0].text"
+      }
+    ],
+    "ordering_provider": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-005",
+        "field_path": "requester.reference"
+      },
+      {
+        "resource_type": "Practitioner",
+        "resource_id": "prac-005",
+        "field_path": "name[0]"
+      }
+    ],
+    "patient_age_group": [
+      {
+        "resource_type": "Patient",
+        "resource_id": "pat-005",
+        "field_path": "birthDate"
+      }
+    ],
+    "encounter_context": [
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-005",
+        "field_path": "class"
+      },
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-005",
+        "field_path": "type[0]"
+      },
+      {
+        "resource_type": "Encounter",
+        "resource_id": "enc-005",
+        "field_path": "period.start"
+      }
+    ],
+    "priority": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-005",
+        "field_path": "priority"
+      }
+    ]
+  },
+  "human_review_decision": "CONFIRM_INCOMPLETE",
+  "reviewer_name": "Administrative Reviewer",
+  "reviewer_note": "The referenced diagnosis could not be resolved, so diagnosis support is incomplete.",
+  "reviewed_at": "2026-04-15T05:41:56+00:00",
+  "final_status": "INCOMPLETE",
+  "final_reviewed_handoff_summary": "Referral intake bundle-005-unresolved-diagnosis-reference was reviewed as INCOMPLETE. Requested service: Neurology consultation. Ordering provider: Priya Shah, DO. Missing elements: supporting_diagnosis. Ambiguous elements: none. Reviewer note: The referenced diagnosis could not be resolved, so diagnosis support is incomplete.. Next admin step: Request the missing intake elements before downstream administrative work.",
+  "recommended_next_admin_step": "Request the missing intake elements before downstream administrative work."
+}

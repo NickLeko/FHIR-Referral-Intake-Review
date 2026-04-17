@@ -1,0 +1,129 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-006-ambiguous-payer-context",
+  "type": "collection",
+  "timestamp": "2026-03-16T13:40:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-006",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-006",
+        "name": [
+          {
+            "text": "Robin Ellis"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1971-01-09"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:practitioner-006",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "prac-006",
+        "name": [
+          {
+            "text": "Noah Rivera, MD"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:encounter-006",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "enc-006",
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "display": "Ambulatory"
+        },
+        "type": [
+          {
+            "text": "Primary care referral visit"
+          }
+        ],
+        "period": {
+          "start": "2026-03-16"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-006",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-006",
+        "clinicalStatus": "active",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+              "code": "R10.9",
+              "display": "Unspecified abdominal pain"
+            }
+          ],
+          "text": "Chronic abdominal pain"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:coverage-006",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "cov-006",
+        "status": "active",
+        "type": {
+          "text": "Commercial PPO coverage"
+        },
+        "subscriberId": "MOCK-PAYER-006"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-006",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "sr-006",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "Patient/pat-006"
+        },
+        "category": [
+          {
+            "text": "Referral"
+          }
+        ],
+        "code": {
+          "text": "Gastroenterology consultation"
+        },
+        "authoredOn": "2026-03-16",
+        "requester": {
+          "reference": "Practitioner/prac-006",
+          "display": "Noah Rivera, MD"
+        },
+        "encounter": {
+          "reference": "Encounter/enc-006"
+        },
+        "reasonCode": [
+          {
+            "text": "Chronic abdominal pain evaluation"
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/cond-006"
+          }
+        ],
+        "insurance": [
+          {
+            "reference": "Coverage/cov-006",
+            "display": "Commercial PPO coverage"
+          }
+        ],
+        "priority": "routine"
+      }
+    }
+  ]
+}

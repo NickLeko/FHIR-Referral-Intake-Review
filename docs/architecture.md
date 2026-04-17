@@ -41,6 +41,8 @@ The parser is intentionally narrow and does not attempt broad FHIR coverage.
 - referenced documents
 - priority
 
+Explicit `ServiceRequest.reasonReference` values are resolved directly. If a reason reference cannot be resolved, the mapper does not backfill supporting diagnosis from unrelated bundled `Condition` resources.
+
 ## Status logic
 
 The initial status is deterministic and intentionally small:
@@ -69,6 +71,7 @@ The Streamlit app exposes a small review form where the reviewer can:
 - add a short reviewer note
 
 The final reviewed output records both the initial status and the human decision.
+The JSON shape is documented in `docs/reviewed_output_contract.md` and checked by tests.
 
 ## Design tradeoffs
 

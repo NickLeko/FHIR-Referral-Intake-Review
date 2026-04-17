@@ -63,6 +63,10 @@ AMBIGUOUS_FIELD_RATIONALES = {
         "Requester display was present without a resolvable Practitioner reference.",
         "ServiceRequest.requester",
     ),
+    "supporting_diagnosis": (
+        "One or more diagnosis references could not be resolved to supported Condition resources.",
+        "ServiceRequest.reasonReference",
+    ),
 }
 
 
@@ -111,7 +115,11 @@ def build_review_packet(parsed_bundle: ParsedBundle) -> ReviewPacket:
         f"{item['resource_type']}/{item['resource_id']}"
         for item in parsed_bundle.unsupported_resources
     ]
-    packet.issue_rationales = _build_issue_rationales(packet, parsed_bundle)
+    packet.issue_rationales = _build_issue_rationales(
+        packet,
+        parsed_bundle,
+        service_request,
+    )
     packet.status = classify_status(
         packet.missing_elements,
         packet.fields_requiring_human_confirmation,
@@ -222,6 +230,12 @@ def _extract_referral_reason(
     diagnoses = _collect_referenced_conditions(service_request, parsed_bundle)
     summaries = [summary for condition in diagnoses if (summary := summarize_condition(condition))]
     if summaries:
+        _trace_resolved_reason_references(
+            service_request,
+            parsed_bundle,
+            trace_map,
+            "referral_reason",
+        )
         for condition in diagnoses:
             add_trace(trace_map, "referral_reason", make_trace(condition, "code"))
         return "; ".join(join_unique(summaries))
@@ -327,8 +341,15 @@ def _extract_supporting_diagnosis(
         return []
 
     conditions = _collect_referenced_conditions(service_request, parsed_bundle)
-    if not conditions:
+    if not conditions and not _has_reason_references(service_request):
         conditions = get_resources(parsed_bundle, "Condition")
+    elif conditions:
+        _trace_resolved_reason_references(
+            service_request,
+            parsed_bundle,
+            trace_map,
+            "supporting_diagnosis",
+        )
 
     diagnosis_summaries: list[str] = []
     for index, condition in enumerate(conditions):
@@ -443,6 +464,63 @@ def _collect_referenced_conditions(
     return conditions
 
 
+def _has_reason_references(service_request: dict[str, Any] | None) -> bool:
+    if service_request is None:
+        return False
+    reason_references = service_request.get("reasonReference")
+    return isinstance(reason_references, list) and any(
+        isinstance(item, dict) and clean_text(item.get("reference"))
+        for item in reason_references
+    )
+
+
+def _unresolved_reason_reference_labels(
+    service_request: dict[str, Any] | None,
+    parsed_bundle: ParsedBundle,
+) -> list[str]:
+    if service_request is None:
+        return []
+
+    reason_references = service_request.get("reasonReference")
+    if not isinstance(reason_references, list):
+        return []
+
+    unresolved: list[str] = []
+    for item in reason_references:
+        if not isinstance(item, dict):
+            continue
+        reference = clean_text(item.get("reference"))
+        if not reference:
+            continue
+        resource = resolve_reference(parsed_bundle, reference)
+        if resource is None or resource.get("resourceType") != "Condition":
+            unresolved.append(reference)
+    return join_unique(unresolved)
+
+
+def _trace_resolved_reason_references(
+    service_request: dict[str, Any],
+    parsed_bundle: ParsedBundle,
+    trace_map: dict[str, list],
+    field_name: str,
+) -> None:
+    reason_references = service_request.get("reasonReference")
+    if not isinstance(reason_references, list):
+        return
+
+    for index, item in enumerate(reason_references):
+        if not isinstance(item, dict):
+            continue
+        reference = clean_text(item.get("reference"))
+        resource = resolve_reference(parsed_bundle, reference)
+        if resource and resource.get("resourceType") == "Condition":
+            add_trace(
+                trace_map,
+                field_name,
+                make_trace(service_request, f"reasonReference[{index}].reference"),
+            )
+
+
 def _collect_supporting_info(
     service_request: dict[str, Any] | None,
     parsed_bundle: ParsedBundle,
@@ -487,8 +565,13 @@ def _detect_missing_elements(packet: ReviewPacket) -> list[str]:
 def _build_issue_rationales(
     packet: ReviewPacket,
     parsed_bundle: ParsedBundle,
+    service_request: dict[str, Any] | None,
 ) -> list[IssueRationale]:
     issue_rationales: list[IssueRationale] = []
+    unresolved_reason_references = _unresolved_reason_reference_labels(
+        service_request,
+        parsed_bundle,
+    )
 
     for field_name in packet.missing_elements:
         rationale, source = MISSING_FIELD_RATIONALES.get(
@@ -500,8 +583,17 @@ def _build_issue_rationales(
                 field=field_name,
                 issue_type="missing",
                 rationale=rationale,
-                source=_source_for_field(packet, field_name) or source,
-                evidence=_evidence_for_field(packet, field_name),
+                source=_source_for_issue(
+                    packet,
+                    field_name,
+                    source,
+                    unresolved_reason_references,
+                ),
+                evidence=_evidence_for_issue(
+                    packet,
+                    field_name,
+                    unresolved_reason_references,
+                ),
             )
         )
 
@@ -515,8 +607,17 @@ def _build_issue_rationales(
                 field=field_name,
                 issue_type="ambiguous",
                 rationale=rationale,
-                source=_source_for_field(packet, field_name) or source,
-                evidence=_evidence_for_field(packet, field_name),
+                source=_source_for_issue(
+                    packet,
+                    field_name,
+                    source,
+                    unresolved_reason_references,
+                ),
+                evidence=_evidence_for_issue(
+                    packet,
+                    field_name,
+                    unresolved_reason_references,
+                ),
             )
         )
 
@@ -546,7 +647,25 @@ def _source_for_field(packet: ReviewPacket, field_name: str) -> str:
     )
 
 
-def _evidence_for_field(packet: ReviewPacket, field_name: str) -> str:
+def _source_for_issue(
+    packet: ReviewPacket,
+    field_name: str,
+    fallback_source: str,
+    unresolved_reason_references: list[str],
+) -> str:
+    if field_name == "supporting_diagnosis" and unresolved_reason_references:
+        return "ServiceRequest.reasonReference"
+    return _source_for_field(packet, field_name) or fallback_source
+
+
+def _evidence_for_issue(
+    packet: ReviewPacket,
+    field_name: str,
+    unresolved_reason_references: list[str],
+) -> str:
+    if field_name == "supporting_diagnosis" and unresolved_reason_references:
+        return f"Unresolved references: {', '.join(unresolved_reason_references)}"
+
     value = getattr(packet, field_name, None)
     if isinstance(value, list):
         return "; ".join(value) if value else "No value extracted."
@@ -572,6 +691,12 @@ def _detect_ambiguous_elements(
 
     if _provider_display_without_resolved_practitioner(service_request, parsed_bundle):
         ambiguous.append("ordering_provider")
+
+    if packet.supporting_diagnosis and _unresolved_reason_reference_labels(
+        service_request,
+        parsed_bundle,
+    ):
+        ambiguous.append("supporting_diagnosis")
 
     return join_unique(ambiguous)
 

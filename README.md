@@ -15,6 +15,7 @@ FHIR can move referral data between systems, but it does not automatically tell 
 - Source traceability from extracted packet fields back to originating FHIR resources
 - An explicit human-in-the-loop review step that can confirm or override the initial classification
 - Final reviewed handoff summaries saved as JSON artifacts
+- A lightweight reviewed-output contract checked by tests
 
 ## What it does not do
 
@@ -37,7 +38,7 @@ FHIR can move referral data between systems, but it does not automatically tell 
 
 ## Workflow in 30 seconds
 
-1. Select one of three mock FHIR bundles.
+1. Select one of seven mock FHIR bundles.
 2. The app parses supported resources and extracts referral/order intake details.
 3. The system builds an administrative review packet with source traces.
 4. Missing or ambiguous fields are surfaced explicitly.
@@ -65,6 +66,8 @@ Each extracted field includes a simple provenance map showing:
 
 This keeps the workflow inspectable and auditable without over-engineering a full lineage system.
 
+Reviewed output artifacts are described in [docs/reviewed_output_contract.md](docs/reviewed_output_contract.md).
+
 ## Repo structure
 
 ```text
@@ -85,6 +88,10 @@ This keeps the workflow inspectable and auditable without over-engineering a ful
 | `bundle_001_review_ready.json` | Cardiology referral with requester, encounter context, diagnosis, observation, and supporting document | `REVIEW_READY` | No required intake gaps or material ambiguity detected | Confirm ready before downstream administrative handling |
 | `bundle_002_incomplete.json` | MRI-related referral cover sheet with limited order context | `INCOMPLETE` | Ordering provider, encounter context, and supporting diagnosis are missing | Confirm incomplete and request missing intake elements |
 | `bundle_003_human_confirmation.json` | Urgent specialty consult with generic destination, ambiguous reason, and display-only requester | `HUMAN_CONFIRMATION_REQUIRED` | Specialty route, reason, and provider identity require clarification | Escalate for human confirmation before scheduling or authorization work |
+| `bundle_004_missing_requester.json` | Otherwise complete orthopedics referral with no requester | `INCOMPLETE` | Ordering provider is missing while diagnosis and encounter context are present | Confirm incomplete and request ordering provider details |
+| `bundle_005_unresolved_diagnosis_reference.json` | Neurology referral with an explicit diagnosis reference that cannot be resolved | `INCOMPLETE` | Supporting diagnosis is not inferred from an unrelated bundled condition | Confirm incomplete and request corrected diagnosis support |
+| `bundle_006_ambiguous_payer_context.json` | Gastroenterology referral containing a Coverage resource | `HUMAN_CONFIRMATION_REQUIRED` | Payer context is present outside the supported parser subset | Escalate for manual coverage/context clarification |
+| `bundle_007_incomplete_patient_demographics.json` | Dermatology referral with missing patient birth date | `INCOMPLETE` | Patient age group cannot be derived | Confirm incomplete and request corrected demographics |
 
 ## Running locally
 

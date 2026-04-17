@@ -1,0 +1,112 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-004-missing-requester",
+  "type": "collection",
+  "timestamp": "2026-03-12T08:20:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-004",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-004",
+        "name": [
+          {
+            "text": "Casey Lane"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1980-09-02"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:encounter-004",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "enc-004",
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "display": "Ambulatory"
+        },
+        "type": [
+          {
+            "text": "Orthopedics intake"
+          }
+        ],
+        "period": {
+          "start": "2026-03-12"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-004",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-004",
+        "clinicalStatus": "active",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+              "code": "M25.561",
+              "display": "Pain in right knee"
+            }
+          ],
+          "text": "Right knee pain"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:observation-004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-004",
+        "status": "final",
+        "code": {
+          "text": "Knee radiograph note"
+        },
+        "valueString": "Mild degenerative changes reported"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-004",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "sr-004",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "Patient/pat-004"
+        },
+        "category": [
+          {
+            "text": "Referral"
+          }
+        ],
+        "code": {
+          "text": "Orthopedics consultation"
+        },
+        "authoredOn": "2026-03-12",
+        "encounter": {
+          "reference": "Encounter/enc-004"
+        },
+        "reasonCode": [
+          {
+            "text": "Right knee pain after fall"
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/cond-004"
+          }
+        ],
+        "supportingInfo": [
+          {
+            "reference": "Observation/obs-004"
+          }
+        ],
+        "priority": "routine"
+      }
+    }
+  ]
+}

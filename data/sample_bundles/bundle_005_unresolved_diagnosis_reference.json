@@ -1,0 +1,111 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-005-unresolved-diagnosis-reference",
+  "type": "collection",
+  "timestamp": "2026-03-14T11:05:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-005",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-005",
+        "name": [
+          {
+            "text": "Drew Parker"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1982-06-30"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:practitioner-005",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "prac-005",
+        "name": [
+          {
+            "text": "Priya Shah, DO"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:encounter-005",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "enc-005",
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "display": "Ambulatory"
+        },
+        "type": [
+          {
+            "text": "Primary care referral visit"
+          }
+        ],
+        "period": {
+          "start": "2026-03-14"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-005-unrelated",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-005-unrelated",
+        "clinicalStatus": "active",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+              "code": "G43.909",
+              "display": "Migraine, unspecified, not intractable, without status migrainosus"
+            }
+          ],
+          "text": "History of migraine"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-005",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "sr-005",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "Patient/pat-005"
+        },
+        "category": [
+          {
+            "text": "Referral"
+          }
+        ],
+        "code": {
+          "text": "Neurology consultation"
+        },
+        "authoredOn": "2026-03-14",
+        "requester": {
+          "reference": "Practitioner/prac-005",
+          "display": "Priya Shah, DO"
+        },
+        "encounter": {
+          "reference": "Encounter/enc-005"
+        },
+        "reasonCode": [
+          {
+            "text": "Right hand numbness evaluation"
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/cond-005-missing"
+          }
+        ],
+        "priority": "routine"
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-007-incomplete-patient-demographics",
+  "type": "collection",
+  "timestamp": "2026-03-18T10:10:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-007",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-007",
+        "name": [
+          {
+            "text": "Avery Mills"
+          }
+        ],
+        "gender": "unknown"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:practitioner-007",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "prac-007",
+        "name": [
+          {
+            "text": "Samira Patel, PA-C"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:encounter-007",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "enc-007",
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "display": "Ambulatory"
+        },
+        "type": [
+          {
+            "text": "Dermatology referral intake"
+          }
+        ],
+        "period": {
+          "start": "2026-03-18"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-007",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-007",
+        "clinicalStatus": "active",
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10-cm",
+              "code": "D48.5",
+              "display": "Neoplasm of uncertain behavior of skin"
+            }
+          ],
+          "text": "Changing skin lesion"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:servicerequest-007",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "sr-007",
+        "status": "active",
+        "intent": "order",
+        "subject": {
+          "reference": "Patient/pat-007"
+        },
+        "category": [
+          {
+            "text": "Referral"
+          }
+        ],
+        "code": {
+          "text": "Dermatology consultation"
+        },
+        "authoredOn": "2026-03-18",
+        "requester": {
+          "reference": "Practitioner/prac-007",
+          "display": "Samira Patel, PA-C"
+        },
+        "encounter": {
+          "reference": "Encounter/enc-007"
+        },
+        "reasonCode": [
+          {
+            "text": "New changing skin lesion"
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/cond-007"
+          }
+        ],
+        "priority": "routine"
+      }
+    }
+  ]
+}

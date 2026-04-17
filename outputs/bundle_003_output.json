@@ -102,6 +102,16 @@
       ],
       "supporting_diagnosis": [
         {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-003",
+          "field_path": "reasonReference[0].reference"
+        },
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-003",
+          "field_path": "reasonReference[1].reference"
+        },
+        {
           "resource_type": "Condition",
           "resource_id": "cond-003a",
           "field_path": "code"
@@ -229,6 +239,16 @@
       }
     ],
     "supporting_diagnosis": [
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-003",
+        "field_path": "reasonReference[0].reference"
+      },
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-003",
+        "field_path": "reasonReference[1].reference"
+      },
       {
         "resource_type": "Condition",
         "resource_id": "cond-003a",

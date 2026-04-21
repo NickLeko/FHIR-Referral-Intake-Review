@@ -165,3 +165,143 @@ def test_reason_reference_trace_is_preserved_for_supporting_diagnosis(
         and trace.field_path == "code"
         for trace in supporting_diagnosis_traces
     )
+
+
+def test_single_unreferenced_condition_is_the_only_diagnosis_fallback(
+    sample_bundle_dir,
+    load_sample_bundle,
+) -> None:
+    bundle = load_sample_bundle(sample_bundle_dir / "bundle_002_incomplete.json")
+    bundle["entry"].insert(
+        -1,
+        {
+            "fullUrl": "urn:uuid:condition-only",
+            "resource": {
+                "resourceType": "Condition",
+                "id": "cond-only",
+                "clinicalStatus": "active",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                            "code": "M54.50",
+                            "display": "Low back pain, unspecified",
+                        }
+                    ],
+                    "text": "Low back pain",
+                },
+            },
+        },
+    )
+
+    packet = build_review_packet(parse_bundle(bundle))
+
+    assert packet.supporting_diagnosis == ["M54.50 - Low back pain"]
+    assert "supporting_diagnosis" not in packet.missing_elements
+
+
+def test_multiple_unreferenced_conditions_are_not_used_as_supporting_diagnosis(
+    sample_bundle_dir,
+    load_sample_bundle,
+) -> None:
+    bundle = load_sample_bundle(sample_bundle_dir / "bundle_002_incomplete.json")
+    bundle["entry"].insert(
+        -1,
+        {
+            "fullUrl": "urn:uuid:condition-a",
+            "resource": {
+                "resourceType": "Condition",
+                "id": "cond-a",
+                "clinicalStatus": "active",
+                "code": {"text": "Low back pain"},
+            },
+        },
+    )
+    bundle["entry"].insert(
+        -1,
+        {
+            "fullUrl": "urn:uuid:condition-b",
+            "resource": {
+                "resourceType": "Condition",
+                "id": "cond-b",
+                "clinicalStatus": "active",
+                "code": {"text": "Hip pain"},
+            },
+        },
+    )
+
+    packet = build_review_packet(parse_bundle(bundle))
+
+    assert packet.supporting_diagnosis == []
+    assert "supporting_diagnosis" in packet.missing_elements
+
+
+def test_unlinked_observations_and_documents_are_not_used_by_default(
+    sample_bundle_dir,
+    load_sample_bundle,
+) -> None:
+    bundle = load_sample_bundle(sample_bundle_dir / "bundle_002_incomplete.json")
+    service_request = _first_resource(bundle, "ServiceRequest")
+    service_request.pop("supportingInfo")
+    bundle["entry"].insert(
+        -1,
+        {
+            "fullUrl": "urn:uuid:observation-extra",
+            "resource": {
+                "resourceType": "Observation",
+                "id": "obs-extra",
+                "status": "final",
+                "code": {"text": "Blood pressure"},
+                "valueString": "120/80",
+            },
+        },
+    )
+
+    packet = build_review_packet(parse_bundle(bundle))
+
+    assert packet.key_observations == []
+    assert packet.referenced_documents == []
+
+
+def test_patient_age_group_uses_authored_on_before_bundle_timestamp(
+    sample_bundle_dir,
+    load_sample_bundle,
+) -> None:
+    bundle = load_sample_bundle(sample_bundle_dir / "bundle_001_review_ready.json")
+    patient = _first_resource(bundle, "Patient")
+    service_request = _first_resource(bundle, "ServiceRequest")
+    patient["birthDate"] = "2008-03-15"
+    service_request["authoredOn"] = "2026-03-01"
+    bundle["timestamp"] = "2026-04-21T10:15:00Z"
+
+    packet = build_review_packet(parse_bundle(bundle))
+
+    assert packet.patient_age_group == "Pediatric"
+    assert any(
+        trace.resource_type == "ServiceRequest"
+        and trace.resource_id == "sr-001"
+        and trace.field_path == "authoredOn"
+        for trace in packet.source_trace["patient_age_group"]
+    )
+
+
+def test_patient_age_group_falls_back_to_bundle_timestamp_when_authored_on_missing(
+    sample_bundle_dir,
+    load_sample_bundle,
+) -> None:
+    bundle = load_sample_bundle(sample_bundle_dir / "bundle_001_review_ready.json")
+    patient = _first_resource(bundle, "Patient")
+    service_request = _first_resource(bundle, "ServiceRequest")
+    patient["birthDate"] = "2008-03-15"
+    service_request.pop("authoredOn")
+    bundle["timestamp"] = "2026-03-01T10:15:00Z"
+
+    packet = build_review_packet(parse_bundle(bundle))
+
+    assert packet.patient_age_group == "Pediatric"
+    assert any(
+        trace.resource_type == "Bundle"
+        and trace.resource_id == "bundle-001-review-ready"
+        and trace.field_path == "timestamp"
+        for trace in packet.source_trace["patient_age_group"]
+    )

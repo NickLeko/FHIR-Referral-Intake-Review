@@ -63,8 +63,13 @@ def parse_bundle(bundle_data: dict[str, Any]) -> ParsedBundle:
         if isinstance(full_url, str) and full_url.strip():
             resources_by_reference[full_url.strip()] = resource
 
-    if not resources_by_type.get("ServiceRequest"):
-        raise BundleValidationError("Bundle must include at least one ServiceRequest.")
+    service_requests = resources_by_type.get("ServiceRequest", [])
+    if not service_requests:
+        raise BundleValidationError("Bundle must include exactly one ServiceRequest.")
+    if len(service_requests) != 1:
+        raise BundleValidationError(
+            "Bundle must include exactly one ServiceRequest; multiple ServiceRequest resources were found."
+        )
 
     return ParsedBundle(
         bundle_id=bundle_id,

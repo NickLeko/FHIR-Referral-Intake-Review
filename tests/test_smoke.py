@@ -172,3 +172,26 @@ def test_malformed_input_fails_safely() -> None:
 
     with pytest.raises(BundleValidationError):
         parse_bundle(malformed_bundle)
+
+
+def test_multiple_service_requests_fail_validation(
+    sample_bundle_dir,
+    load_sample_bundle,
+) -> None:
+    bundle = load_sample_bundle(sample_bundle_dir / "bundle_001_review_ready.json")
+    bundle["entry"].append(
+        {
+            "fullUrl": "urn:uuid:servicerequest-extra",
+            "resource": {
+                "resourceType": "ServiceRequest",
+                "id": "sr-extra",
+                "status": "active",
+                "intent": "order",
+                "subject": {"reference": "Patient/pat-001"},
+                "code": {"text": "Nephrology consultation"},
+            },
+        }
+    )
+
+    with pytest.raises(BundleValidationError, match="exactly one ServiceRequest"):
+        parse_bundle(bundle)

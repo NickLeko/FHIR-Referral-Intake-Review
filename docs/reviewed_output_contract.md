@@ -1,6 +1,7 @@
 # Reviewed Output Contract
 
-Reviewed outputs are local JSON artifacts written to `outputs/` after human review.
+Reviewed outputs are local JSON artifacts.
+The app writes timestamped review-history files into `outputs/review_history/`, while deterministic checked-in examples live in `outputs/`.
 They are not FHIR resources and are not system-of-record updates.
 
 ## Top-level fields
@@ -18,7 +19,7 @@ They are not FHIR resources and are not system-of-record updates.
 - `reviewer_note`: reviewer note; required when overriding the initial status
 - `reviewed_at`: ISO timestamp
 - `final_status`: status after human review
-- `final_reviewed_handoff_summary`: administrative summary text
+- `final_reviewed_handoff_summary`: compact operational handoff summary text
 - `recommended_next_admin_step`: final next administrative step
 
 ## Extracted review packet fields

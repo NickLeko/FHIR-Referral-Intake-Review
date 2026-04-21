@@ -81,6 +81,11 @@
           "resource_type": "Patient",
           "resource_id": "pat-003",
           "field_path": "birthDate"
+        },
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-003",
+          "field_path": "authoredOn"
         }
       ],
       "encounter_context": [
@@ -219,6 +224,11 @@
         "resource_type": "Patient",
         "resource_id": "pat-003",
         "field_path": "birthDate"
+      },
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-003",
+        "field_path": "authoredOn"
       }
     ],
     "encounter_context": [
@@ -293,10 +303,10 @@
     ]
   },
   "human_review_decision": "ESCALATE_HUMAN_CONFIRMATION",
-  "reviewer_name": "Administrative Reviewer",
+  "reviewer_name": "Casey Nguyen, Referral Intake Coordinator",
   "reviewer_note": "Requested specialty and ordering provider identity need clarification before routing.",
   "reviewed_at": "2026-04-15T05:41:56+00:00",
   "final_status": "HUMAN_CONFIRMATION_REQUIRED",
-  "final_reviewed_handoff_summary": "Referral intake bundle-003-human-confirmation was reviewed as HUMAN_CONFIRMATION_REQUIRED. Requested service: Specialty consult. Ordering provider: Alex Morgan, MD. Missing elements: none. Ambiguous elements: requested_service, referral_reason, ordering_provider. Reviewer note: Requested specialty and ordering provider identity need clarification before routing.. Next admin step: Route for manual clarification before downstream scheduling or authorization tasks.",
+  "final_reviewed_handoff_summary": "Service: Specialty consult | Priority: urgent\nKnown facts: ordering provider Alex Morgan, MD; patient age group Adult; encounter Ambulatory | Specialty intake visit | 2026-03-10; supporting diagnosis R06.02 - Shortness of breath; R53.83 - Fatigue / deconditioning concern; key observations Six-minute walk note: Reduced exercise tolerance reported; documents PCP referral note with unclear specialty destination\nBlockers: ambiguous requested_service, referral_reason, ordering_provider\nReview: initial HUMAN_CONFIRMATION_REQUIRED -> final HUMAN_CONFIRMATION_REQUIRED via ESCALATE_HUMAN_CONFIRMATION\nReviewer: Casey Nguyen, Referral Intake Coordinator | 2026-04-15T05:41:56+00:00\nReviewer note: Requested specialty and ordering provider identity need clarification before routing.\nNext step: Route for manual clarification before downstream scheduling or authorization tasks.",
   "recommended_next_admin_step": "Route for manual clarification before downstream scheduling or authorization tasks."
 }

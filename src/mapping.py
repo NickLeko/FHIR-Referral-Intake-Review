@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import date
 from typing import Any
 
 from src.models import IssueRationale, ParsedBundle, ReviewPacket
@@ -12,6 +13,7 @@ from src.utils import (
     extract_codeable_concept_text,
     extract_human_name,
     join_unique,
+    parse_date_value,
     summarize_condition,
     summarize_observation_value,
 )
@@ -38,16 +40,16 @@ MISSING_FIELD_RATIONALES = {
         "ServiceRequest.requester",
     ),
     "patient_age_group": (
-        "Patient birth date was missing or unusable, so age group could not be derived.",
-        "Patient.birthDate",
+        "Patient birth date or a deterministic intake date was missing or unusable, so age group could not be derived.",
+        "Patient.birthDate / ServiceRequest.authoredOn / Bundle.timestamp",
     ),
     "encounter_context": (
         "No encounter context could be resolved for scheduling or authorization handoff.",
         "ServiceRequest.encounter / Encounter",
     ),
     "supporting_diagnosis": (
-        "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
-        "Condition.code",
+        "No supporting diagnosis could be summarized from referenced conditions or a sole bundled Condition candidate.",
+        "ServiceRequest.reasonReference / Condition.code",
     ),
 }
 AMBIGUOUS_FIELD_RATIONALES = {
@@ -80,7 +82,12 @@ def build_review_packet(parsed_bundle: ParsedBundle) -> ReviewPacket:
     requested_service = _extract_requested_service(service_request, trace_map)
     referral_reason = _extract_referral_reason(service_request, parsed_bundle, trace_map)
     ordering_provider = _extract_ordering_provider(service_request, parsed_bundle, trace_map)
-    patient_age_group = _extract_patient_age_group(patient, trace_map)
+    patient_age_group = _extract_patient_age_group(
+        patient,
+        service_request,
+        parsed_bundle,
+        trace_map,
+    )
     encounter_context = _extract_encounter_context(encounter, trace_map)
     supporting_diagnosis = _extract_supporting_diagnosis(
         service_request, parsed_bundle, trace_map
@@ -286,15 +293,27 @@ def _extract_ordering_provider(
 
 def _extract_patient_age_group(
     patient: dict[str, Any] | None,
+    service_request: dict[str, Any] | None,
+    parsed_bundle: ParsedBundle,
     trace_map: dict[str, list],
 ) -> str | None:
     if patient is None:
         return None
 
     birth_date = clean_text(patient.get("birthDate"))
-    value = age_group_from_birth_date(birth_date)
     if birth_date:
         add_trace(trace_map, "patient_age_group", make_trace(patient, "birthDate"))
+    reference_date, reference_resource, reference_path = _resolve_age_reference_date(
+        parsed_bundle,
+        service_request,
+    )
+    if birth_date and reference_resource is not None and reference_path:
+        add_trace(
+            trace_map,
+            "patient_age_group",
+            make_trace(reference_resource, reference_path),
+        )
+    value = age_group_from_birth_date(birth_date, reference_date)
     return value
 
 
@@ -341,15 +360,15 @@ def _extract_supporting_diagnosis(
         return []
 
     conditions = _collect_referenced_conditions(service_request, parsed_bundle)
-    if not conditions and not _has_reason_references(service_request):
-        conditions = get_resources(parsed_bundle, "Condition")
-    elif conditions:
+    if conditions:
         _trace_resolved_reason_references(
             service_request,
             parsed_bundle,
             trace_map,
             "supporting_diagnosis",
         )
+    elif not _has_reason_references(service_request):
+        conditions = _sole_resource_candidate(parsed_bundle, "Condition")
 
     diagnosis_summaries: list[str] = []
     for index, condition in enumerate(conditions):
@@ -377,8 +396,6 @@ def _extract_observations(
     trace_map: dict[str, list],
 ) -> list[str]:
     observations = _collect_supporting_info(service_request, parsed_bundle, "Observation")
-    if not observations:
-        observations = get_resources(parsed_bundle, "Observation")
 
     summaries: list[str] = []
     for observation in observations:
@@ -402,8 +419,6 @@ def _extract_documents(
     trace_map: dict[str, list],
 ) -> list[str]:
     documents = _collect_supporting_info(service_request, parsed_bundle, "DocumentReference")
-    if not documents:
-        documents = get_resources(parsed_bundle, "DocumentReference")
 
     summaries: list[str] = []
     for document in documents:
@@ -542,6 +557,30 @@ def _collect_supporting_info(
         if resource and resource.get("resourceType") == resource_type:
             resources.append(resource)
     return resources
+
+
+def _sole_resource_candidate(
+    parsed_bundle: ParsedBundle,
+    resource_type: str,
+) -> list[dict[str, Any]]:
+    resources = get_resources(parsed_bundle, resource_type)
+    return resources if len(resources) == 1 else []
+
+
+def _resolve_age_reference_date(
+    parsed_bundle: ParsedBundle,
+    service_request: dict[str, Any] | None,
+) -> tuple[date | None, dict[str, Any] | None, str | None]:
+    if service_request is not None:
+        authored_on = parse_date_value(service_request.get("authoredOn"))
+        if authored_on is not None:
+            return authored_on, service_request, "authoredOn"
+
+    bundle_timestamp = parse_date_value(parsed_bundle.raw_bundle.get("timestamp"))
+    if bundle_timestamp is not None:
+        return bundle_timestamp, parsed_bundle.raw_bundle, "timestamp"
+
+    return None, None, None
 
 
 def _detect_missing_elements(packet: ReviewPacket) -> list[str]:

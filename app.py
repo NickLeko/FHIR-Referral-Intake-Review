@@ -15,7 +15,7 @@ from src.review import (
 from src.utils import (
     list_sample_bundle_paths,
     load_json_file,
-    sample_output_path,
+    review_history_output_path,
     save_json_file,
 )
 
@@ -131,7 +131,7 @@ with st.form("human_review_form"):
         format_func=lambda decision: decision.value,
     )
     override_requires_note = decision_overrides_status(packet.status, selected_decision)
-    reviewer_name = st.text_input("Reviewer name", value="Administrative Reviewer")
+    reviewer_name = st.text_input("Reviewer name", value="Referral Intake Coordinator")
     reviewer_note = st.text_area(
         "Reviewer note" + (" (required for override)" if override_requires_note else ""),
         placeholder=(
@@ -152,13 +152,17 @@ if submitted:
             packet=packet,
             decision=selected_decision,
             reviewer_note=reviewer_note,
-            reviewer_name=reviewer_name or "Administrative Reviewer",
+            reviewer_name=reviewer_name or "Referral Intake Coordinator",
         )
-        output_path = sample_output_path(selected_bundle_path)
+        output_path = review_history_output_path(
+            selected_bundle_path,
+            reviewed_output.reviewed_at,
+            reviewed_output.human_review_decision.value,
+        )
         save_json_file(output_path, reviewed_output.to_dict())
 
         st.success(f"Reviewed artifact saved to {output_path}")
         st.subheader("Final Reviewed Handoff Summary")
-        st.write(reviewed_output.final_reviewed_handoff_summary)
+        st.text(reviewed_output.final_reviewed_handoff_summary)
         st.subheader("Saved Reviewed Output")
         st.json(reviewed_output.to_dict())

@@ -22,7 +22,7 @@
       {
         "field": "supporting_diagnosis",
         "issue_type": "missing",
-        "rationale": "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
+        "rationale": "No supporting diagnosis could be summarized from referenced conditions or a sole bundled Condition candidate.",
         "source": "ServiceRequest.reasonReference",
         "evidence": "Unresolved references: Condition/cond-005-missing"
       }
@@ -59,6 +59,11 @@
           "resource_type": "Patient",
           "resource_id": "pat-005",
           "field_path": "birthDate"
+        },
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-005",
+          "field_path": "authoredOn"
         }
       ],
       "encounter_context": [
@@ -99,7 +104,7 @@
     {
       "field": "supporting_diagnosis",
       "issue_type": "missing",
-      "rationale": "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
+      "rationale": "No supporting diagnosis could be summarized from referenced conditions or a sole bundled Condition candidate.",
       "source": "ServiceRequest.reasonReference",
       "evidence": "Unresolved references: Condition/cond-005-missing"
     }
@@ -136,6 +141,11 @@
         "resource_type": "Patient",
         "resource_id": "pat-005",
         "field_path": "birthDate"
+      },
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-005",
+        "field_path": "authoredOn"
       }
     ],
     "encounter_context": [
@@ -164,10 +174,10 @@
     ]
   },
   "human_review_decision": "CONFIRM_INCOMPLETE",
-  "reviewer_name": "Administrative Reviewer",
+  "reviewer_name": "Casey Nguyen, Referral Intake Coordinator",
   "reviewer_note": "The referenced diagnosis could not be resolved, so diagnosis support is incomplete.",
   "reviewed_at": "2026-04-15T05:41:56+00:00",
   "final_status": "INCOMPLETE",
-  "final_reviewed_handoff_summary": "Referral intake bundle-005-unresolved-diagnosis-reference was reviewed as INCOMPLETE. Requested service: Neurology consultation. Ordering provider: Priya Shah, DO. Missing elements: supporting_diagnosis. Ambiguous elements: none. Reviewer note: The referenced diagnosis could not be resolved, so diagnosis support is incomplete.. Next admin step: Request the missing intake elements before downstream administrative work.",
+  "final_reviewed_handoff_summary": "Service: Neurology consultation | Priority: routine\nKnown facts: ordering provider Priya Shah, DO; patient age group Adult; encounter Ambulatory | Primary care referral visit | 2026-03-14\nBlockers: missing supporting_diagnosis\nReview: initial INCOMPLETE -> final INCOMPLETE via CONFIRM_INCOMPLETE\nReviewer: Casey Nguyen, Referral Intake Coordinator | 2026-04-15T05:41:56+00:00\nReviewer note: The referenced diagnosis could not be resolved, so diagnosis support is incomplete.\nNext step: Request the missing intake elements before downstream administrative work.",
   "recommended_next_admin_step": "Request the missing intake elements before downstream administrative work."
 }

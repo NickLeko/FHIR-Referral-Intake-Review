@@ -40,8 +40,8 @@
       {
         "field": "supporting_diagnosis",
         "issue_type": "missing",
-        "rationale": "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
-        "source": "Condition.code",
+        "rationale": "No supporting diagnosis could be summarized from referenced conditions or a sole bundled Condition candidate.",
+        "source": "ServiceRequest.reasonReference / Condition.code",
         "evidence": "No value extracted."
       }
     ],
@@ -65,6 +65,11 @@
           "resource_type": "Patient",
           "resource_id": "pat-002",
           "field_path": "birthDate"
+        },
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-002",
+          "field_path": "authoredOn"
         }
       ],
       "referenced_documents": [
@@ -111,8 +116,8 @@
     {
       "field": "supporting_diagnosis",
       "issue_type": "missing",
-      "rationale": "No supporting diagnosis could be summarized from referenced or bundled Condition resources.",
-      "source": "Condition.code",
+      "rationale": "No supporting diagnosis could be summarized from referenced conditions or a sole bundled Condition candidate.",
+      "source": "ServiceRequest.reasonReference / Condition.code",
       "evidence": "No value extracted."
     }
   ],
@@ -136,6 +141,11 @@
         "resource_type": "Patient",
         "resource_id": "pat-002",
         "field_path": "birthDate"
+      },
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-002",
+        "field_path": "authoredOn"
       }
     ],
     "referenced_documents": [
@@ -154,10 +164,10 @@
     ]
   },
   "human_review_decision": "CONFIRM_INCOMPLETE",
-  "reviewer_name": "Administrative Reviewer",
+  "reviewer_name": "Casey Nguyen, Referral Intake Coordinator",
   "reviewer_note": "Ordering provider, encounter context, and diagnosis support are still missing.",
   "reviewed_at": "2026-04-15T05:41:56+00:00",
   "final_status": "INCOMPLETE",
-  "final_reviewed_handoff_summary": "Referral intake bundle-002-incomplete was reviewed as INCOMPLETE. Requested service: Lumbar spine MRI review. Ordering provider: Unavailable. Missing elements: ordering_provider, encounter_context, supporting_diagnosis. Ambiguous elements: none. Reviewer note: Ordering provider, encounter context, and diagnosis support are still missing.. Next admin step: Request the missing intake elements before downstream administrative work.",
+  "final_reviewed_handoff_summary": "Service: Lumbar spine MRI review | Priority: routine\nKnown facts: patient age group Adult; documents Referral cover sheet without signed order details\nBlockers: missing ordering_provider, encounter_context, supporting_diagnosis\nReview: initial INCOMPLETE -> final INCOMPLETE via CONFIRM_INCOMPLETE\nReviewer: Casey Nguyen, Referral Intake Coordinator | 2026-04-15T05:41:56+00:00\nReviewer note: Ordering provider, encounter context, and diagnosis support are still missing.\nNext step: Request the missing intake elements before downstream administrative work.",
   "recommended_next_admin_step": "Request the missing intake elements before downstream administrative work."
 }

@@ -24,8 +24,8 @@
       {
         "field": "patient_age_group",
         "issue_type": "missing",
-        "rationale": "Patient birth date was missing or unusable, so age group could not be derived.",
-        "source": "Patient.birthDate",
+        "rationale": "Patient birth date or a deterministic intake date was missing or unusable, so age group could not be derived.",
+        "source": "Patient.birthDate / ServiceRequest.authoredOn / Bundle.timestamp",
         "evidence": "No value extracted."
       }
     ],
@@ -111,8 +111,8 @@
     {
       "field": "patient_age_group",
       "issue_type": "missing",
-      "rationale": "Patient birth date was missing or unusable, so age group could not be derived.",
-      "source": "Patient.birthDate",
+      "rationale": "Patient birth date or a deterministic intake date was missing or unusable, so age group could not be derived.",
+      "source": "Patient.birthDate / ServiceRequest.authoredOn / Bundle.timestamp",
       "evidence": "No value extracted."
     }
   ],
@@ -186,10 +186,10 @@
     ]
   },
   "human_review_decision": "CONFIRM_INCOMPLETE",
-  "reviewer_name": "Administrative Reviewer",
+  "reviewer_name": "Casey Nguyen, Referral Intake Coordinator",
   "reviewer_note": "Patient age group cannot be derived because birth date is missing.",
   "reviewed_at": "2026-04-15T05:41:56+00:00",
   "final_status": "INCOMPLETE",
-  "final_reviewed_handoff_summary": "Referral intake bundle-007-incomplete-patient-demographics was reviewed as INCOMPLETE. Requested service: Dermatology consultation. Ordering provider: Samira Patel, PA-C. Missing elements: patient_age_group. Ambiguous elements: none. Reviewer note: Patient age group cannot be derived because birth date is missing.. Next admin step: Request the missing intake elements before downstream administrative work.",
+  "final_reviewed_handoff_summary": "Service: Dermatology consultation | Priority: routine\nKnown facts: ordering provider Samira Patel, PA-C; encounter Ambulatory | Dermatology referral intake | 2026-03-18; supporting diagnosis D48.5 - Changing skin lesion\nBlockers: missing patient_age_group\nReview: initial INCOMPLETE -> final INCOMPLETE via CONFIRM_INCOMPLETE\nReviewer: Casey Nguyen, Referral Intake Coordinator | 2026-04-15T05:41:56+00:00\nReviewer note: Patient age group cannot be derived because birth date is missing.\nNext step: Request the missing intake elements before downstream administrative work.",
   "recommended_next_admin_step": "Request the missing intake elements before downstream administrative work."
 }

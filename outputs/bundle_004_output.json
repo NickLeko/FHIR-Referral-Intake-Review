@@ -51,6 +51,11 @@
           "resource_type": "Patient",
           "resource_id": "pat-004",
           "field_path": "birthDate"
+        },
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-004",
+          "field_path": "authoredOn"
         }
       ],
       "encounter_context": [
@@ -145,6 +150,11 @@
         "resource_type": "Patient",
         "resource_id": "pat-004",
         "field_path": "birthDate"
+      },
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-004",
+        "field_path": "authoredOn"
       }
     ],
     "encounter_context": [
@@ -202,10 +212,10 @@
     ]
   },
   "human_review_decision": "CONFIRM_INCOMPLETE",
-  "reviewer_name": "Administrative Reviewer",
+  "reviewer_name": "Casey Nguyen, Referral Intake Coordinator",
   "reviewer_note": "Ordering provider is missing even though the clinical and encounter context is present.",
   "reviewed_at": "2026-04-15T05:41:56+00:00",
   "final_status": "INCOMPLETE",
-  "final_reviewed_handoff_summary": "Referral intake bundle-004-missing-requester was reviewed as INCOMPLETE. Requested service: Orthopedics consultation. Ordering provider: Unavailable. Missing elements: ordering_provider. Ambiguous elements: none. Reviewer note: Ordering provider is missing even though the clinical and encounter context is present.. Next admin step: Request the missing intake elements before downstream administrative work.",
+  "final_reviewed_handoff_summary": "Service: Orthopedics consultation | Priority: routine\nKnown facts: patient age group Adult; encounter Ambulatory | Orthopedics intake | 2026-03-12; supporting diagnosis M25.561 - Right knee pain; key observations Knee radiograph note: Mild degenerative changes reported\nBlockers: missing ordering_provider\nReview: initial INCOMPLETE -> final INCOMPLETE via CONFIRM_INCOMPLETE\nReviewer: Casey Nguyen, Referral Intake Coordinator | 2026-04-15T05:41:56+00:00\nReviewer note: Ordering provider is missing even though the clinical and encounter context is present.\nNext step: Request the missing intake elements before downstream administrative work.",
   "recommended_next_admin_step": "Request the missing intake elements before downstream administrative work."
 }

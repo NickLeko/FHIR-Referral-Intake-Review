@@ -7,6 +7,7 @@ from typing import Any, Iterable
 
 DATA_DIR = Path("data/sample_bundles")
 OUTPUT_DIR = Path("outputs")
+REVIEW_HISTORY_DIR = OUTPUT_DIR / "review_history"
 
 
 def load_json_file(path: Path) -> dict[str, Any]:
@@ -25,10 +26,36 @@ def list_sample_bundle_paths(data_dir: Path = DATA_DIR) -> list[Path]:
     return sorted(data_dir.glob("*.json"))
 
 
-def sample_output_path(bundle_path: Path, output_dir: Path = OUTPUT_DIR) -> Path:
+def _bundle_output_prefix(bundle_path: Path) -> str:
     parts = bundle_path.stem.split("_")
-    prefix = "_".join(parts[:2]) if len(parts) >= 2 else bundle_path.stem
-    return output_dir / f"{prefix}_output.json"
+    return "_".join(parts[:2]) if len(parts) >= 2 else bundle_path.stem
+
+
+def sample_output_path(
+    bundle_path: Path,
+    artifact_label: str | None = None,
+    output_dir: Path = OUTPUT_DIR,
+) -> Path:
+    prefix = _bundle_output_prefix(bundle_path)
+    if artifact_label is None:
+        return output_dir / f"{prefix}_output.json"
+    return output_dir / f"{prefix}_{artifact_label}_output.json"
+
+
+def review_history_output_path(
+    bundle_path: Path,
+    reviewed_at: str,
+    decision: str,
+    output_dir: Path = REVIEW_HISTORY_DIR,
+) -> Path:
+    safe_reviewed_at = reviewed_at.replace(":", "-")
+    decision_label = decision.lower()
+    bundle_label = bundle_path.stem
+    return (
+        output_dir
+        / bundle_label
+        / f"{bundle_label}__{safe_reviewed_at}__{decision_label}.json"
+    )
 
 
 def clean_text(value: Any) -> str | None:
@@ -96,17 +123,15 @@ def age_group_from_birth_date(
     birth_date_text: str | None,
     reference_date: date | None = None,
 ) -> str | None:
-    if birth_date_text is None:
+    if birth_date_text is None or reference_date is None:
         return None
 
-    try:
-        birth_date = date.fromisoformat(birth_date_text)
-    except ValueError:
+    birth_date = parse_date_value(birth_date_text)
+    if birth_date is None:
         return None
 
-    today = reference_date or date.today()
-    age_years = today.year - birth_date.year - (
-        (today.month, today.day) < (birth_date.month, birth_date.day)
+    age_years = reference_date.year - birth_date.year - (
+        (reference_date.month, reference_date.day) < (birth_date.month, birth_date.day)
     )
 
     if age_years < 18:
@@ -114,6 +139,22 @@ def age_group_from_birth_date(
     if age_years < 65:
         return "Adult"
     return "Older adult"
+
+
+def parse_date_value(value: Any) -> date | None:
+    text_value = clean_text(value)
+    if text_value is None:
+        return None
+
+    try:
+        return date.fromisoformat(text_value)
+    except ValueError:
+        pass
+
+    try:
+        return datetime.fromisoformat(text_value.replace("Z", "+00:00")).date()
+    except ValueError:
+        return None
 
 
 def summarize_condition(condition: dict[str, Any]) -> str | None:

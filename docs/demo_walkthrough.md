@@ -10,6 +10,15 @@ python3 -m src.generate_outputs
 streamlit run app.py
 ```
 
+## Fastest inspection path
+
+If you want the shortest useful walkthrough:
+
+1. Inspect `outputs/bundle_006_output.json`.
+2. Inspect `outputs/bundle_006_override_ready_output.json`.
+3. Compare both against `data/sample_bundles/bundle_006_ambiguous_payer_context.json`.
+4. Open the app with `bundle_006_ambiguous_payer_context.json` selected and review the packet, issues, and source traceability tables.
+
 ## What each sample bundle demonstrates
 
 - `bundle_001_review_ready.json`: a mostly complete referral packet that maps cleanly to `REVIEW_READY`
@@ -17,7 +26,7 @@ streamlit run app.py
 - `bundle_003_human_confirmation.json`: a packet with present but ambiguous referral details that maps to `HUMAN_CONFIRMATION_REQUIRED`
 - `bundle_004_missing_requester.json`: an otherwise complete packet missing the ordering provider
 - `bundle_005_unresolved_diagnosis_reference.json`: a packet with an unresolved diagnosis reference that is not backfilled from an unrelated bundled condition
-- `bundle_006_ambiguous_payer_context.json`: a packet with payer context outside the supported parser subset
+- `bundle_006_ambiguous_payer_context.json`: the best first demo bundle; it shows unsupported payer context, conservative system escalation, and a checked-in reviewer override example
 - `bundle_007_incomplete_patient_demographics.json`: a packet with missing birth date, preventing age-group derivation
 
 ## Where to inspect extracted fields
@@ -37,7 +46,8 @@ Use the `Human review decision` form near the bottom of the page to:
 - escalate human confirmation
 - add a reviewer note, which is required when changing the initial status
 
-Submitting the form writes a reviewed output artifact into `outputs/`.
+Submitting the form writes a timestamped reviewed output artifact into `outputs/review_history/`.
+Checked-in sample artifacts remain in `outputs/`, including `outputs/bundle_006_override_ready_output.json` as an override example.
 
 ## Suggested screenshots to capture
 

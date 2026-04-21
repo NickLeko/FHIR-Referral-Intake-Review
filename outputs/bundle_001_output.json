@@ -60,6 +60,11 @@
           "resource_type": "Patient",
           "resource_id": "pat-001",
           "field_path": "birthDate"
+        },
+        {
+          "resource_type": "ServiceRequest",
+          "resource_id": "sr-001",
+          "field_path": "authoredOn"
         }
       ],
       "encounter_context": [
@@ -168,6 +173,11 @@
         "resource_type": "Patient",
         "resource_id": "pat-001",
         "field_path": "birthDate"
+      },
+      {
+        "resource_type": "ServiceRequest",
+        "resource_id": "sr-001",
+        "field_path": "authoredOn"
       }
     ],
     "encounter_context": [
@@ -232,10 +242,10 @@
     ]
   },
   "human_review_decision": "CONFIRM_READY",
-  "reviewer_name": "Administrative Reviewer",
+  "reviewer_name": "Casey Nguyen, Referral Intake Coordinator",
   "reviewer_note": "Packet is sufficiently complete for downstream administrative handling.",
   "reviewed_at": "2026-04-15T05:41:56+00:00",
   "final_status": "REVIEW_READY",
-  "final_reviewed_handoff_summary": "Referral intake bundle-001-review-ready was reviewed as REVIEW_READY. Requested service: Cardiology consultation. Ordering provider: Riley Chen, MD. Missing elements: none. Ambiguous elements: none. Reviewer note: Packet is sufficiently complete for downstream administrative handling.. Next admin step: Proceed to downstream administrative handling after reviewer confirmation.",
+  "final_reviewed_handoff_summary": "Service: Cardiology consultation | Priority: routine\nKnown facts: ordering provider Riley Chen, MD; patient age group Adult; encounter Ambulatory | Cardiology clinic intake | 2026-02-28; supporting diagnosis R06.09 - Exertional dyspnea; key observations Resting oxygen saturation: 94 %; documents Outside stress test summary\nBlockers: none\nReview: initial REVIEW_READY -> final REVIEW_READY via CONFIRM_READY\nReviewer: Casey Nguyen, Referral Intake Coordinator | 2026-04-15T05:41:56+00:00\nReviewer note: Packet is sufficiently complete for downstream administrative handling.\nNext step: Proceed to downstream administrative handling after reviewer confirmation.",
   "recommended_next_admin_step": "Proceed to downstream administrative handling after reviewer confirmation."
 }

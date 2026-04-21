@@ -207,11 +207,11 @@
       }
     ]
   },
-  "human_review_decision": "ESCALATE_HUMAN_CONFIRMATION",
+  "human_review_decision": "CONFIRM_READY",
   "reviewer_name": "Casey Nguyen, Referral Intake Coordinator",
-  "reviewer_note": "Coverage context is present but outside the supported parser subset and requires review.",
-  "reviewed_at": "2026-04-15T05:41:56+00:00",
-  "final_status": "HUMAN_CONFIRMATION_REQUIRED",
-  "final_reviewed_handoff_summary": "Service: Gastroenterology consultation | Priority: routine\nKnown facts: ordering provider Noah Rivera, MD; patient age group Adult; encounter Ambulatory | Primary care referral visit | 2026-03-16; supporting diagnosis R10.9 - Chronic abdominal pain\nBlockers: unsupported Coverage/cov-006\nReview: initial HUMAN_CONFIRMATION_REQUIRED -> final HUMAN_CONFIRMATION_REQUIRED via ESCALATE_HUMAN_CONFIRMATION\nReviewer: Casey Nguyen, Referral Intake Coordinator | 2026-04-15T05:41:56+00:00\nReviewer note: Coverage context is present but outside the supported parser subset and requires review.\nNext step: Route for manual clarification before downstream scheduling or authorization tasks.",
-  "recommended_next_admin_step": "Route for manual clarification before downstream scheduling or authorization tasks."
+  "reviewer_note": "Coverage details were manually reviewed from the bundled payer context and do not block downstream GI scheduling.",
+  "reviewed_at": "2026-04-15T06:12:09+00:00",
+  "final_status": "REVIEW_READY",
+  "final_reviewed_handoff_summary": "Service: Gastroenterology consultation | Priority: routine\nKnown facts: ordering provider Noah Rivera, MD; patient age group Adult; encounter Ambulatory | Primary care referral visit | 2026-03-16; supporting diagnosis R10.9 - Chronic abdominal pain\nBlockers: unsupported Coverage/cov-006\nReview: initial HUMAN_CONFIRMATION_REQUIRED -> final REVIEW_READY via CONFIRM_READY\nReviewer: Casey Nguyen, Referral Intake Coordinator | 2026-04-15T06:12:09+00:00\nReviewer note: Coverage details were manually reviewed from the bundled payer context and do not block downstream GI scheduling.\nNext step: Proceed to downstream administrative handling after reviewer confirmation.",
+  "recommended_next_admin_step": "Proceed to downstream administrative handling after reviewer confirmation."
 }

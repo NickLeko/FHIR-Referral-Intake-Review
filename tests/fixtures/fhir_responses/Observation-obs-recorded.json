@@ -1,0 +1,16 @@
+{
+  "resourceType": "Observation",
+  "id": "obs-recorded",
+  "meta": {
+    "versionId": "7",
+    "lastUpdated": "2026-08-20T08:45:00Z"
+  },
+  "status": "final",
+  "code": {
+    "text": "Synthetic intake measurement"
+  },
+  "valueQuantity": {
+    "value": 95,
+    "unit": "%"
+  }
+}

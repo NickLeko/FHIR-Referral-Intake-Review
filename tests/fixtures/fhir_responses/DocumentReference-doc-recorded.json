@@ -1,0 +1,20 @@
+{
+  "resourceType": "DocumentReference",
+  "id": "doc-recorded",
+  "meta": {
+    "versionId": "6",
+    "lastUpdated": "2026-08-19T16:00:00Z"
+  },
+  "status": "current",
+  "type": {
+    "text": "Synthetic referral note"
+  },
+  "description": "Synthetic outside referral summary",
+  "content": [
+    {
+      "attachment": {
+        "title": "Synthetic referral attachment"
+      }
+    }
+  ]
+}

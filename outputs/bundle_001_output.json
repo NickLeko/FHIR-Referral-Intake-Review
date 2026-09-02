@@ -129,7 +129,12 @@
       ]
     },
     "recommended_next_admin_action": "Proceed to downstream administrative handling after reviewer confirmation.",
-    "status": "REVIEW_READY"
+    "status": "REVIEW_READY",
+    "input_provenance": {
+      "source_type": "mock",
+      "resources": [],
+      "scope_notes": []
+    }
   },
   "status_before_review": "REVIEW_READY",
   "missing_elements": [],

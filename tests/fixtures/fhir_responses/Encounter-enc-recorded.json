@@ -1,0 +1,21 @@
+{
+  "resourceType": "Encounter",
+  "id": "enc-recorded",
+  "meta": {
+    "versionId": "5",
+    "lastUpdated": "2026-08-20T08:30:00Z"
+  },
+  "status": "finished",
+  "class": {
+    "code": "AMB",
+    "display": "Ambulatory"
+  },
+  "type": [
+    {
+      "text": "Synthetic referral intake"
+    }
+  ],
+  "period": {
+    "start": "2026-08-20"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "resourceType": "Patient",
+  "id": "pat-recorded",
+  "meta": {
+    "versionId": "3",
+    "lastUpdated": "2026-08-19T10:00:00Z"
+  },
+  "birthDate": "1985-01-01"
+}

@@ -1,0 +1,14 @@
+{
+  "description": "Sanitized, fully synthetic FHIR R4 response fixtures for offline tests. No server payload or patient-identifying data is retained.",
+  "baseUrl": "https://example.test/fhir",
+  "recordedAt": "2026-08-20T12:00:00Z",
+  "resources": [
+    "ServiceRequest/sr-recorded",
+    "Patient/pat-recorded",
+    "Practitioner/prac-recorded",
+    "Encounter/enc-recorded",
+    "Condition/cond-recorded",
+    "Observation/obs-recorded",
+    "DocumentReference/doc-recorded"
+  ]
+}

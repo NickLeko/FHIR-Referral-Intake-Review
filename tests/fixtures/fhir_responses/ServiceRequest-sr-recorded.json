@@ -1,0 +1,66 @@
+{
+  "resourceType": "ServiceRequest",
+  "id": "sr-recorded",
+  "meta": {
+    "versionId": "11",
+    "lastUpdated": "2026-08-20T11:59:00Z"
+  },
+  "contained": [
+    {
+      "resourceType": "Condition",
+      "id": "cond-contained",
+      "clinicalStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            "code": "active"
+          }
+        ]
+      },
+      "code": {
+        "text": "Synthetic contained supporting diagnosis"
+      }
+    }
+  ],
+  "status": "active",
+  "intent": "order",
+  "subject": {
+    "reference": "Patient/pat-recorded"
+  },
+  "requester": {
+    "reference": "https://example.test/fhir/Practitioner/prac-recorded",
+    "display": "Synthetic Test Clinician"
+  },
+  "encounter": {
+    "reference": "Encounter/enc-recorded"
+  },
+  "code": {
+    "text": "Synthetic cardiology consultation"
+  },
+  "authoredOn": "2026-08-20",
+  "reasonCode": [
+    {
+      "text": "Synthetic exertional symptom evaluation"
+    }
+  ],
+  "reasonReference": [
+    {
+      "reference": "Condition/cond-recorded"
+    },
+    {
+      "reference": "#cond-contained"
+    }
+  ],
+  "supportingInfo": [
+    {
+      "reference": "Observation/obs-recorded"
+    },
+    {
+      "reference": "Observation/obs-recorded"
+    },
+    {
+      "reference": "https://example.test/fhir/DocumentReference/doc-recorded"
+    }
+  ],
+  "priority": "routine"
+}

@@ -24,6 +24,7 @@ REVIEW_PACKET_CONTRACT_KEYS = (
     "source_trace",
     "recommended_next_admin_action",
     "status",
+    "input_provenance",
 )
 
 REVIEWED_OUTPUT_CONTRACT_KEYS = (
@@ -58,7 +59,23 @@ TRACE_ENTRY_CONTRACT_KEYS = (
     "field_path",
 )
 
+INPUT_PROVENANCE_CONTRACT_KEYS = (
+    "source_type",
+    "resources",
+    "scope_notes",
+)
+
+RESOURCE_PROVENANCE_CONTRACT_KEYS = (
+    "server_base_url",
+    "resource_type",
+    "resource_id",
+    "version_id",
+    "last_updated",
+    "fetched_at",
+)
+
 _STATUS_VALUES = {status.value for status in PacketStatus}
+_SOURCE_TYPE_VALUES = {"mock", "live"}
 _DECISION_VALUES = {decision.value for decision in HumanReviewDecision}
 _FINAL_STATUS_BY_DECISION = {
     HumanReviewDecision.CONFIRM_READY.value: PacketStatus.REVIEW_READY.value,
@@ -83,6 +100,7 @@ def reviewed_output_contract_errors(payload: dict[str, Any]) -> list[str]:
         packet,
         REVIEW_PACKET_CONTRACT_KEYS,
         errors,
+        optional_keys=("input_provenance",),
     )
     _check_packet_contract(packet, errors)
     _check_reviewed_output_contract(payload, packet, errors)
@@ -140,6 +158,12 @@ def _check_packet_contract(packet: dict[str, Any], errors: list[str]) -> None:
         packet.get("source_trace"),
         errors,
     )
+    if "input_provenance" in packet:
+        _check_input_provenance(
+            "extracted_review_packet.input_provenance",
+            packet.get("input_provenance"),
+            errors,
+        )
 
 
 def _check_reviewed_output_contract(
@@ -250,15 +274,70 @@ def _check_source_trace(name: str, value: Any, errors: list[str]) -> None:
                 _check_string(f"{item_name}.{trace_key}", item.get(trace_key), errors)
 
 
+def _check_input_provenance(name: str, value: Any, errors: list[str]) -> None:
+    if not isinstance(value, dict):
+        errors.append(f"{name} must be an object.")
+        return
+
+    _check_exact_keys(
+        name,
+        value,
+        INPUT_PROVENANCE_CONTRACT_KEYS,
+        errors,
+        optional_keys=("scope_notes",),
+    )
+    _check_string(f"{name}.source_type", value.get("source_type"), errors)
+    if value.get("source_type") not in _SOURCE_TYPE_VALUES:
+        errors.append(f"{name}.source_type must be mock or live.")
+
+    resources = value.get("resources")
+    if not isinstance(resources, list):
+        errors.append(f"{name}.resources must be a list.")
+        return
+
+    if "scope_notes" in value:
+        _check_string_list(f"{name}.scope_notes", value.get("scope_notes"), errors)
+
+    for index, resource in enumerate(resources):
+        resource_name = f"{name}.resources[{index}]"
+        if not isinstance(resource, dict):
+            errors.append(f"{resource_name} must be an object.")
+            continue
+        _check_exact_keys(
+            resource_name,
+            resource,
+            RESOURCE_PROVENANCE_CONTRACT_KEYS,
+            errors,
+        )
+        for field_name in (
+            "server_base_url",
+            "resource_type",
+            "resource_id",
+            "fetched_at",
+        ):
+            _check_string(
+                f"{resource_name}.{field_name}",
+                resource.get(field_name),
+                errors,
+            )
+        for field_name in ("version_id", "last_updated"):
+            _check_optional_string(
+                f"{resource_name}.{field_name}",
+                resource.get(field_name),
+                errors,
+            )
+
+
 def _check_exact_keys(
     name: str,
     value: dict[str, Any],
     expected_keys: tuple[str, ...],
     errors: list[str],
+    optional_keys: tuple[str, ...] = (),
 ) -> None:
     expected = set(expected_keys)
     actual = set(value)
-    missing = sorted(expected - actual)
+    missing = sorted(expected - actual - set(optional_keys))
     extra = sorted(actual - expected)
     if missing:
         errors.append(f"{name} is missing keys: {', '.join(missing)}.")

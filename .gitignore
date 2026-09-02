@@ -31,3 +31,7 @@ dist/
 build/
 .coverage
 htmlcov/
+
+# Live sandbox artifacts
+
+outputs/live/

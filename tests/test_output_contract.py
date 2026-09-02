@@ -129,3 +129,52 @@ def test_checked_in_outputs_include_a_reviewer_override_example() -> None:
 
     assert override_payloads
     assert any(payload["human_review_decision"] == "CONFIRM_READY" for payload in override_payloads)
+
+
+def test_input_provenance_is_additive_and_legacy_packets_remain_valid(
+    sample_bundle_dir,
+    load_sample_bundle,
+) -> None:
+    bundle = load_sample_bundle(sample_bundle_dir / "bundle_001_review_ready.json")
+    packet = build_review_packet(parse_bundle(bundle))
+    reviewed_output = build_reviewed_output(
+        packet,
+        HumanReviewDecision.CONFIRM_READY,
+        reviewer_note="Reviewed as complete.",
+        reviewed_at="2026-04-15T05:41:56+00:00",
+    )
+    payload = reviewed_output.to_dict()
+
+    assert payload["extracted_review_packet"]["input_provenance"] == {
+        "source_type": "mock",
+        "resources": [],
+        "scope_notes": [],
+    }
+    assert reviewed_output_contract_errors(payload) == []
+
+    legacy_payload = reviewed_output.to_dict()
+    legacy_payload["extracted_review_packet"].pop("input_provenance")
+    assert reviewed_output_contract_errors(legacy_payload) == []
+
+
+def test_input_provenance_contract_rejects_unknown_source_type(
+    sample_bundle_dir,
+    load_sample_bundle,
+) -> None:
+    bundle = load_sample_bundle(sample_bundle_dir / "bundle_001_review_ready.json")
+    packet = build_review_packet(parse_bundle(bundle))
+    reviewed_output = build_reviewed_output(
+        packet,
+        HumanReviewDecision.CONFIRM_READY,
+        reviewer_note="Reviewed as complete.",
+        reviewed_at="2026-04-15T05:41:56+00:00",
+    )
+    payload = reviewed_output.to_dict()
+    payload["extracted_review_packet"]["input_provenance"]["source_type"] = "unknown"
+
+    errors = reviewed_output_contract_errors(payload)
+
+    assert (
+        "extracted_review_packet.input_provenance.source_type must be mock or live."
+        in errors
+    )

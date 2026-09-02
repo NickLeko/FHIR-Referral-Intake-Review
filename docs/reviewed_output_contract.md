@@ -4,6 +4,10 @@ Reviewed outputs are local JSON artifacts.
 The app writes timestamped review-history files into `outputs/review_history/`, while deterministic checked-in examples live in `outputs/`.
 They are not FHIR resources and are not system-of-record updates.
 
+The live fetch CLI writes the extracted review-packet portion of this contract to
+`outputs/live/`. It does not add a human-review decision or represent the packet as
+finalized.
+
 ## Top-level fields
 
 - `bundle_id`: source bundle id
@@ -43,6 +47,33 @@ They are not FHIR resources and are not system-of-record updates.
 - `source_trace`
 - `recommended_next_admin_action`
 - `status`
+- `input_provenance`
+
+## Input provenance
+
+`input_provenance` is additive packet metadata and does not affect extraction,
+missing or ambiguous detection, or status classification.
+
+- `source_type`: `mock` or `live`
+- `resources`: one record for each resource fetched with an HTTP GET
+- `scope_notes`: non-status-bearing notes about intentionally unassembled references
+
+Each live resource record uses:
+
+- `server_base_url`
+- `resource_type`
+- `resource_id`
+- `version_id`: the resource's `meta.versionId`, or `null`
+- `last_updated`: the resource's `meta.lastUpdated`, or `null`
+- `fetched_at`: the fetch timestamp
+
+Live packets state that reverse references were not searched and identify the field
+paths of forward references outside the supported assembly boundary. The notes do
+not contain referenced resource ids and do not affect classification.
+
+Newly generated mock packets use `source_type: mock` with empty resource and scope-note lists.
+Previously generated reviewed artifacts that omit `input_provenance` remain valid;
+this preserves backward compatibility for the additive contract change.
 
 ## Required invariants
 
@@ -51,6 +82,7 @@ They are not FHIR resources and are not system-of-record updates.
 - `final_status` must match `human_review_decision`.
 - `reviewer_note` is required when `human_review_decision` overrides `status_before_review`.
 - `source_trace` entries use `resource_type`, `resource_id`, and `field_path`.
+- When present, `input_provenance.source_type` must be `mock` or `live`, each resource record must follow the field shape above, and `scope_notes` must be a list of strings.
 - `issue_rationales` entries use `field`, `issue_type`, `rationale`, `source`, and `evidence`.
 - Accepted packet statuses are `REVIEW_READY`, `INCOMPLETE`, and `HUMAN_CONFIRMATION_REQUIRED`.
 - Accepted review decisions are `CONFIRM_READY`, `CONFIRM_INCOMPLETE`, and `ESCALATE_HUMAN_CONFIRMATION`.

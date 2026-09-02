@@ -1,6 +1,6 @@
 # FHIR Referral Intake Review
 
-A referral intake coordinator often has to turn structured data, cover sheets, notes, and partial order details into a practical handoff for scheduling, authorization, or specialty routing. This prototype simulates that administrative review step using mock FHIR bundles: it extracts the referral facts that matter, explains missing or ambiguous intake issues, preserves source traceability, and requires a human reviewer before the handoff is finalized.
+A referral intake coordinator often has to turn structured data, cover sheets, notes, and partial order details into a practical handoff for scheduling, authorization, or specialty routing. This prototype simulates that administrative review step using checked-in mock FHIR bundles or a `ServiceRequest` fetched from an open FHIR R4 sandbox: it extracts the referral facts that matter, explains missing or ambiguous intake issues, preserves source traceability, and requires a human reviewer before the handoff is finalized.
 
 This repo is a narrow healthcare workflow artifact, not a general FHIR parser and not a clinical decision system. It shows deterministic referral-intake review support: one `ServiceRequest`, a small supported resource subset, conservative evidence use, explicit reviewer confirmation, and auditable JSON outputs.
 
@@ -28,7 +28,8 @@ FHIR can move referral data between systems, but it does not automatically tell 
 
 - Deterministic parsing of a small subset of FHIR resources
 - An explicit single-`ServiceRequest` intake boundary per bundle
-- Mapping mock bundle data into a clean referral intake review packet
+- Mapping mock or live-assembled Bundle data into a clean referral intake review packet
+- Read-only retrieval and narrow reference assembly from an open FHIR R4 endpoint
 - Explicit detection of missing, ambiguous, and unsupported elements
 - Conservative evidence use: referenced support is preferred and unlinked bundle resources are not treated as evidence by default
 - Bounded status classification: `REVIEW_READY`, `INCOMPLETE`, `HUMAN_CONFIRMATION_REQUIRED`
@@ -39,8 +40,7 @@ FHIR can move referral data between systems, but it does not automatically tell 
 
 ## What it does not do
 
-- No live FHIR server access
-- No SMART-on-FHIR, OAuth, or API integration
+- No SMART-on-FHIR or OAuth (read-only open-endpoint access only)
 - No clinical decision support
 - No diagnosis or treatment recommendations
 - No production referral management features
@@ -92,6 +92,8 @@ Each extracted field includes a simple provenance map showing:
 - resource id
 - FHIR field path
 
+The packet also includes `input_provenance`. It identifies mock versus live input and, for each fetched resource, records the server base URL, resource type and id, `meta.versionId`, `meta.lastUpdated`, and fetch timestamp when available. Live provenance also notes that reverse references were not searched and identifies out-of-scope reference field paths that were intentionally ignored. Provenance does not participate in status classification.
+
 This keeps the workflow inspectable and auditable without over-engineering a full lineage system.
 
 Patient age group is derived against `ServiceRequest.authoredOn` when available, otherwise `Bundle.timestamp`. If neither date is usable, the field is left unset rather than derived from wall-clock runtime.
@@ -107,6 +109,7 @@ Reviewed output artifacts are described in [docs/reviewed_output_contract.md](do
 ├── data/sample_bundles/
 ├── docs/
 ├── outputs/
+├── scripts/
 ├── src/
 └── tests/
 ```
@@ -132,6 +135,37 @@ pip install -r requirements.txt
 python3 -m src.generate_outputs
 streamlit run app.py
 ```
+
+## Live sandbox mode
+
+Fetch one `ServiceRequest`, assemble only the references consumed by the existing parser, and write the extracted packet to the ignored `outputs/live/` directory:
+
+```bash
+python -m src.fetch_and_review --service-request <id>
+```
+
+Override the default `https://hapi.fhir.org/baseR4` endpoint with either `FHIR_BASE_URL` or `--base-url`:
+
+```bash
+FHIR_BASE_URL=https://example.test/fhir \
+  python -m src.fetch_and_review --service-request <id>
+```
+
+To create temporary demo data, post the seven checked-in synthetic Bundles as transactions and capture the server-assigned `ServiceRequest` ids:
+
+```bash
+python scripts/seed_sandbox.py
+```
+
+The public HAPI sandbox is periodically wiped, so those ids are not stable. The seed script performs writes and should be used only against a test sandbox.
+
+Run an aggregate-only realism sweep over up to 50 sandbox `ServiceRequest` resources:
+
+```bash
+python scripts/realism_sweep.py --limit 10
+```
+
+The sweep writes [docs/realism_sweep.md](docs/realism_sweep.md) without retaining raw server resources, resource ids, or patient-level values. Both live commands use the same deterministic `parse_bundle` and `build_review_packet` path as the checked-in mock Bundles. The fetch CLI produces an extracted packet awaiting human review; it does not fabricate a reviewer decision.
 
 ## Test command
 
@@ -161,4 +195,4 @@ Captured locally:
 
 ## Safety and scope boundaries
 
-This project is an administrative workflow realism artifact built on mock data. It is intentionally narrow, non-production, and designed to show deterministic extraction plus human review boundaries rather than automated clinical or operational autonomy.
+This project is an administrative workflow realism artifact built on checked-in synthetic data and untrusted public-sandbox test data. It is intentionally narrow, non-production, and designed to show deterministic extraction plus human review boundaries rather than automated clinical or operational autonomy. Live access is limited to open endpoints: there is no SMART launch, OAuth, write-back of review results, or production integration.

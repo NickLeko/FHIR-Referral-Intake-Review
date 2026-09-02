@@ -1,0 +1,13 @@
+{
+  "resourceType": "Practitioner",
+  "id": "prac-recorded",
+  "meta": {
+    "versionId": "2",
+    "lastUpdated": "2026-08-18T09:00:00Z"
+  },
+  "name": [
+    {
+      "text": "Synthetic Test Clinician"
+    }
+  ]
+}

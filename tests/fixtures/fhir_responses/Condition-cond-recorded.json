@@ -1,0 +1,26 @@
+{
+  "resourceType": "Condition",
+  "id": "cond-recorded",
+  "meta": {
+    "versionId": "4",
+    "lastUpdated": "2026-08-17T14:00:00Z"
+  },
+  "clinicalStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+        "code": "active"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "R68.89",
+        "display": "Other general symptoms and signs"
+      }
+    ],
+    "text": "Synthetic exertional symptom"
+  }
+}

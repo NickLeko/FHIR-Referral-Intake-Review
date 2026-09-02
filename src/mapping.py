@@ -109,6 +109,7 @@ def build_review_packet(parsed_bundle: ParsedBundle) -> ReviewPacket:
         referenced_documents=referenced_documents,
         priority=priority,
         source_trace=trace_map,
+        input_provenance=parsed_bundle.input_provenance,
     )
 
     packet.missing_elements = _detect_missing_elements(packet)
@@ -426,7 +427,7 @@ def _extract_documents(
         type_text = extract_codeable_concept_text(document.get("type"))
         content = document.get("content")
         attachment_title = None
-        if isinstance(content, list) and content:
+        if isinstance(content, list) and content and isinstance(content[0], dict):
             attachment = content[0].get("attachment")
             if isinstance(attachment, dict):
                 attachment_title = clean_text(attachment.get("title"))

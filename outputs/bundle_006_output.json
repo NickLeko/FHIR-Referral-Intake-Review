@@ -111,7 +111,12 @@
       ]
     },
     "recommended_next_admin_action": "Route for manual clarification before downstream scheduling or authorization tasks.",
-    "status": "HUMAN_CONFIRMATION_REQUIRED"
+    "status": "HUMAN_CONFIRMATION_REQUIRED",
+    "input_provenance": {
+      "source_type": "mock",
+      "resources": [],
+      "scope_notes": []
+    }
   },
   "status_before_review": "HUMAN_CONFIRMATION_REQUIRED",
   "missing_elements": [],

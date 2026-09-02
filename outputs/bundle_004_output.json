@@ -113,7 +113,12 @@
       ]
     },
     "recommended_next_admin_action": "Request the missing intake elements before downstream administrative work.",
-    "status": "INCOMPLETE"
+    "status": "INCOMPLETE",
+    "input_provenance": {
+      "source_type": "mock",
+      "resources": [],
+      "scope_notes": []
+    }
   },
   "status_before_review": "INCOMPLETE",
   "missing_elements": [

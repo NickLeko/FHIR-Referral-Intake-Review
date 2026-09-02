@@ -18,6 +18,44 @@ class HumanReviewDecision(str, Enum):
 
 
 @dataclass(frozen=True)
+class ResourceProvenance:
+    server_base_url: str
+    resource_type: str
+    resource_id: str
+    version_id: str | None
+    last_updated: str | None
+    fetched_at: str
+
+    def to_dict(self) -> dict[str, str | None]:
+        return {
+            "server_base_url": self.server_base_url,
+            "resource_type": self.resource_type,
+            "resource_id": self.resource_id,
+            "version_id": self.version_id,
+            "last_updated": self.last_updated,
+            "fetched_at": self.fetched_at,
+        }
+
+
+@dataclass
+class InputProvenance:
+    source_type: str = "mock"
+    resources: list[ResourceProvenance] = field(default_factory=list)
+    scope_notes: list[str] = field(default_factory=list)
+
+    @classmethod
+    def mock(cls) -> InputProvenance:
+        return cls(source_type="mock")
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "source_type": self.source_type,
+            "resources": [resource.to_dict() for resource in self.resources],
+            "scope_notes": self.scope_notes,
+        }
+
+
+@dataclass(frozen=True)
 class TraceEntry:
     resource_type: str
     resource_id: str
@@ -56,6 +94,7 @@ class ParsedBundle:
     resources_by_type: dict[str, list[dict[str, Any]]]
     resources_by_reference: dict[str, dict[str, Any]]
     unsupported_resources: list[dict[str, str]] = field(default_factory=list)
+    input_provenance: InputProvenance = field(default_factory=InputProvenance.mock)
 
 
 @dataclass
@@ -79,6 +118,7 @@ class ReviewPacket:
     source_trace: dict[str, list[TraceEntry]] = field(default_factory=dict)
     recommended_next_admin_action: str = ""
     status: PacketStatus = PacketStatus.INCOMPLETE
+    input_provenance: InputProvenance = field(default_factory=InputProvenance.mock)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -104,6 +144,7 @@ class ReviewPacket:
             },
             "recommended_next_admin_action": self.recommended_next_admin_action,
             "status": self.status.value,
+            "input_provenance": self.input_provenance.to_dict(),
         }
 
 

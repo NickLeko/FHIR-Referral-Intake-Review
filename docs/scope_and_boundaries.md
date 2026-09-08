@@ -41,3 +41,5 @@ Administrative intake quality often depends on context, not just field presence.
 ## Non-production disclaimer
 
 This repository is a portfolio-grade integration artifact using synthetic and public-sandbox data. It is meant to demonstrate healthcare interoperability literacy, auditability, and HITL workflow design. It is not a production system and should not be used for live patient care or operational decision-making.
+
+**Verification boundary:** Token acquisition with granted write scope, conditional Task create, read-back, and sequential replay were confirmed live, as was the dangling-Patient 410. Lost responses, injected 500s, rate limiting (429), expiry between read/write, and partial batch failure are mock-tested only. **Concurrent uniqueness is unverified: no live or mocked concurrency test exists.**

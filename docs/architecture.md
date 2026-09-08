@@ -10,9 +10,9 @@ The prototype follows one narrow workflow:
 4. Missing and ambiguous elements are detected with deterministic rules.
 5. The packet receives a bounded initial status.
 6. A human reviewer confirms or overrides the recommendation.
-7. A final reviewed handoff summary is saved as a JSON artifact, with app reviews written to timestamped local history files.
+7. A final reviewed handoff summary is saved as a JSON artifact, with mock app reviews written to timestamped files and live reviews to stable review-id filenames.
 
-For the fastest external review, inspect the bundle 006 input, the standard reviewed output, and the override reviewed output before reading the rest of the repo.
+For the fastest external review, start with the [live round trip](live_task_round_trip.md), the [410 failure observation](live_sandbox_verification.md), then the bundle 006 mock override example.
 
 For live review, `src/auth.py` supplies cached SMART backend-service tokens to
 `src/fhir_client.py`. The transport bounds retries, renews once on 401, pins
@@ -95,8 +95,10 @@ The checked-in examples include both standard reviewer confirmations and one exp
 - Deterministic parsing over generalized parsing: easier to defend and test
 - Small resource subset over completeness: more realistic for a portfolio artifact
 - One-page UI over platform features: keeps attention on workflow logic
-- JSON outputs over database storage: enough to demonstrate reviewed handoff artifacts
+- JSON reviewed artifacts with separate SQLite delivery receipts: the output contract stays independent of delivery state
 
 ## Why deterministic parsing was chosen
 
 This project is meant to show inspectable workflow support, not probabilistic interpretation. Deterministic logic makes the mapping explainable, auditable, and easy to test. It also reinforces the HITL boundary by avoiding any suggestion that the system is autonomously interpreting clinical nuance.
+
+**Verification boundary:** Token acquisition with granted write scope, conditional Task create, read-back, and sequential replay were confirmed live, as was the dangling-Patient 410. Lost responses, injected 500s, rate limiting (429), expiry between read/write, and partial batch failure are mock-tested only. **Concurrent uniqueness is unverified: no live or mocked concurrency test exists.**

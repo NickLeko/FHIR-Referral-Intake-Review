@@ -1,7 +1,7 @@
 # Reviewed Output Contract
 
 Reviewed outputs are local JSON artifacts.
-The app writes timestamped review-history files into `outputs/review_history/`, while deterministic checked-in examples live in `outputs/`.
+The app writes timestamped mock review-history files into `outputs/review_history/` and stable review-id files into `outputs/review_history/live/`; deterministic checked-in examples live in `outputs/`.
 The JSON artifacts are not FHIR resources. For human-reviewed live inputs, additive Task delivery records the disposition on the source sandbox; delivery receipts live in a separate SQLite outbox and add no keys to this contract. See [integration.md](integration.md).
 
 The live fetch CLI writes the extracted review-packet portion of this contract to

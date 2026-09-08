@@ -47,7 +47,7 @@ All runtime credentials come from environment variables:
 | --- | --- |
 | `FHIR_AUTH_MODE` | `smart` for backend-service OAuth; `none` (default) for legacy open access |
 | `FHIR_BASE_URL` | Exact registered FHIR base, including the sandbox `/sim/` path |
-| `FHIR_TOKEN_URL` | Exact HTTPS token endpoint for that registration; must match discovery |
+| `FHIR_TOKEN_URL` | Exact HTTPS token endpoint for that registration; manually compare with discovery (the client does not discover it) |
 | `FHIR_CLIENT_ID` | Registered backend-service client identity |
 | `FHIR_KEY_ID` | Public JWK `kid` |
 | `FHIR_PRIVATE_KEY_PEM` | Multiline RSA private key, held in process memory |
@@ -79,7 +79,7 @@ Renewal obtains a **new client-credentials token**. This grant does not use a
 refresh token or an end-user authorization-code flow. A server-side 401 allows
 one token invalidation and reacquisition per FHIR operation; another 401 fails
 closed. Token acquisition has the same bounded transient retry policy as reads.
-Malformed token responses and insufficient granted scopes block access.
+Malformed token responses and explicitly insufficient granted scopes block access. If the token response omits `scope`, the client assumes the requested scopes; the recorded live run instead checked an explicit returned scope set for exact equality.
 
 The token URL is explicitly configured (and checked against sandbox discovery in
 manual verification); the client does not trust arbitrary discovered endpoints
@@ -180,6 +180,8 @@ or automatic compensating clinical/administrative action.
 
 ## Failure semantics
 
+**Verification boundary:** Token acquisition with granted write scope, conditional Task create, read-back, and sequential replay were confirmed live, as was the dangling-Patient 410. Lost responses, injected 500s, rate limiting (429), expiry between read/write, and partial batch failure are mock-tested only. **Concurrent uniqueness is unverified: no live or mocked concurrency test exists.**
+
 Default transport budget: initial attempt plus **two** transient retries, a
 10-second request timeout, and exponential delays of 0.25 then 0.5 seconds.
 A separate single 401 recovery permits at most one additional request. All
@@ -202,7 +204,23 @@ delivery-error status.
 
 ## Verification and remaining limitations
 
-On **2026-09-07**, against the public SMART Health IT R4 launcher, verified:
+The latest live verification **succeeded at 2026-09-08 04:09 UTC (2026-09-07
+21:09 PDT)**. Screening checked **2 candidates**: **1** had a dangling Patient (410)
+and the next, `ServiceRequest/REDACTED-ServiceRequest-02`, had a fully resolvable supported chain.
+After Nick Leko explicitly confirmed `INCOMPLETE`, token acquisition returned 200
+with an exact requested/granted scope match including `system/Task.crs`. The first
+conditional Task POST returned **201**, id **REDACTED-Task-01**; GET by id returned **200**
+with every submitted field matching. Repeated conditional POST returned **200**,
+the **same id/version 1**, and identifier search returned **200**, `total: 1`.
+Sandbox identifiers here are stable post-capture pseudonyms. No extensions were sent or returned. See the [complete live round-trip evidence](live_task_round_trip.md).
+
+The earlier attempt at 00:31 UTC and the retry's first candidate both exposed a
+live **410 Gone** for a deleted Patient referenced by a still-readable
+ServiceRequest. The system failed that assembly closed. This verifies the sandbox
+resource-lifecycle risk that also motivates seeded-resource retention checks in
+the realism sweep. See the [original failure record](live_sandbox_verification.md).
+
+Earlier **2026-09-07** implementation notes report these checks against the public SMART Health IT R4 launcher (not independently rerun in the final pass; the retained round-trip HTTP capture does not prove all of them):
 
 - Generated registration and RS384 token acquisition succeeded.
 - Discovery advertised client credentials and its token endpoint matched setup.
@@ -212,14 +230,14 @@ On **2026-09-07**, against the public SMART Health IT R4 launcher, verified:
 - Server advertised Task conditional create, create/search interactions, and
   identifier search.
 
-No real human-reviewed disposition was submitted to the public sandbox during
-implementation. Actual sandbox Task persistence, atomic uniqueness under race,
-expired-token timing, dropped write responses, 500/429 injection, and partial
-write failure were **not verified live**. These paths are exercised with a
-stateful mocked HTTP server, including real request preparation, JWT signature
-verification, committed-but-lost writes, restart/replay, and per-item receipts.
-Streamlit AppTest exercises both mock and live-review UI paths against that
-mocked server. Tests do not require external credentials or network access.
+Concurrent uniqueness has no mocked concurrency test and remains unverified.
+Task persistence/read-back and sequential conditional-write idempotency are now
+verified live for one explicitly human-reviewed event. Concurrent uniqueness,
+expired-token timing between read/write, dropped write responses, injected
+500/429 failures, and partial write batches were **not verified live**. The
+stateful mocked HTTP tests cover the injected failure/recovery paths; Streamlit
+AppTest covers mock and live-review UI paths against that mocked server. Tests
+require no external credentials or network access.
 
 This is an integration artifact, **not production-grade**. It has no authenticated
 reviewer identity/RBAC, no signed approval artifact or tamper-proof audit, no key

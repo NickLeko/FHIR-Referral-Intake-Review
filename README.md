@@ -8,17 +8,17 @@ This repo is a narrow healthcare workflow artifact, not a general FHIR parser an
 
 If you only spend 2 to 3 minutes in the repo, inspect these files in order:
 
-1. [`outputs/bundle_006_override_ready_output.json`](outputs/bundle_006_override_ready_output.json): the strongest reviewed artifact; the system initially escalates because payer context is outside scope, then the reviewer explicitly overrides to `REVIEW_READY`.
-2. [`data/sample_bundles/bundle_006_ambiguous_payer_context.json`](data/sample_bundles/bundle_006_ambiguous_payer_context.json): the input bundle behind that override example.
-3. [`outputs/bundle_003_output.json`](outputs/bundle_003_output.json): a strong escalation example showing ambiguity handling without override.
-4. [`outputs/bundle_001_output.json`](outputs/bundle_001_output.json): the clean baseline case that reaches `REVIEW_READY`.
-5. [`docs/reviewed_output_contract.md`](docs/reviewed_output_contract.md) and [`tests/test_output_contract.py`](tests/test_output_contract.py): the executable proof that reviewed artifacts follow a fixed contract.
+1. [Live round trip](docs/live_task_round_trip.md#actual-http-results): a human confirmed `INCOMPLETE`; token **200**, conditional Task POST **201**, GET **200**, same-key replay **200**, and exactly **one** identifier match. The Task keeps the same id and version 1. Sandbox identifiers are now stable pseudonyms, including `Task/REDACTED-Task-01`.
+2. [Observed fail-closed 410](#failure-semantics): screening checked **2 candidates**; **1** referenced a deleted Patient. That packet was rejected before review/write. The second candidate supported the successful round trip.
+3. [Mock bundle walkthrough](docs/demo_walkthrough.md): compare [bundle 006's standard output](outputs/bundle_006_output.json) with its [reviewer override](outputs/bundle_006_override_ready_output.json), then inspect the [fixed local-output contract](docs/reviewed_output_contract.md).
+
+**Verification boundary:** Token acquisition with granted write scope, conditional Task create, read-back, and sequential replay were confirmed live, as was the dangling-Patient 410. Lost responses, injected 500s, rate limiting (429), expiry between read/write, and partial batch failure are mock-tested only. **Concurrent uniqueness is unverified: no live or mocked concurrency test exists.**
 
 ## What To Look For
 
 - Deterministic scope: exactly one `ServiceRequest`, a fixed supported subset, and no opportunistic inference from unrelated bundle content.
 - Human review boundary: the system recommends a status, but a reviewer remains responsible for confirming readiness, confirming incompleteness, or overriding after inspection.
-- Auditability: extracted fields carry source traces, reviewed outputs preserve initial status, final status, reviewer identity, reviewer rationale, and review timestamp.
+- Auditability: extracted fields carry source traces, reviewed outputs preserve initial status, final status, reviewer label, reviewer rationale, and review timestamp.
 
 ## Why this matters
 
@@ -63,7 +63,7 @@ Each bundle must contain exactly one `ServiceRequest` for the intake packet to b
 
 ## Workflow in 30 seconds
 
-1. Select one of seven mock FHIR bundles.
+1. Select one of seven mock FHIR bundles, or fetch one live sandbox ServiceRequest.
 2. The app parses supported resources and extracts referral/order intake details.
 3. The system builds an administrative review packet with source traces.
 4. Missing or ambiguous fields are surfaced explicitly.
@@ -71,7 +71,7 @@ Each bundle must contain exactly one `ServiceRequest` for the intake packet to b
 6. A human reviewer confirms readiness, confirms incompleteness, or forces escalation.
 7. The app saves a reviewed artifact to `outputs/review_history/`. In live mode it also records and verifies a Task on the source server, with delivery tracked separately.
 
-## Fastest Demo Path
+## Mock Demo Path
 
 - Start with `bundle_006_ambiguous_payer_context.json` and compare `outputs/bundle_006_output.json` to `outputs/bundle_006_override_ready_output.json`.
 - Then inspect `bundle_003_human_confirmation.json` and `outputs/bundle_003_output.json` to see a non-override escalation case.
@@ -190,7 +190,7 @@ python scripts/seed_sandbox.py
 
 The public HAPI sandbox is periodically wiped, so those ids are not stable. The seed script performs writes and should be used only against a test sandbox.
 
-Run an aggregate-only realism sweep over up to 50 sandbox `ServiceRequest` resources:
+Run an aggregate-only realism sweep over 10 sandbox `ServiceRequest` resources (the CLI limit can be raised to 50):
 
 ```bash
 python scripts/realism_sweep.py --limit 10
@@ -199,6 +199,8 @@ python scripts/realism_sweep.py --limit 10
 The sweep writes [docs/realism_sweep.md](docs/realism_sweep.md) without retaining raw server resources, resource ids, or patient-level values. Both live commands use the same deterministic `parse_bundle` and `build_review_packet` path as the checked-in mock Bundles. The fetch CLI produces an extracted packet awaiting human review; it does not fabricate a reviewer decision.
 
 ## Failure semantics
+
+**Verification boundary:** Token acquisition with granted write scope, conditional Task create, read-back, and sequential replay were confirmed live, as was the dangling-Patient 410. Lost responses, injected 500s, rate limiting (429), expiry between read/write, and partial batch failure are mock-tested only. **Concurrent uniqueness is unverified: no live or mocked concurrency test exists.**
 
 Default retries are an initial attempt plus two transient retries, with 0.25/0.5-second exponential backoff and a 10-second request timeout. Delivery failures never alter a human's saved disposition.
 
@@ -211,17 +213,21 @@ Default retries are an initial attempt plus two transient retries, with 0.25/0.5
 | Malformed Bundle/resource shape | No schema-error retry. Fail the affected packet/write closed; malformed post-write verification stays uncertain. Human investigates the source. |
 | Some batch writes land, others fail | Persist per-review receipts, retain successful writes, and skip them on replay. Failed/uncertain items need human follow-up. No rollback or blanket success. |
 
+**Observed live: fail-closed behavior on a dangling Patient.** On 2026-09-07 PDT, SMART Health IT returned HTTP 200 for `ServiceRequest/REDACTED-ServiceRequest-01` but HTTP **410 Gone** for its referenced `Patient/REDACTED-01`, with an OperationOutcome explicitly reporting deletion. The system aborted assembly and sent no Task. This is verified live failure behavior, not an injected test. A referenced resource can be deleted while the referring ServiceRequest remains. This is consistent with earlier observations of seeded resources disappearing: sandbox resource lifecycle is independent of references. It does not establish a specific deletion actor or a shared cleanup event. See the [realism report](docs/realism_sweep.md) and [live response evidence](docs/live_sandbox_verification.md).
+
 The read CLI accepts repeated `--service-request` arguments, producing separate single-referral packets and a per-item manifest. Delivery batches accept only saved reviewed events and return nonzero on any unresolved outcome. See [failure and recovery details](docs/integration.md#failure-semantics).
 
 ## Test command
+
+See the [final verification record](docs/final_verification.md) for the clean-branch test count and validation scope.
 
 ```bash
 pytest -q
 ```
 
-## Demo path
+## Interactive mock demo
 
-- Start with the checked-in artifacts in `outputs/`; they are the fastest proof surface.
+- After the live evidence above, use the checked-in mock artifacts in `outputs/` for a reproducible walkthrough.
 - Inspect `outputs/bundle_006_override_ready_output.json` first, then compare it to `outputs/bundle_006_output.json`.
 - Review `data/sample_bundles/bundle_006_ambiguous_payer_context.json` to see the exact input that produced the override example.
 - Open the app and inspect the extracted packet, issues table, and source traceability table if you want the interactive walkthrough.
@@ -245,4 +251,8 @@ This is a deterministic administrative integration artifact built on synthetic d
 
 **It is not production-grade.** Reviewer names are unverified labels; there is no RBAC, signed approval/audit, KMS/key rotation, encrypted managed data store, distributed delivery worker, full FHIR/profile validation, source-version concurrency guard, or production privacy/security certification. A source may change during review, and competing review events require manual reconciliation. The public sandbox cannot demonstrate production authorization guarantees.
 
-Live verification on 2026-09-07 covered token acquisition, renewal, invalid-signature rejection, authenticated referral search/read, and advertised Task capabilities. Actual sandbox Task persistence and injected failure conditions were not verified live; stateful mocked-server tests cover write-back, response loss, retry/idempotency, malformed data, and partial batches. See the [verification record and limitations](docs/integration.md#verification-and-remaining-limitations).
+**Live round trip verified (2026-09-07 PDT / 2026-09-08 UTC).** Screening checked **2 candidates**: **1** failed on a dangling Patient (410); the second, `ServiceRequest/REDACTED-ServiceRequest-02`, had a fully resolvable supported reference chain (200s). Nick Leko explicitly confirmed its `INCOMPLETE` packet before write-back. The real token response granted all requested scopes, including `system/Task.crs`.
+
+The first conditional Task POST returned **201 Created**, id **`REDACTED-Task-01`** (a post-capture pseudonym). GET `/Task/REDACTED-Task-01` returned **200**, and every submitted field matched, including `completed`, `INCOMPLETE`, `CONFIRM_INCOMPLETE`, the reviewer, and the source ServiceRequest reference. No extensions were sent or returned. Repeating the identical conditional write returned **200**, the **same id and version 1**; a final identifier search returned **200**, `total: 1`. See the [full live round-trip record and server response](docs/live_task_round_trip.md).
+
+The earlier fail-closed 410 remains a verified source-data failure observation, described under [Failure semantics](#failure-semantics). Earlier implementation notes report renewal, invalid-signature rejection, and advertised Task capabilities; those checks were not independently repeated in this final pass. Lost write responses, deliberately injected 500/429 failures, expiry between read/write, partial write batches, and concurrency behavior remain outside this live proof; see the [verification limits](docs/integration.md#verification-and-remaining-limitations).

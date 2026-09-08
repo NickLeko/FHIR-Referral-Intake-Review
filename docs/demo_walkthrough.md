@@ -1,5 +1,9 @@
 # Demo Walkthrough
 
+Start with the [verified live round trip](live_task_round_trip.md), then the [live 410 fail-closed observation](live_sandbox_verification.md). The reproducible steps below use checked-in mock bundles. For an interactive live review, follow [the authenticated setup and human review flow](integration.md#read-human-review-and-write).
+
+**Verification boundary:** Token acquisition with granted write scope, conditional Task create, read-back, and sequential replay were confirmed live, as was the dangling-Patient 410. Lost responses, injected 500s, rate limiting (429), expiry between read/write, and partial batch failure are mock-tested only. **Concurrent uniqueness is unverified: no live or mocked concurrency test exists.**
+
 ## Run the app
 
 ```bash
@@ -10,7 +14,7 @@ python3 -m src.generate_outputs
 streamlit run app.py
 ```
 
-## Fastest inspection path
+## Mock inspection path
 
 If you want the shortest useful walkthrough:
 
@@ -46,7 +50,7 @@ Use the `Human review decision` form near the bottom of the page to:
 - escalate human confirmation
 - add a reviewer note, which is required when changing the initial status
 
-Submitting the form writes a timestamped reviewed output artifact into `outputs/review_history/`.
+In mock mode, submitting the form writes a timestamped reviewed output artifact into `outputs/review_history/`.
 Checked-in sample artifacts remain in `outputs/`, including `outputs/bundle_006_override_ready_output.json` as an override example.
 
 ## Suggested screenshots to capture

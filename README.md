@@ -188,13 +188,17 @@ In a separate shell with SMART credentials unset, create temporary demo data on 
 python scripts/seed_sandbox.py
 ```
 
-The public HAPI sandbox is periodically wiped, so those ids are not stable. The seed script performs writes and should be used only against a test sandbox.
+The seed script performs writes and should be used only against a test sandbox. Keep returned ids locally for the optional seeded comparison below.
 
-Run an aggregate-only realism sweep over 10 sandbox `ServiceRequest` resources (the CLI limit can be raised to 50):
+Run an aggregate-only realism sweep over up to 50 found sandbox `ServiceRequest` resources. Optionally supply known seed ids repeatedly; those are excluded from the found sample and reviewed separately. Replace the placeholders with ids kept locally:
 
 ```bash
-python scripts/realism_sweep.py --limit 10
+python scripts/realism_sweep.py --limit 50 \
+  --seeded-service-request-id YOUR_FIRST_SEED_ID \
+  --seeded-service-request-id YOUR_SECOND_SEED_ID
 ```
+
+Omit the seed arguments for a found-only sweep; retention then remains unchecked. The report compares status and presence of the six expected intake elements. Seed ids are validated and deduplicated, and neither ids nor patient-level values appear in the report. SMART registration URLs are pseudonymized in report headers.
 
 The sweep writes [docs/realism_sweep.md](docs/realism_sweep.md) without retaining raw server resources, resource ids, or patient-level values. Both live commands use the same deterministic `parse_bundle` and `build_review_packet` path as the checked-in mock Bundles. The fetch CLI produces an extracted packet awaiting human review; it does not fabricate a reviewer decision.
 
@@ -213,7 +217,7 @@ Default retries are an initial attempt plus two transient retries, with 0.25/0.5
 | Malformed Bundle/resource shape | No schema-error retry. Fail the affected packet/write closed; malformed post-write verification stays uncertain. Human investigates the source. |
 | Some batch writes land, others fail | Persist per-review receipts, retain successful writes, and skip them on replay. Failed/uncertain items need human follow-up. No rollback or blanket success. |
 
-**Observed live: fail-closed behavior on a dangling Patient.** On 2026-09-07 PDT, SMART Health IT returned HTTP 200 for `ServiceRequest/REDACTED-ServiceRequest-01` but HTTP **410 Gone** for its referenced `Patient/REDACTED-01`, with an OperationOutcome explicitly reporting deletion. The system aborted assembly and sent no Task. This is verified live failure behavior, not an injected test. A referenced resource can be deleted while the referring ServiceRequest remains. This is consistent with earlier observations of seeded resources disappearing: sandbox resource lifecycle is independent of references. It does not establish a specific deletion actor or a shared cleanup event. See the [realism report](docs/realism_sweep.md) and [live response evidence](docs/live_sandbox_verification.md).
+**Observed live: sandbox lifecycle and fail-closed review.** Disappearing seeded resources and dangling Patient references are the same sandbox lifecycle behavior observed two ways: resources can disappear independently of their references. On 2026-09-07 PDT, SMART Health IT returned **200** for `ServiceRequest/REDACTED-ServiceRequest-01` but **410 Gone** for `Patient/REDACTED-01`, explicitly reporting deletion; assembly stopped and no Task was sent. The separate HAPI n=50 sweep (2026-09-04 UTC) still found all **7 seeds** at its measurement, which does not guarantee later availability. Its **50 found referrals were all `INCOMPLETE`**, with **41/50 (82%)** containing only one or two of six expected elements; the seeded comparison produced **2 `REVIEW_READY`, 4 `INCOMPLETE`, and 1 `HUMAN_CONFIRMATION_REQUIRED`**. These describe sandbox data, not real-world referral completeness, and do not establish a shared cleanup event or deletion actor. See the [aggregate realism findings](docs/realism_sweep.md) and [live 410 response](docs/live_sandbox_verification.md).
 
 The read CLI accepts repeated `--service-request` arguments, producing separate single-referral packets and a per-item manifest. Delivery batches accept only saved reviewed events and return nonzero on any unresolved outcome. See [failure and recovery details](docs/integration.md#failure-semantics).
 

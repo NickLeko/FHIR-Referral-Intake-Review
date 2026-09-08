@@ -1,4 +1,36 @@
-# Final branch verification
+# Branch verification records
+
+## Realism-sweep follow-up
+
+Verified on 2026-09-08 UTC on `codex/fhir-realism-sweep`, branched from updated
+main at `5237855`. The previously separate reporting changes are now included.
+
+- `pytest -q`: **95 passed**, including the six realism-sweep tests.
+- `pytest -q tests/test_realism_sweep.py`: **6 passed**.
+- `ruff check --select F .`: passed.
+- Sweep tests cover pagination/limit, aggregate status and field-presence counts,
+  seeded-versus-found exclusion, repeated CLI seed arguments and deduplication,
+  unavailable-seed wording, aggregate file output, and registration redaction.
+- Generated a report from offline synthetic fixtures and checked that source,
+  seed and fixture resource ids were absent. SMART registration values are
+  pseudonymized in report headers. The historical n=50 findings contain only
+  aggregates and no sandbox record identifiers.
+- Preserved the 2026-09-04 HAPI findings: 50/50 found referrals `INCOMPLETE`,
+  41/50 with one or two of six expected elements; seven retained seeds with
+  2 `REVIEW_READY`, 4 `INCOMPLETE`, and 1 `HUMAN_CONFIRMATION_REQUIRED`.
+  This was not a fresh live sweep. All seven seeds were available at that
+  measurement; the report does not claim they disappeared during that run.
+
+The README now joins seed retention and the live dangling-Patient 410 in one
+lifecycle observation. The SMART result remains **2 candidates**, **1** dangling
+reference, and `Task/REDACTED-Task-01`: token **200**, POST **201**, GET **200**,
+same-key replay **200** (same id/version 1), identifier search **200**, `total: 1`.
+Injected 500/429 failures, response loss, token expiry between read/write, and
+partial batch failure remain mock-tested only; concurrent uniqueness remains
+unverified. This reporting change does not expand parser inputs or authorize
+Task delivery without human review.
+
+## Auth/write-back verification at `5237855`
 
 Verified on 2026-09-08 UTC for `codex/fhir-auth-writeback`. The implementation
 is based on `b74ad46`; the only Python change in this final pass removes two
@@ -24,11 +56,11 @@ correct and publish documentation. Pre-existing realism-sweep edits are excluded
   or Task API integration remains. The historical failed-attempt record is
   explicitly distinguished from the later successful run.
 
-The clean branch has **93 tests**. The two additional pending realism-sweep tests
+At `5237855`, the clean branch had **93 tests**. The two then-pending realism-sweep tests
 exclude known seeded resources from the found sample and report when all seeds
-are unavailable. They are not part of this commit or its test count. The frozen
-realism report describes its separate HAPI sample of 10 referrals; the pending
-50-referral report is also excluded. Neither sample is the SMART screening count.
+are unavailable. They were not part of that commit or its test count. Its realism report described
+a separate HAPI sample of 10 referrals; the then-pending 50-referral report was
+also excluded. Neither sample is the SMART screening count.
 
 ## Consistent live results
 

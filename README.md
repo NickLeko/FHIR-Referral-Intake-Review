@@ -202,6 +202,37 @@ Omit the seed arguments for a found-only sweep; retention then remains unchecked
 
 The sweep writes [docs/realism_sweep.md](docs/realism_sweep.md) without retaining raw server resources, resource ids, or patient-level values. Both live commands use the same deterministic `parse_bundle` and `build_review_packet` path as the checked-in mock Bundles. The fetch CLI produces an extracted packet awaiting human review; it does not fabricate a reviewer decision.
 
+## Reference-integrity measurement
+
+The separate read-only [reference-integrity validator](docs/reference_integrity.md)
+samples a chosen R4 resource type, walks its standard Reference fields, and
+reports resolution by target type, field path, and source resource. It reuses
+the existing auth/fetch layer with pagination, pacing, backoff, and a per-run
+cache. It does not expand the intake parser or change the human review gate.
+
+```bash
+source .env.smart
+python -m src.reference_integrity --resource-type ServiceRequest --sample-size 100
+```
+
+The [two live SMART Health IT samples on 2026-09-08 UTC](docs/reference_integrity_comparison.md)
+resolved **11/36 distinct targets (30.56%)** in the original contiguous cohort
+and **10/116 (8.62%)** in a scattered sample. These rates describe the queried
+targets' state. Downstream exposure was **22/272 occurrences (8.09%) from those
+36 targets**, with 236 cache hits, versus **17/291 (5.84%) from those 116
+targets**, with 175 cache hits. Repeated references reuse the same lookup:
+occurrence rates weight target failures by their impact on these source samples.
+
+The original **82/100 referrals with a broken reference** were heavily
+clustered: 76 shared the same deleted Patient, Practitioner, and Encounter trio.
+The second sample scanned all **8,831** returned ServiceRequests, skipped the
+first 100, and selected 100 across the remaining 8,731 using a fixed-seed
+reservoir. **95/100** had broken references; its largest shared broken-target
+set involved 11 referrals. The problem extends beyond the first cluster, but
+these observations do not establish independent failure mechanisms per type,
+a common deletion event, or production prevalence. Reports preserve separate
+logical/display-only counts and use pseudonyms, not sandbox lookup ids.
+
 ## Failure semantics
 
 **Verification boundary:** Token acquisition with granted write scope, conditional Task create, read-back, and sequential replay were confirmed live, as was the dangling-Patient 410. Lost responses, injected 500s, rate limiting (429), expiry between read/write, and partial batch failure are mock-tested only. **Concurrent uniqueness is unverified: no live or mocked concurrency test exists.**

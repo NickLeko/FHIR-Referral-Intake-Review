@@ -1,0 +1,5074 @@
+{
+  "format_version": 1,
+  "server": "https://launch.smarthealthit.org/v/r4/sim/REDACTED-REGISTRATION/fhir",
+  "source_resource_type": "ServiceRequest",
+  "requested_sample_size": 100,
+  "sampled_resources": 100,
+  "started_at": "2026-09-08T20:52:42.403473+00:00",
+  "finished_at": "2026-09-08T20:52:58.583460+00:00",
+  "sampling": {
+    "pages": 2,
+    "duplicates_skipped": 0,
+    "complete": true,
+    "stop_reason": "requested_sample_reached",
+    "method": "sequential"
+  },
+  "halt": null,
+  "inventory_issues": [],
+  "canonical_fields_excluded": 8,
+  "unique_target_lookups": 36,
+  "cache_hits": 236,
+  "sources": [
+    {
+      "source": "ServiceRequest/REDACTED-01",
+      "reference_count": 2,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-02",
+      "reference_count": 1,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-03",
+      "reference_count": 1,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-04",
+      "reference_count": 1,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-05",
+      "reference_count": 1,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-06",
+      "reference_count": 1,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-07",
+      "reference_count": 2,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-08",
+      "reference_count": 0,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-09",
+      "reference_count": 0,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-10",
+      "reference_count": 2,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-11",
+      "reference_count": 2,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-12",
+      "reference_count": 2,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-13",
+      "reference_count": 2,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-14",
+      "reference_count": 2,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-15",
+      "reference_count": 2,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-16",
+      "reference_count": 1,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-17",
+      "reference_count": 1,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-18",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-19",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-20",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-21",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-22",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-23",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-24",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-25",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-26",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-27",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-28",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-29",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-30",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-31",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-32",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-33",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-34",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-35",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-36",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-37",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-38",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-39",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-40",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-41",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-42",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-43",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-44",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-45",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-46",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-47",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-48",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-49",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-50",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-51",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-52",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-53",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-54",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-55",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-56",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-57",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-58",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-59",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-60",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-61",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-62",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-63",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-64",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-65",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-66",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-67",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-68",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-69",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-70",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-71",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-72",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-73",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-74",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-75",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-76",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-77",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-78",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-79",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-80",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-81",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-82",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-83",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-84",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-85",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-86",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "reference_count": 9,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-88",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-89",
+      "reference_count": 1,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-90",
+      "reference_count": 1,
+      "has_broken_reference": false,
+      "has_resolution_problem": false
+    },
+    {
+      "source": "ServiceRequest/REDACTED-91",
+      "reference_count": 7,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-92",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-93",
+      "reference_count": 7,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-94",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-95",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-96",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-97",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-98",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-99",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    },
+    {
+      "source": "ServiceRequest/REDACTED-100",
+      "reference_count": 3,
+      "has_broken_reference": true,
+      "has_resolution_problem": true
+    }
+  ],
+  "references": [
+    {
+      "source": "ServiceRequest/REDACTED-01",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-01",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Unknown",
+      "target": null,
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "display_only"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-02",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-03",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-04",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-05",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-06",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-03",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-07",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-04",
+      "http_status": 404,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "not_found_404",
+      "error_type": "FHIRNotFoundError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-07",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-01",
+      "http_status": 404,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "not_found_404",
+      "error_type": "FHIRNotFoundError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-10",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-05",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-10",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-11",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-06",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-11",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-12",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-07",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-12",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-13",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-07",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-13",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-14",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-08",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-14",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-15",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-09",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-15",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-16",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-10",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-17",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-11",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-18",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-18",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-18",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-19",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-19",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-19",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-20",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-20",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-20",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-21",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-21",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-21",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-22",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-22",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-22",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-23",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-23",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-23",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-24",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-24",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-24",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-25",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-25",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-25",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-26",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-26",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-26",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-27",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-27",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-27",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-28",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-28",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-28",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-29",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-29",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-29",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-30",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-30",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-30",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-31",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-31",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-31",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-32",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-32",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-32",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-33",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-33",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-33",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-34",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-34",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-34",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-35",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-35",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-35",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-36",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-36",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-36",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-37",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-37",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-37",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-38",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-38",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-38",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-39",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-39",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-39",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-40",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-40",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-40",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-41",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-41",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-41",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-42",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-42",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-42",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-43",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-43",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-43",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-44",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-44",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-44",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-45",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-45",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-45",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-46",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-46",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-46",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-47",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-47",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-47",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-48",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-48",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-48",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-49",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-49",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-49",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-50",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-50",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-50",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-51",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-51",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-51",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-52",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-52",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-52",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-53",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-53",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-53",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-54",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-54",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-54",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-55",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-55",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-55",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-56",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-56",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-56",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-57",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-57",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-57",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-58",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-58",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-58",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-59",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-59",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-59",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-60",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-60",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-60",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-61",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-61",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-61",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-62",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-62",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-62",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-63",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-63",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-63",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-64",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-64",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-64",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-65",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-65",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-65",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-66",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-66",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-66",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-67",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-67",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-67",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-68",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-68",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-68",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-69",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-69",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-69",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-70",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-70",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-70",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-71",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-71",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-71",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-72",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-72",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-72",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-73",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-73",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-73",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-74",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-74",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-74",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-75",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-75",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-75",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-76",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-76",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-76",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-77",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-77",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-77",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-78",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-78",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-78",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-79",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-79",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-79",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-80",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-80",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-80",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-81",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-81",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-81",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-82",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-82",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-82",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-83",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-83",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-83",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-84",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-84",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-84",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-85",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-85",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-85",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-86",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-86",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-86",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "source_resource_type": "PractitionerRole",
+      "field_path": "ServiceRequest.contained[2].practitioner",
+      "field_group": "ServiceRequest.contained[].practitioner",
+      "target_resource_type": "Practitioner",
+      "target": "Contained/REDACTED-01",
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "resolved_contained"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "source_resource_type": "PractitionerRole",
+      "field_path": "ServiceRequest.contained[2].organization",
+      "field_group": "ServiceRequest.contained[].organization",
+      "target_resource_type": "Organization",
+      "target": "Contained/REDACTED-02",
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "resolved_contained"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "source_resource_type": "Patient",
+      "field_path": "ServiceRequest.contained[3].generalPractitioner[0]",
+      "field_group": "ServiceRequest.contained[].generalPractitioner[]",
+      "target_resource_type": "PractitionerRole",
+      "target": "Contained/REDACTED-03",
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "resolved_contained"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "source_resource_type": "Patient",
+      "field_path": "ServiceRequest.contained[3].managingOrganization",
+      "field_group": "ServiceRequest.contained[].managingOrganization",
+      "target_resource_type": "Organization",
+      "target": "Contained/REDACTED-02",
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "resolved_contained"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.basedOn[0]",
+      "field_group": "ServiceRequest.basedOn[]",
+      "target_resource_type": "Unknown",
+      "target": null,
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "display_only"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Contained/REDACTED-04",
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "resolved_contained"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "PractitionerRole",
+      "target": "Contained/REDACTED-03",
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "resolved_contained"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.performer[0]",
+      "field_group": "ServiceRequest.performer[]",
+      "target_resource_type": "HealthcareService",
+      "target": null,
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "logical"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-87",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.performer[1]",
+      "field_group": "ServiceRequest.performer[]",
+      "target_resource_type": "Organization",
+      "target": null,
+      "http_status": null,
+      "cache_hit": false,
+      "lookup_attempted": false,
+      "outcome": "logical"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-88",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-13",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-88",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-04",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-88",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.performer[0]",
+      "field_group": "ServiceRequest.performer[]",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-05",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-89",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-03",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-90",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-03",
+      "http_status": 200,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-91",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.extension[2].extension[0].extension[2].extension[0].valueReference",
+      "field_group": "ServiceRequest.extension[].extension[].extension[].extension[].valueReference",
+      "target_resource_type": "MedicationAdministration",
+      "target": "MedicationAdministration/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-91",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.extension[2].extension[0].extension[4].valueReference",
+      "field_group": "ServiceRequest.extension[].extension[].extension[].valueReference",
+      "target_resource_type": "ObservationDefinition",
+      "target": "ObservationDefinition/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-91",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.extension[2].extension[1].extension[4].valueReference",
+      "field_group": "ServiceRequest.extension[].extension[].extension[].valueReference",
+      "target_resource_type": "ObservationDefinition",
+      "target": "ObservationDefinition/REDACTED-02",
+      "http_status": 200,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "resolved_200"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-91",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.basedOn[0]",
+      "field_group": "ServiceRequest.basedOn[]",
+      "target_resource_type": "MedicationRequest",
+      "target": "MedicationRequest/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-91",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-14",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-91",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-02",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-91",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.reasonReference[0]",
+      "field_group": "ServiceRequest.reasonReference[]",
+      "target_resource_type": "Condition",
+      "target": "Condition/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-92",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-15",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-92",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-06",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-92",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.performer[0]",
+      "field_group": "ServiceRequest.performer[]",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-07",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-93",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.extension[2].extension[0].extension[2].extension[0].valueReference",
+      "field_group": "ServiceRequest.extension[].extension[].extension[].extension[].valueReference",
+      "target_resource_type": "MedicationAdministration",
+      "target": "MedicationAdministration/REDACTED-02",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-93",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.extension[2].extension[0].extension[4].valueReference",
+      "field_group": "ServiceRequest.extension[].extension[].extension[].valueReference",
+      "target_resource_type": "ObservationDefinition",
+      "target": "ObservationDefinition/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-93",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.extension[2].extension[1].extension[4].valueReference",
+      "field_group": "ServiceRequest.extension[].extension[].extension[].valueReference",
+      "target_resource_type": "ObservationDefinition",
+      "target": "ObservationDefinition/REDACTED-04",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-93",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.basedOn[0]",
+      "field_group": "ServiceRequest.basedOn[]",
+      "target_resource_type": "MedicationRequest",
+      "target": "MedicationRequest/REDACTED-02",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-93",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-16",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-93",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-93",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.reasonReference[0]",
+      "field_group": "ServiceRequest.reasonReference[]",
+      "target_resource_type": "Condition",
+      "target": "Condition/REDACTED-02",
+      "http_status": 410,
+      "cache_hit": false,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-94",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-94",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-94",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-95",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-95",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-95",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-96",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-96",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-96",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-97",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-97",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-97",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-98",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-98",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-98",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-99",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-99",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-99",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-100",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.subject",
+      "field_group": "ServiceRequest.subject",
+      "target_resource_type": "Patient",
+      "target": "Patient/REDACTED-12",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-100",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.encounter",
+      "field_group": "ServiceRequest.encounter",
+      "target_resource_type": "Encounter",
+      "target": "Encounter/REDACTED-01",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    },
+    {
+      "source": "ServiceRequest/REDACTED-100",
+      "source_resource_type": "ServiceRequest",
+      "field_path": "ServiceRequest.requester",
+      "field_group": "ServiceRequest.requester",
+      "target_resource_type": "Practitioner",
+      "target": "Practitioner/REDACTED-03",
+      "http_status": 410,
+      "cache_hit": true,
+      "lookup_attempted": true,
+      "outcome": "gone_410",
+      "error_type": "FHIRHTTPError"
+    }
+  ],
+  "summary": {
+    "unique_http_resolution_rate": {
+      "numerator": 11,
+      "denominator": 36,
+      "percent": 30.5556
+    },
+    "unique_http_outcomes": {
+      "gone_410": 23,
+      "not_found_404": 2,
+      "resolved_200": 11
+    },
+    "reference_occurrences": 282,
+    "unique_http_broken_targets": 25,
+    "outcomes": {
+      "display_only": 2,
+      "gone_410": 248,
+      "logical": 2,
+      "not_found_404": 2,
+      "resolved_200": 22,
+      "resolved_contained": 6
+    },
+    "http_resolution_rate": {
+      "numerator": 22,
+      "denominator": 272,
+      "percent": 8.0882
+    },
+    "known_broken_references": 250,
+    "http_status_counts": {
+      "200": 22,
+      "404": 2,
+      "410": 248
+    },
+    "sources_with_broken_reference": {
+      "numerator": 82,
+      "denominator": 100,
+      "percent": 82.0
+    },
+    "sources_with_resolution_problem": {
+      "numerator": 82,
+      "denominator": 100,
+      "percent": 82.0
+    }
+  },
+  "by_target_type": {
+    "Condition": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 2
+      },
+      "reference_occurrences": 2,
+      "unique_http_broken_targets": 2,
+      "outcomes": {
+        "gone_410": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "known_broken_references": 2,
+      "http_status_counts": {
+        "410": 2
+      }
+    },
+    "Encounter": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 3,
+        "percent": 0.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 3
+      },
+      "reference_occurrences": 78,
+      "unique_http_broken_targets": 3,
+      "outcomes": {
+        "gone_410": 78
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 78,
+        "percent": 0.0
+      },
+      "known_broken_references": 78,
+      "http_status_counts": {
+        "410": 78
+      }
+    },
+    "HealthcareService": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "unique_http_outcomes": {},
+      "reference_occurrences": 1,
+      "unique_http_broken_targets": 0,
+      "outcomes": {
+        "logical": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "known_broken_references": 0,
+      "http_status_counts": {}
+    },
+    "MedicationAdministration": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 2
+      },
+      "reference_occurrences": 2,
+      "unique_http_broken_targets": 2,
+      "outcomes": {
+        "gone_410": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "known_broken_references": 2,
+      "http_status_counts": {
+        "410": 2
+      }
+    },
+    "MedicationRequest": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 2
+      },
+      "reference_occurrences": 2,
+      "unique_http_broken_targets": 2,
+      "outcomes": {
+        "gone_410": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "known_broken_references": 2,
+      "http_status_counts": {
+        "410": 2
+      }
+    },
+    "ObservationDefinition": {
+      "unique_http_resolution_rate": {
+        "numerator": 1,
+        "denominator": 4,
+        "percent": 25.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 3,
+        "resolved_200": 1
+      },
+      "reference_occurrences": 4,
+      "unique_http_broken_targets": 3,
+      "outcomes": {
+        "gone_410": 3,
+        "resolved_200": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 1,
+        "denominator": 4,
+        "percent": 25.0
+      },
+      "known_broken_references": 3,
+      "http_status_counts": {
+        "200": 1,
+        "410": 3
+      }
+    },
+    "Organization": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "unique_http_outcomes": {},
+      "reference_occurrences": 3,
+      "unique_http_broken_targets": 0,
+      "outcomes": {
+        "logical": 1,
+        "resolved_contained": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "known_broken_references": 0,
+      "http_status_counts": {}
+    },
+    "Patient": {
+      "unique_http_resolution_rate": {
+        "numerator": 9,
+        "denominator": 16,
+        "percent": 56.25
+      },
+      "unique_http_outcomes": {
+        "gone_410": 6,
+        "not_found_404": 1,
+        "resolved_200": 9
+      },
+      "reference_occurrences": 98,
+      "unique_http_broken_targets": 7,
+      "outcomes": {
+        "gone_410": 81,
+        "not_found_404": 1,
+        "resolved_200": 15,
+        "resolved_contained": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 15,
+        "denominator": 97,
+        "percent": 15.4639
+      },
+      "known_broken_references": 82,
+      "http_status_counts": {
+        "200": 15,
+        "404": 1,
+        "410": 81
+      }
+    },
+    "Practitioner": {
+      "unique_http_resolution_rate": {
+        "numerator": 1,
+        "denominator": 7,
+        "percent": 14.2857
+      },
+      "unique_http_outcomes": {
+        "gone_410": 5,
+        "not_found_404": 1,
+        "resolved_200": 1
+      },
+      "reference_occurrences": 88,
+      "unique_http_broken_targets": 6,
+      "outcomes": {
+        "gone_410": 80,
+        "not_found_404": 1,
+        "resolved_200": 6,
+        "resolved_contained": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 6,
+        "denominator": 87,
+        "percent": 6.8966
+      },
+      "known_broken_references": 81,
+      "http_status_counts": {
+        "200": 6,
+        "404": 1,
+        "410": 80
+      }
+    },
+    "PractitionerRole": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "unique_http_outcomes": {},
+      "reference_occurrences": 2,
+      "unique_http_broken_targets": 0,
+      "outcomes": {
+        "resolved_contained": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "known_broken_references": 0,
+      "http_status_counts": {}
+    },
+    "Unknown": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "unique_http_outcomes": {},
+      "reference_occurrences": 2,
+      "unique_http_broken_targets": 0,
+      "outcomes": {
+        "display_only": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "known_broken_references": 0,
+      "http_status_counts": {}
+    }
+  },
+  "by_source_field": {
+    "ServiceRequest.basedOn[]": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 2
+      },
+      "reference_occurrences": 3,
+      "unique_http_broken_targets": 2,
+      "outcomes": {
+        "display_only": 1,
+        "gone_410": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "known_broken_references": 2,
+      "http_status_counts": {
+        "410": 2
+      }
+    },
+    "ServiceRequest.contained[].generalPractitioner[]": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "unique_http_outcomes": {},
+      "reference_occurrences": 1,
+      "unique_http_broken_targets": 0,
+      "outcomes": {
+        "resolved_contained": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "known_broken_references": 0,
+      "http_status_counts": {}
+    },
+    "ServiceRequest.contained[].managingOrganization": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "unique_http_outcomes": {},
+      "reference_occurrences": 1,
+      "unique_http_broken_targets": 0,
+      "outcomes": {
+        "resolved_contained": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "known_broken_references": 0,
+      "http_status_counts": {}
+    },
+    "ServiceRequest.contained[].organization": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "unique_http_outcomes": {},
+      "reference_occurrences": 1,
+      "unique_http_broken_targets": 0,
+      "outcomes": {
+        "resolved_contained": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "known_broken_references": 0,
+      "http_status_counts": {}
+    },
+    "ServiceRequest.contained[].practitioner": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "unique_http_outcomes": {},
+      "reference_occurrences": 1,
+      "unique_http_broken_targets": 0,
+      "outcomes": {
+        "resolved_contained": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "percent": null
+      },
+      "known_broken_references": 0,
+      "http_status_counts": {}
+    },
+    "ServiceRequest.encounter": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 3,
+        "percent": 0.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 3
+      },
+      "reference_occurrences": 78,
+      "unique_http_broken_targets": 3,
+      "outcomes": {
+        "gone_410": 78
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 78,
+        "percent": 0.0
+      },
+      "known_broken_references": 78,
+      "http_status_counts": {
+        "410": 78
+      }
+    },
+    "ServiceRequest.extension[].extension[].extension[].extension[].valueReference": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 2
+      },
+      "reference_occurrences": 2,
+      "unique_http_broken_targets": 2,
+      "outcomes": {
+        "gone_410": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "known_broken_references": 2,
+      "http_status_counts": {
+        "410": 2
+      }
+    },
+    "ServiceRequest.extension[].extension[].extension[].valueReference": {
+      "unique_http_resolution_rate": {
+        "numerator": 1,
+        "denominator": 4,
+        "percent": 25.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 3,
+        "resolved_200": 1
+      },
+      "reference_occurrences": 4,
+      "unique_http_broken_targets": 3,
+      "outcomes": {
+        "gone_410": 3,
+        "resolved_200": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 1,
+        "denominator": 4,
+        "percent": 25.0
+      },
+      "known_broken_references": 3,
+      "http_status_counts": {
+        "200": 1,
+        "410": 3
+      }
+    },
+    "ServiceRequest.performer[]": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 2
+      },
+      "reference_occurrences": 4,
+      "unique_http_broken_targets": 2,
+      "outcomes": {
+        "gone_410": 2,
+        "logical": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "known_broken_references": 2,
+      "http_status_counts": {
+        "410": 2
+      }
+    },
+    "ServiceRequest.reasonReference[]": {
+      "unique_http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 2
+      },
+      "reference_occurrences": 2,
+      "unique_http_broken_targets": 2,
+      "outcomes": {
+        "gone_410": 2
+      },
+      "http_resolution_rate": {
+        "numerator": 0,
+        "denominator": 2,
+        "percent": 0.0
+      },
+      "known_broken_references": 2,
+      "http_status_counts": {
+        "410": 2
+      }
+    },
+    "ServiceRequest.requester": {
+      "unique_http_resolution_rate": {
+        "numerator": 1,
+        "denominator": 5,
+        "percent": 20.0
+      },
+      "unique_http_outcomes": {
+        "gone_410": 3,
+        "not_found_404": 1,
+        "resolved_200": 1
+      },
+      "reference_occurrences": 87,
+      "unique_http_broken_targets": 4,
+      "outcomes": {
+        "display_only": 1,
+        "gone_410": 78,
+        "not_found_404": 1,
+        "resolved_200": 6,
+        "resolved_contained": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 6,
+        "denominator": 85,
+        "percent": 7.0588
+      },
+      "known_broken_references": 79,
+      "http_status_counts": {
+        "200": 6,
+        "404": 1,
+        "410": 78
+      }
+    },
+    "ServiceRequest.subject": {
+      "unique_http_resolution_rate": {
+        "numerator": 9,
+        "denominator": 16,
+        "percent": 56.25
+      },
+      "unique_http_outcomes": {
+        "gone_410": 6,
+        "not_found_404": 1,
+        "resolved_200": 9
+      },
+      "reference_occurrences": 98,
+      "unique_http_broken_targets": 7,
+      "outcomes": {
+        "gone_410": 81,
+        "not_found_404": 1,
+        "resolved_200": 15,
+        "resolved_contained": 1
+      },
+      "http_resolution_rate": {
+        "numerator": 15,
+        "denominator": 97,
+        "percent": 15.4639
+      },
+      "known_broken_references": 82,
+      "http_status_counts": {
+        "200": 15,
+        "404": 1,
+        "410": 81
+      }
+    }
+  },
+  "reference_count_distribution": {
+    "0": 2,
+    "1": 9,
+    "2": 8,
+    "3": 78,
+    "7": 2,
+    "9": 1
+  },
+  "notes": [
+    "One public sandbox at one moment; this original sequential sample measures one contiguous returned cohort, not server-wide prevalence. Search order alone does not establish creation order or a common deletion batch.",
+    "All ids are run-local pseudonyms. No raw payloads, display text, logical identifiers, or credential values are retained.",
+    "Distinct-target resolution describes the queried target state. Occurrence resolution weights those same targets by reference frequency and includes cache reuse; it describes downstream exposure, not an independent server-state estimate.",
+    "Known broken means 404, 410 or missing contained target. Errors and blocked/unattempted refs are reported separately; known-broken source fraction is a lower bound when these exist.",
+    "Logical and display-only references are not broken and are excluded from HTTP denominators. Contained targets are checked locally, never reported as HTTP 200.",
+    "All standard R4 Reference fields in sampled JSON are walked, including extensions and contained resources. Canonical fields are counted separately, not dereferenced. Resolved targets are not recursively crawled.",
+    "Out-of-server or unsafe URLs are not followed. Auth scopes are unchanged. Rate-limit deferral or auth failure halts new lookups; no anonymous fallback.",
+    "A successful GET proves readability and identity at lookup time, not semantic consistency or a coherent snapshot. Cache entries, including failures, last for this run only.",
+    "Clustering and distinct-target summaries were derived offline from the captured pseudonymized rows. Source/target outcomes and original run timestamps are unchanged. Pseudonyms cannot be compared across different runs."
+  ],
+  "clustering": {
+    "broken_target_fanout": [
+      {
+        "target": "Encounter/REDACTED-01",
+        "source_count": 76,
+        "reference_occurrences": 76
+      },
+      {
+        "target": "Patient/REDACTED-12",
+        "source_count": 76,
+        "reference_occurrences": 76
+      },
+      {
+        "target": "Practitioner/REDACTED-03",
+        "source_count": 76,
+        "reference_occurrences": 76
+      },
+      {
+        "target": "Condition/REDACTED-01",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Condition/REDACTED-02",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Encounter/REDACTED-02",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Encounter/REDACTED-03",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "MedicationAdministration/REDACTED-01",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "MedicationAdministration/REDACTED-02",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "MedicationRequest/REDACTED-01",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "MedicationRequest/REDACTED-02",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "ObservationDefinition/REDACTED-01",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "ObservationDefinition/REDACTED-03",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "ObservationDefinition/REDACTED-04",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Patient/REDACTED-01",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Patient/REDACTED-04",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Patient/REDACTED-13",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Patient/REDACTED-14",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Patient/REDACTED-15",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Patient/REDACTED-16",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Practitioner/REDACTED-01",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Practitioner/REDACTED-04",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Practitioner/REDACTED-05",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Practitioner/REDACTED-06",
+        "source_count": 1,
+        "reference_occurrences": 1
+      },
+      {
+        "target": "Practitioner/REDACTED-07",
+        "source_count": 1,
+        "reference_occurrences": 1
+      }
+    ],
+    "shared_broken_target_sets": [
+      {
+        "targets": [
+          "Encounter/REDACTED-01",
+          "Patient/REDACTED-12",
+          "Practitioner/REDACTED-03"
+        ],
+        "source_count": 76
+      },
+      {
+        "targets": [
+          "Condition/REDACTED-01",
+          "Encounter/REDACTED-02",
+          "MedicationAdministration/REDACTED-01",
+          "MedicationRequest/REDACTED-01",
+          "ObservationDefinition/REDACTED-01",
+          "Patient/REDACTED-14"
+        ],
+        "source_count": 1
+      },
+      {
+        "targets": [
+          "Condition/REDACTED-02",
+          "Encounter/REDACTED-03",
+          "MedicationAdministration/REDACTED-02",
+          "MedicationRequest/REDACTED-02",
+          "ObservationDefinition/REDACTED-03",
+          "ObservationDefinition/REDACTED-04",
+          "Patient/REDACTED-16"
+        ],
+        "source_count": 1
+      },
+      {
+        "targets": [
+          "Patient/REDACTED-01"
+        ],
+        "source_count": 1
+      },
+      {
+        "targets": [
+          "Patient/REDACTED-04",
+          "Practitioner/REDACTED-01"
+        ],
+        "source_count": 1
+      },
+      {
+        "targets": [
+          "Patient/REDACTED-13",
+          "Practitioner/REDACTED-04",
+          "Practitioner/REDACTED-05"
+        ],
+        "source_count": 1
+      },
+      {
+        "targets": [
+          "Patient/REDACTED-15",
+          "Practitioner/REDACTED-06",
+          "Practitioner/REDACTED-07"
+        ],
+        "source_count": 1
+      }
+    ]
+  }
+}

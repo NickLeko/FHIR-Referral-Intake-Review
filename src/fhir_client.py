@@ -93,6 +93,7 @@ class FetchedResource:
     resource: dict[str, Any]
     provenance: ResourceProvenance
     request_url: str
+    http_status: int = 200
 
 
 class FHIRClient:
@@ -194,6 +195,9 @@ class FHIRClient:
                 expected_type=validated_type,
                 expected_id=validated_id,
             )
+        except FHIRResponseError as error:
+            error.status_code = response.status_code
+            raise
         finally:
             _close_response(response)
 
@@ -213,6 +217,7 @@ class FHIRClient:
             resource=resource,
             provenance=provenance,
             request_url=request_url,
+            http_status=response.status_code,
         )
 
     def get_reference(

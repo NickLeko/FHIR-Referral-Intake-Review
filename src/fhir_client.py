@@ -34,7 +34,7 @@ _FHIR_REFERENCE_RE = re.compile(
 
 
 class FHIRClientError(Exception):
-    """Base class for safe, caller-facing FHIR read failures."""
+    """Base class for safe, caller-facing FHIR integration failures."""
 
 
 class FHIRConfigurationError(FHIRClientError):
@@ -51,9 +51,7 @@ class FHIRTransportError(FHIRClientError):
     def __init__(self, request_url: str, attempts: int) -> None:
         self.request_url = request_url
         self.attempts = attempts
-        super().__init__(
-            f"FHIR read failed after {attempts} transport attempt(s)."
-        )
+        super().__init__(f"FHIR request failed after {attempts} transport attempt(s).")
 
 
 class FHIRHTTPError(FHIRClientError):
@@ -63,9 +61,7 @@ class FHIRHTTPError(FHIRClientError):
         self.status_code = status_code
         self.request_url = request_url
         self.attempts = attempts
-        super().__init__(
-            f"FHIR server returned HTTP {status_code} for a read request."
-        )
+        super().__init__(f"FHIR server returned HTTP {status_code} for a request.")
 
 
 class FHIRNotFoundError(FHIRHTTPError):
@@ -81,6 +77,17 @@ class FHIRResponseError(FHIRClientError):
         super().__init__(f"FHIR server returned an invalid read response: {problem}.")
 
 
+class FHIRRetryLaterError(FHIRHTTPError):
+    """The server requested a delay beyond the synchronous retry budget."""
+
+    def __init__(self, status_code, request_url, attempts, retry_after):
+        super().__init__(status_code, request_url, attempts)
+        self.retry_after = retry_after
+        self.args = (
+            f"FHIR HTTP {status_code}: retry deferred for {retry_after:.1f} seconds.",
+        )
+
+
 @dataclass(frozen=True)
 class FetchedResource:
     resource: dict[str, Any]
@@ -89,7 +96,7 @@ class FetchedResource:
 
 
 class FHIRClient:
-    """A deliberately small, read-only client for individual FHIR R4 resources."""
+    """A bounded FHIR R4 transport with optional SMART backend-service authentication."""
 
     def __init__(
         self,
@@ -103,6 +110,7 @@ class FHIRClient:
         session: Any | None = None,
         sleep: Callable[[float], None] = time.sleep,
         clock: Callable[[], datetime | str] | None = None,
+        token_provider: Any = None,
     ) -> None:
         configured_base_url = (
             os.environ.get("FHIR_BASE_URL", DEFAULT_FHIR_BASE_URL)
@@ -141,6 +149,22 @@ class FHIRClient:
         self._base_parts = urlsplit(self.base_url)
         self._base_origin = _origin(self._base_parts)
         self._base_path = self._base_parts.path.rstrip("/")
+        self._retry_not_before = 0.0
+        self._token_provider = token_provider
+        if token_provider is None:
+            from src.auth import SmartClientCredentials
+
+            self._token_provider = SmartClientCredentials.from_env(
+                request=self._request_with_retries
+            )
+            if self._token_provider and self.base_url != _normalize_base_url(
+                os.environ["FHIR_BASE_URL"]
+            ):
+                raise FHIRConfigurationError(
+                    "SMART credentials are bound to FHIR_BASE_URL; configure the destination explicitly in the environment."
+                )
+        if self._token_provider and self._base_parts.scheme != "https":
+            raise FHIRConfigurationError("Authenticated FHIR access requires HTTPS.")
 
     def get_resource(
         self,
@@ -226,11 +250,14 @@ class FHIRClient:
 
         validated_type = _validate_resource_type(resource_type)
         if page_url is None:
-            if isinstance(count, bool) or not isinstance(count, int) or not 1 <= count <= 50:
+            if (
+                isinstance(count, bool)
+                or not isinstance(count, int)
+                or not 1 <= count <= 50
+            ):
                 raise FHIRConfigurationError("search count must be between 1 and 50.")
             request_url = (
-                f"{self.base_url}/{validated_type}?"
-                f"{urlencode({'_count': count})}"
+                f"{self.base_url}/{validated_type}?{urlencode({'_count': count})}"
             )
         else:
             request_url = self._validated_page_url(page_url, validated_type)
@@ -244,24 +271,17 @@ class FHIRClient:
                     request_url,
                     "search response body is not valid JSON",
                 ) from exc
-            if not isinstance(payload, dict) or payload.get("resourceType") != "Bundle":
-                raise FHIRResponseError(
-                    request_url,
-                    "search response is not a FHIR Bundle",
-                )
-            for field_name in ("entry", "link"):
-                value = payload.get(field_name)
-                if value is not None and not isinstance(value, list):
-                    raise FHIRResponseError(
-                        request_url,
-                        f"search Bundle {field_name} is not a list",
-                    )
+            self._validate_search_bundle(payload, request_url, validated_type)
             return payload
         finally:
             _close_response(response)
 
     def _validated_page_url(self, page_url: str, resource_type: str) -> str:
-        if not isinstance(page_url, str) or not page_url or page_url != page_url.strip():
+        if (
+            not isinstance(page_url, str)
+            or not page_url
+            or page_url != page_url.strip()
+        ):
             raise FHIRReferenceError("Search next link must be a non-empty URL.")
         if "\\" in page_url:
             raise FHIRReferenceError("Search next link has an unsupported shape.")
@@ -287,9 +307,13 @@ class FHIRClient:
             parts.path == self._base_path
             or parts.path == f"{self._base_path}/{resource_type}"
         ):
-            raise FHIRReferenceError("Search next link is outside the configured base path.")
+            raise FHIRReferenceError(
+                "Search next link is outside the configured base path."
+            )
         if not self._base_path and parts.path not in {"/", f"/{resource_type}"}:
-            raise FHIRReferenceError("Search next link is outside the configured base path.")
+            raise FHIRReferenceError(
+                "Search next link is outside the configured base path."
+            )
         return page_url
 
     def _local_relative_reference(self, reference: str) -> str:
@@ -337,46 +361,192 @@ class FHIRClient:
         return parts.path[1:]
 
     def _get_with_retries(self, request_url: str) -> tuple[Any, int]:
-        headers = {
+        return self._request_with_retries("get", request_url)
+
+    def _request_with_retries(
+        self,
+        method,
+        request_url,
+        *,
+        headers=None,
+        authenticated=True,
+        data_factory=None,
+        **kwargs,
+    ):
+        """Retries only safe reads, OAuth grants, or conditional creates supplied by callers."""
+        remaining_delay = self._retry_not_before - time.monotonic()
+        if remaining_delay > 0:
+            raise FHIRRetryLaterError(429, request_url, 0, remaining_delay)
+        base_headers = {
             "Accept": FHIR_JSON_MEDIA_TYPE,
             "User-Agent": self.user_agent,
+            **(headers or {}),
         }
-        total_attempts = self.max_retries + 1
-        for attempt in range(1, total_attempts + 1):
+        transient_failures = 0
+        auth_retried = False
+        attempts = 0
+        while True:
+            attempts += 1
+            request_headers = dict(base_headers)
+            if authenticated and self._token_provider:
+                request_headers["Authorization"] = (
+                    f"Bearer {self._token_provider.token()}"
+                )
+            request_kwargs = dict(kwargs)
+            if data_factory is not None:
+                request_kwargs["data"] = data_factory()
             try:
-                response = self._session.get(
+                response = getattr(self._session, method)(
                     request_url,
-                    headers=headers,
+                    headers=request_headers,
                     timeout=self.timeout,
                     allow_redirects=False,
+                    **request_kwargs,
                 )
-            except requests.RequestException as exc:
-                if attempt >= total_attempts:
-                    raise FHIRTransportError(request_url, attempt) from exc
-                self._sleep(self._retry_delay(attempt, None))
+            except requests.RequestException:
+                if transient_failures >= self.max_retries:
+                    raise FHIRTransportError(request_url, attempts) from None
+                transient_failures += 1
+                self._sleep(self._retry_delay(transient_failures, None))
                 continue
-
             status_code = getattr(response, "status_code", None)
             if not isinstance(status_code, int):
                 _close_response(response)
                 raise FHIRResponseError(request_url, "missing HTTP status")
             if 200 <= status_code < 300:
-                return response, attempt
-
-            if (status_code == 429 or 500 <= status_code < 600) and attempt < total_attempts:
-                retry_after = _retry_after_seconds(
-                    getattr(response, "headers", None),
-                    now=self._clock,
-                )
+                return response, attempts
+            if (
+                status_code == 401
+                and authenticated
+                and self._token_provider
+                and not auth_retried
+            ):
                 _close_response(response)
-                self._sleep(self._retry_delay(attempt, retry_after))
+                self._token_provider.invalidate()
+                auth_retried = True
                 continue
-
+            if status_code == 429 or 500 <= status_code < 600:
+                retry_after = _retry_after_seconds(
+                    getattr(response, "headers", None), now=self._clock
+                )
+                if retry_after is not None and retry_after > self.max_retry_delay:
+                    _close_response(response)
+                    self._retry_not_before = time.monotonic() + retry_after
+                    raise FHIRRetryLaterError(
+                        status_code, request_url, attempts, retry_after
+                    )
+                if status_code == 429 and transient_failures >= self.max_retries:
+                    _close_response(response)
+                    delay = self._retry_delay(transient_failures + 1, retry_after)
+                    self._retry_not_before = time.monotonic() + delay
+                    raise FHIRRetryLaterError(status_code, request_url, attempts, delay)
+                if transient_failures < self.max_retries:
+                    _close_response(response)
+                    transient_failures += 1
+                    self._sleep(self._retry_delay(transient_failures, retry_after))
+                    continue
             _close_response(response)
             error_type = FHIRNotFoundError if status_code == 404 else FHIRHTTPError
-            raise error_type(status_code, request_url, attempt)
+            raise error_type(status_code, request_url, attempts)
 
-        raise AssertionError("bounded retry loop exited unexpectedly")
+    def check_task_write_capability(self):
+        url = f"{self.base_url}/metadata"
+        response, _ = self._get_with_retries(url)
+        try:
+            payload = response.json()
+            if (
+                not isinstance(payload, dict)
+                or payload.get("resourceType") != "CapabilityStatement"
+            ):
+                raise ValueError()
+            for rest in payload.get("rest", []):
+                if rest.get("mode") != "server":
+                    continue
+                for resource in rest.get("resource", []):
+                    if (
+                        resource.get("type") == "Task"
+                        and resource.get("conditionalCreate") is True
+                        and {"create", "search-type"}
+                        <= {i.get("code") for i in resource.get("interaction", [])}
+                        and any(
+                            p.get("name") == "identifier"
+                            for p in resource.get("searchParam", [])
+                        )
+                    ):
+                        return
+        except (ValueError, TypeError, AttributeError):
+            raise FHIRResponseError(url, "invalid CapabilityStatement") from None
+        finally:
+            _close_response(response)
+        raise FHIRConfigurationError(
+            "Server must advertise Task conditional create and identifier search; write-back is disabled."
+        )
+
+    def conditional_create_task(self, task, identifier):
+        response, _ = self._request_with_retries(
+            "post",
+            f"{self.base_url}/Task",
+            json=task,
+            headers={
+                "Content-Type": FHIR_JSON_MEDIA_TYPE,
+                "Prefer": "return=representation",
+                "If-None-Exist": urlencode({"identifier": identifier}),
+            },
+        )
+        # Even a 2xx is verified by identifier search; no body or Location is trusted.
+        _close_response(response)
+
+    def find_tasks(self, identifier):
+        url = (
+            f"{self.base_url}/Task?{urlencode({'identifier': identifier, '_count': 2})}"
+        )
+        response, _ = self._get_with_retries(url)
+        try:
+            payload = response.json()
+            self._validate_search_bundle(payload, url, "Task")
+            return payload
+        except (ValueError, TypeError):
+            raise FHIRResponseError(url, "invalid Task search JSON") from None
+        finally:
+            _close_response(response)
+
+    @staticmethod
+    def _validate_search_bundle(payload, request_url, expected_type):
+        if (
+            not isinstance(payload, dict)
+            or payload.get("resourceType") != "Bundle"
+            or payload.get("type") != "searchset"
+        ):
+            raise FHIRResponseError(request_url, "expected a searchset Bundle")
+        for field in ("entry", "link"):
+            if field in payload and not isinstance(payload[field], list):
+                raise FHIRResponseError(
+                    request_url, f"search Bundle {field} is not a list"
+                )
+        for entry in payload.get("entry", []):
+            resource = entry.get("resource") if isinstance(entry, dict) else None
+            if not isinstance(resource, dict) or not isinstance(
+                resource.get("resourceType"), str
+            ):
+                raise FHIRResponseError(
+                    request_url, "search entry must contain a resource"
+                )
+            if resource["resourceType"] != expected_type:
+                raise FHIRResponseError(request_url, "unexpected search resource type")
+            if not isinstance(resource.get("id"), str) or not _FHIR_ID_RE.fullmatch(
+                resource["id"]
+            ):
+                raise FHIRResponseError(request_url, "invalid search resource id")
+            search = entry.get("search", {})
+            if not isinstance(search, dict) or search.get("mode", "match") != "match":
+                raise FHIRResponseError(request_url, "expected matching search entries")
+        for link in payload.get("link", []):
+            if (
+                not isinstance(link, dict)
+                or not isinstance(link.get("relation"), str)
+                or not isinstance(link.get("url"), str)
+            ):
+                raise FHIRResponseError(request_url, "invalid search link")
 
     def _retry_delay(self, attempt: int, retry_after: float | None) -> float:
         exponential_delay = self.retry_backoff * (2 ** (attempt - 1))
@@ -394,7 +564,9 @@ class FHIRClient:
         try:
             payload = response.json()
         except (ValueError, TypeError) as exc:
-            raise FHIRResponseError(request_url, "response body is not valid JSON") from exc
+            raise FHIRResponseError(
+                request_url, "response body is not valid JSON"
+            ) from exc
         if not isinstance(payload, dict):
             raise FHIRResponseError(request_url, "JSON top level is not an object")
 
@@ -404,13 +576,17 @@ class FHIRClient:
         ):
             raise FHIRResponseError(request_url, "resourceType is missing or invalid")
         if actual_type != expected_type:
-            raise FHIRResponseError(request_url, "resourceType does not match the request")
+            raise FHIRResponseError(
+                request_url, "resourceType does not match the request"
+            )
 
         actual_id = payload.get("id")
         if not isinstance(actual_id, str) or not _FHIR_ID_RE.fullmatch(actual_id):
             raise FHIRResponseError(request_url, "resource id is missing or invalid")
         if actual_id != expected_id:
-            raise FHIRResponseError(request_url, "resource id does not match the request")
+            raise FHIRResponseError(
+                request_url, "resource id does not match the request"
+            )
         return payload
 
 
@@ -428,9 +604,13 @@ def _normalize_base_url(value: Any) -> str:
     if parts.username is not None or parts.password is not None:
         raise FHIRConfigurationError("FHIR base URL must not include credentials.")
     if parts.query or parts.fragment:
-        raise FHIRConfigurationError("FHIR base URL must not include query or fragment.")
-    if "%" in parts.path or "//" in parts.path or any(
-        segment in {".", ".."} for segment in parts.path.split("/")
+        raise FHIRConfigurationError(
+            "FHIR base URL must not include query or fragment."
+        )
+    if (
+        "%" in parts.path
+        or "//" in parts.path
+        or any(segment in {".", ".."} for segment in parts.path.split("/"))
     ):
         raise FHIRConfigurationError("FHIR base URL has an unsafe path.")
     try:

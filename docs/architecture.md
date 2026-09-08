@@ -4,7 +4,7 @@
 
 The prototype follows one narrow workflow:
 
-1. A user selects a mock FHIR bundle.
+1. A user selects a mock FHIR bundle or fetches one live ServiceRequest with its supported references.
 2. The parser accepts only a small supported resource subset.
 3. The mapper extracts operationally relevant referral intake fields.
 4. Missing and ambiguous elements are detected with deterministic rules.
@@ -13,6 +13,18 @@ The prototype follows one narrow workflow:
 7. A final reviewed handoff summary is saved as a JSON artifact, with app reviews written to timestamped local history files.
 
 For the fastest external review, inspect the bundle 006 input, the standard reviewed output, and the override reviewed output before reading the rest of the repo.
+
+For live review, `src/auth.py` supplies cached SMART backend-service tokens to
+`src/fhir_client.py`. The transport bounds retries, renews once on 401, pins
+reference/pagination destinations, and defers long Retry-After delays.
+`src/fetch_and_review.py` keeps every batch item at the single-referral boundary.
+
+After explicit human submission, `src/writeback.py` saves the unchanged reviewed
+JSON and queues delivery in a local SQLite outbox. It records an additive Task
+using conditional create and verifies it by identifier search. Delivery state is
+separate from review status. `src/deliver_reviews.py` explicitly replays saved
+reviews without generating decisions. See [integration.md](integration.md) for
+failure states and recovery; Task is not added to parser inputs.
 
 ## Supported resources
 

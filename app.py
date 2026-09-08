@@ -1,10 +1,16 @@
 from __future__ import annotations
 
 from pathlib import Path
+from datetime import datetime, timezone
+import sqlite3
 
 import streamlit as st
 
 from src.mapping import build_review_packet
+from src.fhir_client import FHIRClient, FHIRClientError
+from src.fetch_and_review import fetch_review_packet
+from src.bundle_assembler import BundleAssemblyError
+from src.writeback import ReviewOutbox, ReviewGateError
 from src.parser import BundleValidationError, parse_bundle
 from src.review import (
     HumanReviewDecision,
@@ -78,26 +84,60 @@ st.set_page_config(page_title="FHIR Referral Intake Review", layout="wide")
 
 st.title("FHIR Referral Intake Review")
 st.caption(
-    "A small workflow prototype for transforming mock FHIR bundles into a "
-    "human-reviewable referral intake packet with explicit HITL boundaries."
+    "Deterministic referral intake review with source traceability and an explicit human review gate."
 )
 
-bundle_paths = list_sample_bundle_paths()
-if not bundle_paths:
-    st.error("No sample bundles were found in data/sample_bundles/.")
-    st.stop()
+mode = st.radio("Input source", ["Mock bundles", "Live sandbox"], horizontal=True)
+if mode == "Mock bundles":
+    bundle_lookup = {path.name: path for path in list_sample_bundle_paths()}
+    if not bundle_lookup:
+        st.error("No sample bundles were found in data/sample_bundles/.")
+        st.stop()
+    selected_bundle_name = st.selectbox(
+        "Select a mock FHIR bundle", options=list(bundle_lookup)
+    )
+    selected_bundle_path = bundle_lookup[selected_bundle_name]
+    try:
+        packet = build_review_packet(parse_bundle(load_json_file(selected_bundle_path)))
+    except BundleValidationError as error:
+        st.error(f"Bundle validation failed: {error}")
+        st.stop()
+else:
+    st.caption(
+        "Uses server and SMART credentials from environment variables. Review submission saves the local artifact and records the disposition on the source sandbox."
+    )
+    with st.form("live_fetch"):
+        service_request_id = st.text_input("ServiceRequest ID")
+        fetch_submitted = st.form_submit_button("Fetch referral")
+    if fetch_submitted:
+        # Clear stale data before attempting a new fetch, including on failure.
+        st.session_state.pop("live_packet", None)
+        st.session_state.pop("last_delivery", None)
+        try:
+            client = FHIRClient()
+            st.session_state.live_client = client
+            st.session_state.live_packet = fetch_review_packet(
+                service_request_id.strip(), client=client
+            )
+        except (
+            FHIRClientError,
+            BundleAssemblyError,
+            BundleValidationError,
+            ValueError,
+        ) as error:
+            st.error(f"Referral could not be loaded. Human follow-up required: {error}")
+    if "live_packet" not in st.session_state:
+        st.stop()
+    packet = st.session_state.live_packet
+    selected_bundle_path = Path(packet.bundle_id + ".json")
 
-bundle_lookup = {path.name: path for path in bundle_paths}
-selected_bundle_name = st.selectbox("Select a mock FHIR bundle", options=list(bundle_lookup))
-selected_bundle_path = bundle_lookup[selected_bundle_name]
-
-try:
-    bundle_payload = load_json_file(selected_bundle_path)
-    parsed_bundle = parse_bundle(bundle_payload)
-    packet = build_review_packet(parsed_bundle)
-except BundleValidationError as error:
-    st.error(f"Bundle validation failed: {error}")
-    st.stop()
+# Widget choices must belong to the packet the human actually inspected.
+context = (mode, packet.bundle_id, repr(packet.input_provenance.to_dict()))
+if st.session_state.get("review_context") != context:
+    st.session_state.review_context = context
+    st.session_state.pop("last_delivery", None)
+    st.session_state.pop("decision", None)
+    st.session_state.pop("review_note", None)
 
 packet_dict = packet.to_dict()
 status = packet_dict["status"]
@@ -129,11 +169,13 @@ with st.form("human_review_form"):
         options=decision_options,
         index=decision_options.index(default_decision),
         format_func=lambda decision: decision.value,
+        key="decision",
     )
     override_requires_note = decision_overrides_status(packet.status, selected_decision)
     reviewer_name = st.text_input("Reviewer name", value="Referral Intake Coordinator")
     reviewer_note = st.text_area(
-        "Reviewer note" + (" (required for override)" if override_requires_note else ""),
+        "Reviewer note (required for override)",
+        key="review_note",
         placeholder=(
             "Required when changing the initial status."
             if override_requires_note
@@ -141,11 +183,23 @@ with st.form("human_review_form"):
         ),
     )
     if override_requires_note:
-        st.caption("A note is required because this decision changes the initial status.")
-    submitted = st.form_submit_button("Generate reviewed handoff summary")
+        st.caption(
+            "A note is required because this decision changes the initial status."
+        )
+    submitted = st.form_submit_button(
+        "Save review and record disposition on sandbox"
+        if mode == "Live sandbox"
+        else "Generate reviewed handoff summary",
+        disabled=mode == "Live sandbox" and "last_delivery" in st.session_state,
+    )
 
-if submitted:
-    if decision_overrides_status(packet.status, selected_decision) and not reviewer_note.strip():
+# A repeated browser submission must use the persisted event, even if its
+# previous render still showed an enabled submit button.
+if submitted and not (mode == "Live sandbox" and "last_delivery" in st.session_state):
+    if (
+        decision_overrides_status(packet.status, selected_decision)
+        and not reviewer_note.strip()
+    ):
         st.error("Reviewer note is required when overriding the initial status.")
     else:
         reviewed_output = build_reviewed_output(
@@ -153,16 +207,62 @@ if submitted:
             decision=selected_decision,
             reviewer_note=reviewer_note,
             reviewer_name=reviewer_name or "Referral Intake Coordinator",
+            reviewed_at=datetime.now(timezone.utc).isoformat(),
         )
-        output_path = review_history_output_path(
-            selected_bundle_path,
-            reviewed_output.reviewed_at,
-            reviewed_output.human_review_decision.value,
-        )
-        save_json_file(output_path, reviewed_output.to_dict())
+        if mode == "Live sandbox":
+            try:
+                outbox = ReviewOutbox()
+                receipt = outbox.enqueue(
+                    reviewed_output.to_dict(),
+                    base_url=st.session_state.live_client.base_url,
+                )
+                output_path = Path(receipt["artifact_path"])
+                st.session_state.last_delivery = receipt["review_id"]
+                outbox.deliver(receipt["review_id"], st.session_state.live_client)
+            except (ReviewGateError, FHIRClientError, OSError, sqlite3.Error) as error:
+                st.error(
+                    f"Unable to save or queue the review: {type(error).__name__}. Inspect local delivery state before retrying."
+                )
+                st.stop()
+        else:
+            output_path = review_history_output_path(
+                selected_bundle_path,
+                reviewed_output.reviewed_at,
+                reviewed_output.human_review_decision.value,
+            )
+            save_json_file(output_path, reviewed_output.to_dict())
 
         st.success(f"Reviewed artifact saved to {output_path}")
         st.subheader("Final Reviewed Handoff Summary")
         st.text(reviewed_output.final_reviewed_handoff_summary)
         st.subheader("Saved Reviewed Output")
         st.json(reviewed_output.to_dict())
+
+if mode == "Live sandbox" and "last_delivery" in st.session_state:
+    outbox = ReviewOutbox()
+    key = st.session_state.last_delivery
+    receipt = outbox.get(key)
+    st.subheader("Source server delivery")
+    if receipt["state"] == "delivered":
+        st.success(f"Disposition recorded and verified: {receipt['task_reference']}")
+    else:
+        st.warning(
+            f"Delivery {receipt['state']}. The local human-reviewed decision is saved; server delivery needs follow-up."
+        )
+        st.caption(receipt["detail"])
+        if receipt.get("retry_at"):
+            st.caption(
+                "Server retry time: "
+                + datetime.fromtimestamp(receipt["retry_at"], timezone.utc).isoformat()
+            )
+        if st.button("Retry delivery of this saved review"):
+            try:
+                outbox.deliver(key, st.session_state.live_client)
+                st.rerun()
+            except (ReviewGateError, OSError, sqlite3.Error) as error:
+                st.error(
+                    f"Delivery state could not be saved: {type(error).__name__}. Inspect the saved review before retrying."
+                )
+    st.caption(
+        f"Review ID: {key}. Fetch again only to inspect and submit a new review event."
+    )

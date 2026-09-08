@@ -35,3 +35,12 @@ htmlcov/
 # Live sandbox artifacts
 
 outputs/live/
+
+# Integration credentials and local review delivery state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+outputs/review_history/
+outputs/integration/

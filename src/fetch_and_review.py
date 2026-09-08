@@ -32,14 +32,23 @@ def fetch_and_review(
     if client is None:
         client = FHIRClient(base_url=base_url) if base_url is not None else FHIRClient()
 
-    assembly_result = BundleAssembler(client).assemble(service_request_id)
-    parsed_bundle = parse_bundle(assembly_result.bundle)
-    parsed_bundle.input_provenance = assembly_result.input_provenance
-    packet = build_review_packet(parsed_bundle)
+    packet = fetch_review_packet(service_request_id, client=client)
 
     output_path = Path(output_dir) / _output_filename(service_request_id)
     save_json_file(output_path, packet.to_dict())
     return output_path
+
+
+def fetch_review_packet(service_request_id: str, *, client: FHIRClient):
+    assembly_result = BundleAssembler(client).assemble(service_request_id)
+    parsed_bundle = parse_bundle(assembly_result.bundle)
+    parsed_bundle.input_provenance = assembly_result.input_provenance
+    try:
+        return build_review_packet(parsed_bundle)
+    except (AttributeError, TypeError, IndexError, KeyError):
+        raise BundleValidationError(
+            "Fetched resources violate the supported field shape; human investigation required."
+        ) from None
 
 
 def _output_filename(service_request_id: str) -> str:
@@ -58,7 +67,8 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--service-request",
         required=True,
-        help="FHIR ServiceRequest resource id to fetch.",
+        action="append",
+        help="FHIR ServiceRequest resource id to fetch; repeat for independent packets.",
     )
     parser.add_argument(
         "--base-url",
@@ -70,15 +80,43 @@ def _build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     try:
-        output_path = fetch_and_review(
-            args.service_request,
-            base_url=args.base_url,
-        )
-    except (BundleAssemblyError, BundleValidationError, FHIRClientError, ValueError) as error:
-        print(f"Unable to assemble ServiceRequest: {error}", file=sys.stderr)
+        client = FHIRClient(base_url=args.base_url)
+        results = fetch_batch(args.service_request, client=client)
+    except FHIRClientError as error:
+        print(f"Unable to configure FHIR access: {error}", file=sys.stderr)
         return 1
-    print(f"Saved {output_path}")
-    return 0
+    for result in results:
+        print(result)
+    return 0 if all(r["state"] == "awaiting_review" for r in results) else 1
+
+
+def fetch_batch(service_request_ids, *, client, output_dir=LIVE_OUTPUT_DIR):
+    results = []
+    for source_id in service_request_ids:
+        try:
+            path = fetch_and_review(source_id, client=client, output_dir=output_dir)
+            results.append(
+                {
+                    "service_request_id": source_id,
+                    "state": "awaiting_review",
+                    "path": str(path),
+                }
+            )
+        except (
+            FHIRClientError,
+            BundleAssemblyError,
+            BundleValidationError,
+            ValueError,
+        ) as error:
+            results.append(
+                {
+                    "service_request_id": source_id,
+                    "state": "needs_attention",
+                    "reason": type(error).__name__,
+                }
+            )
+    save_json_file(Path(output_dir) / "fetch_batch.json", {"results": results})
+    return results
 
 
 if __name__ == "__main__":

@@ -21,7 +21,7 @@ class BundleValidationError(ValueError):
 
 
 def parse_bundle(bundle_data: dict[str, Any]) -> ParsedBundle:
-    if bundle_data.get("resourceType") != "Bundle":
+    if not isinstance(bundle_data, dict) or bundle_data.get("resourceType") != "Bundle":
         raise BundleValidationError("Input must be a FHIR Bundle resource.")
 
     bundle_id = bundle_data.get("id")

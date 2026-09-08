@@ -39,6 +39,8 @@ class SandboxSeeder:
             timeout=timeout,
             session=self._session,
         )
+        if configuration._token_provider:
+            raise SandboxSeedError("Seeding requires a separate open-sandbox configuration with SMART credentials unset.")
         self.base_url = configuration.base_url
         self.timeout = configuration.timeout
         self.user_agent = configuration.user_agent

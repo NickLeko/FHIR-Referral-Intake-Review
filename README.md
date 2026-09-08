@@ -1,6 +1,6 @@
 # FHIR Referral Intake Review
 
-A referral intake coordinator often has to turn structured data, cover sheets, notes, and partial order details into a practical handoff for scheduling, authorization, or specialty routing. This prototype simulates that administrative review step using checked-in mock FHIR bundles or a `ServiceRequest` fetched from an open FHIR R4 sandbox: it extracts the referral facts that matter, explains missing or ambiguous intake issues, preserves source traceability, and requires a human reviewer before the handoff is finalized.
+A referral intake coordinator often has to turn structured data, cover sheets, notes, and partial order details into a practical handoff for scheduling, authorization, or specialty routing. This integration artifact supports that administrative review step using checked-in mock FHIR bundles or a `ServiceRequest` fetched from a FHIR R4 sandbox: it extracts the referral facts that matter, explains missing or ambiguous intake issues, preserves source traceability, and requires a human reviewer before the handoff is finalized.
 
 This repo is a narrow healthcare workflow artifact, not a general FHIR parser and not a clinical decision system. It shows deterministic referral-intake review support: one `ServiceRequest`, a small supported resource subset, conservative evidence use, explicit reviewer confirmation, and auditable JSON outputs.
 
@@ -29,7 +29,10 @@ FHIR can move referral data between systems, but it does not automatically tell 
 - Deterministic parsing of a small subset of FHIR resources
 - An explicit single-`ServiceRequest` intake boundary per bundle
 - Mapping mock or live-assembled Bundle data into a clean referral intake review packet
-- Read-only retrieval and narrow reference assembly from an open FHIR R4 endpoint
+- SMART Backend Services OAuth2 client credentials against SMART Health IT, with token renewal
+- Narrow reference assembly from a FHIR R4 endpoint
+- Additive, idempotent Task write-back after explicit human review
+- Durable per-review delivery receipts and bounded recovery from partial failures
 - Explicit detection of missing, ambiguous, and unsupported elements
 - Conservative evidence use: referenced support is preferred and unlinked bundle resources are not treated as evidence by default
 - Bounded status classification: `REVIEW_READY`, `INCOMPLETE`, `HUMAN_CONFIRMATION_REQUIRED`
@@ -40,7 +43,7 @@ FHIR can move referral data between systems, but it does not automatically tell 
 
 ## What it does not do
 
-- No SMART-on-FHIR or OAuth (read-only open-endpoint access only)
+- No interactive SMART EHR launch or authenticated reviewer identity
 - No clinical decision support
 - No diagnosis or treatment recommendations
 - No production referral management features
@@ -56,7 +59,7 @@ FHIR can move referral data between systems, but it does not automatically tell 
 - `Observation`
 - `DocumentReference`
 
-Each bundle must contain exactly one `ServiceRequest` for the intake packet to be valid.
+Each bundle must contain exactly one `ServiceRequest` for the intake packet to be valid. `Task` is an output resource only; the supported input subset is unchanged.
 
 ## Workflow in 30 seconds
 
@@ -66,7 +69,7 @@ Each bundle must contain exactly one `ServiceRequest` for the intake packet to b
 4. Missing or ambiguous fields are surfaced explicitly.
 5. The packet receives an initial deterministic status.
 6. A human reviewer confirms readiness, confirms incompleteness, or forces escalation.
-7. The app saves a timestamped reviewed artifact to `outputs/review_history/`.
+7. The app saves a reviewed artifact to `outputs/review_history/`. In live mode it also records and verifies a Task on the source server, with delivery tracked separately.
 
 ## Fastest Demo Path
 
@@ -136,7 +139,35 @@ python3 -m src.generate_outputs
 streamlit run app.py
 ```
 
-## Live sandbox mode
+## Authenticated sandbox and write-back
+
+The authenticated target is **SMART Health IT**: its public R4 launcher supports backend-service client credentials with signed assertions and registered public keys, and advertises Task conditional creation and identifier search. The existing open HAPI read mode remains available.
+
+After installing dependencies, create and load a local test registration:
+
+```bash
+python scripts/setup_smart_sandbox.py
+source .env.smart
+streamlit run app.py
+```
+
+The helper generates an RSA key and matching public registration. Runtime credentials come from environment variables; `.env.smart` is ignored and restricted to its owner. Keep this file while reviews are pending. Full variables, scopes, registration details and recovery commands are in [docs/integration.md](docs/integration.md).
+
+Auth uses `grant_type=client_credentials` with an RS384 signed client assertion. Tokens stay in memory and are renewed before expiry by acquiring a new client-credentials token. An unexpected 401 permits one reacquisition and retry; persistent auth failures stop access. This flow does not use refresh tokens or an interactive SMART launch.
+
+In Streamlit select **Live sandbox**, fetch a ServiceRequest and inspect its packet. A human must submit the review form; overrides still require a note. The unchanged reviewed-output JSON is saved first. An additive `Task` then references the original ServiceRequest through `focus`, records the final disposition in `businessStatus`, and includes the reviewer decision, note and time. `Task.status=completed` means the review action finished, not that the referral is ready or approved.
+
+A durable SQLite outbox tracks delivery separately from the reviewed JSON contract. Conditional creation with a stable review identifier prevents duplicate Tasks on replay, assuming server conformance. A source-server lookup verifies the contents before marking delivery successful. Use **Retry delivery of this saved review** or the CLI to recover; do not submit a new review just to retry:
+
+```bash
+python -m src.deliver_reviews
+python -m src.deliver_reviews --review-id SAVED_REVIEW_ID
+python -m src.deliver_reviews --retry-pending
+```
+
+Only existing human-reviewed live artifacts can enter delivery. No fetch, batch, or retry path invents a reviewer decision. The original ServiceRequest is not modified.
+
+## Live read mode
 
 Fetch one `ServiceRequest`, assemble only the references consumed by the existing parser, and write the extracted packet to the ignored `outputs/live/` directory:
 
@@ -144,14 +175,14 @@ Fetch one `ServiceRequest`, assemble only the references consumed by the existin
 python -m src.fetch_and_review --service-request <id>
 ```
 
-Override the default `https://hapi.fhir.org/baseR4` endpoint with either `FHIR_BASE_URL` or `--base-url`:
+Without SMART configuration, the default is the open `https://hapi.fhir.org/baseR4` endpoint. Override it with `FHIR_BASE_URL` or `--base-url` (with SMART enabled, these must match):
 
 ```bash
 FHIR_BASE_URL=https://example.test/fhir \
   python -m src.fetch_and_review --service-request <id>
 ```
 
-To create temporary demo data, post the seven checked-in synthetic Bundles as transactions and capture the server-assigned `ServiceRequest` ids:
+In a separate shell with SMART credentials unset, create temporary demo data on an open test server by posting the seven checked-in synthetic Bundles as transactions and capture the server-assigned `ServiceRequest` ids:
 
 ```bash
 python scripts/seed_sandbox.py
@@ -166,6 +197,21 @@ python scripts/realism_sweep.py --limit 10
 ```
 
 The sweep writes [docs/realism_sweep.md](docs/realism_sweep.md) without retaining raw server resources, resource ids, or patient-level values. Both live commands use the same deterministic `parse_bundle` and `build_review_packet` path as the checked-in mock Bundles. The fetch CLI produces an extracted packet awaiting human review; it does not fabricate a reviewer decision.
+
+## Failure semantics
+
+Default retries are an initial attempt plus two transient retries, with 0.25/0.5-second exponential backoff and a 10-second request timeout. Delivery failures never alter a human's saved disposition.
+
+| Condition | Behavior |
+| --- | --- |
+| Server 500 mid-batch | Bounded retries per request. An exhausted read fails that packet closed, including failed support fetches. Other referrals continue independently. Writes reconcile by identifier after retry exhaustion. |
+| Token expires between read and write | Renew before expiry; on 401 reacquire once and retry the same conditional write. Persistent failure requires human follow-up; never fall back to anonymous access. |
+| Write succeeds but response is lost | Reuse the same conditional-create identifier and verify the stored Task. If delivery cannot be confirmed, retain `uncertain` for human reconciliation/replay. |
+| Rate limiting | Honor Retry-After seconds or HTTP date. A delay beyond the 5-second synchronous cap defers work instead of retrying early; outbox cooldown survives restart and applies across the batch. |
+| Malformed Bundle/resource shape | No schema-error retry. Fail the affected packet/write closed; malformed post-write verification stays uncertain. Human investigates the source. |
+| Some batch writes land, others fail | Persist per-review receipts, retain successful writes, and skip them on replay. Failed/uncertain items need human follow-up. No rollback or blanket success. |
+
+The read CLI accepts repeated `--service-request` arguments, producing separate single-referral packets and a per-item manifest. Delivery batches accept only saved reviewed events and return nonzero on any unresolved outcome. See [failure and recovery details](docs/integration.md#failure-semantics).
 
 ## Test command
 
@@ -195,4 +241,8 @@ Captured locally:
 
 ## Safety and scope boundaries
 
-This project is an administrative workflow realism artifact built on checked-in synthetic data and untrusted public-sandbox test data. It is intentionally narrow, non-production, and designed to show deterministic extraction plus human review boundaries rather than automated clinical or operational autonomy. Live access is limited to open endpoints: there is no SMART launch, OAuth, write-back of review results, or production integration.
+This is a deterministic administrative integration artifact built on synthetic data and untrusted public-sandbox test data. It has no clinical recommendations or autonomous operational decisions.
+
+**It is not production-grade.** Reviewer names are unverified labels; there is no RBAC, signed approval/audit, KMS/key rotation, encrypted managed data store, distributed delivery worker, full FHIR/profile validation, source-version concurrency guard, or production privacy/security certification. A source may change during review, and competing review events require manual reconciliation. The public sandbox cannot demonstrate production authorization guarantees.
+
+Live verification on 2026-09-07 covered token acquisition, renewal, invalid-signature rejection, authenticated referral search/read, and advertised Task capabilities. Actual sandbox Task persistence and injected failure conditions were not verified live; stateful mocked-server tests cover write-back, response loss, retry/idempotency, malformed data, and partial batches. See the [verification record and limitations](docs/integration.md#verification-and-remaining-limitations).

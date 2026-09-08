@@ -23,3 +23,18 @@ def load_sample_bundle():
         return load_json_file(path)
 
     return _load
+
+
+@pytest.fixture(autouse=True)
+def isolate_fhir_environment(monkeypatch):
+    """Tests stay offline even in a shell that sourced real sandbox credentials."""
+    for name in (
+        "FHIR_AUTH_MODE",
+        "FHIR_BASE_URL",
+        "FHIR_TOKEN_URL",
+        "FHIR_CLIENT_ID",
+        "FHIR_PRIVATE_KEY_PEM",
+        "FHIR_KEY_ID",
+        "FHIR_SCOPES",
+    ):
+        monkeypatch.delenv(name, raising=False)

@@ -6,7 +6,12 @@ from copy import deepcopy
 from dataclasses import dataclass
 from typing import Any, Sequence
 
-from src.fhir_client import FHIRClient, FHIRClientError, FetchedResource
+from src.fhir_client import (
+    FHIRClient,
+    FHIRNotFoundError,
+    FHIRReferenceError,
+    FetchedResource,
+)
 from src.models import InputProvenance, ResourceProvenance
 
 
@@ -387,12 +392,13 @@ class BundleAssembler:
     ) -> _ExternalResolution:
         try:
             fetched = self.client.get_reference(reference, expected_types)
-        except FHIRClientError as exc:
+        # A missing/unsafe source reference remains a data-quality issue. Auth,
+        # transport, server and response-shape failures abort assembly so they
+        # cannot be misrepresented as missing clinical information.
+        except (FHIRNotFoundError, FHIRReferenceError) as exc:
             exception_name = type(exc).__name__
             reason = (
-                "invalid_reference"
-                if "Reference" in exception_name
-                else "fetch_failed"
+                "invalid_reference" if "Reference" in exception_name else "fetch_failed"
             )
             status_code = getattr(exc, "status_code", None)
             detail = exception_name
@@ -619,8 +625,7 @@ def _assembly_scope_notes(service_request: dict[str, Any]) -> list[str]:
             continue
         for reference_path in _reference_paths(value, field_name):
             notes.append(
-                "Ignored out-of-scope reference at "
-                f"ServiceRequest.{reference_path}."
+                f"Ignored out-of-scope reference at ServiceRequest.{reference_path}."
             )
     return notes
 

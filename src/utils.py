@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import os
+import tempfile
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
@@ -17,9 +19,18 @@ def load_json_file(path: Path) -> dict[str, Any]:
 
 def save_json_file(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
-        json.dump(payload, handle, indent=2)
-        handle.write("\n")
+    # Replace only after the complete artifact is flushed to disk.
+    fd, temporary = tempfile.mkstemp(dir=path.parent, prefix=".json-")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, indent=2, allow_nan=False)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
 
 
 def list_sample_bundle_paths(data_dir: Path = DATA_DIR) -> list[Path]:
